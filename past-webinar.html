@@ -1,0 +1,2275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corrosion Measurement: Best Practices &amp; Pitfalls | Recorded Webinar | ScienceGears</title>
+    <meta name="description"
+        content="Watch the recording of ScienceGears' webinar on corrosion measurement best practices and pitfalls with Dr. Mark Stevenson. Read attendee feedback and share your own.">
+    <meta name="keywords"
+        content="corrosion measurement, Tafel, polarisation, electrochemical corrosion testing, recorded webinar, sciencegears">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Corrosion Measurement: Best Practices & Pitfalls | Recorded Webinar | ScienceGears">
+    <meta property="og:description" content="Watch the full recording, browse chapters, and read attendee feedback.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.sciencegears.com/past-webinar">
+    <meta property="og:image" content="https://www.sciencegears.com/assets/images/sciencegears-social.jpg">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://www.sciencegears.com/past-webinar">
+
+    <!-- Favicon -->
+    <link rel="icon" href="assets/logo/fav-icon.png" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/logo/fav-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/logo/fav-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/logo/fav-icon.png">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Swiper JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- Inline additions for past webinar page -->
+    <style>
+        .webinar-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-recorded {
+            background: var(--medium-gray, #6b7280);
+            color: white;
+        }
+
+        .detail-card {
+            background: var(--apple-card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--apple-card-shadow);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            overflow: hidden;
+            padding: 2rem;
+        }
+
+        .join-form-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            border-top: 5px solid var(--accent-orange);
+        }
+
+        .form-label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+        }
+
+        .form-control,
+        .form-select {
+            border-radius: 10px;
+            border: 1px solid var(--border-gray);
+            padding: 12px 18px;
+            font-size: 0.95rem;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: var(--accent-orange);
+            box-shadow: 0 0 0 0.2rem rgba(244, 166, 49, 0.15);
+        }
+
+        .btn-join {
+            background: var(--gradient-orange);
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .btn-join:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.35);
+            color: white;
+        }
+
+        .btn-join:disabled {
+            opacity: 0.7;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* ====== VIDEO FRAME (replaces the small banner) ====== */
+        .video-frame {
+            position: relative;
+            margin: -2rem -2rem 1.5rem;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            background: linear-gradient(145deg, #0b1b3a, #1a3a6e);
+            cursor: pointer;
+        }
+
+        .video-frame.is-playing {
+            cursor: default;
+        }
+
+        .video-frame iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+        }
+
+        .video-thumb {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease, opacity 0.3s ease;
+        }
+
+        .video-frame:hover .video-thumb {
+            transform: scale(1.03);
+        }
+
+        .video-frame::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.05) 45%, rgba(0, 0, 0, 0.15) 100%);
+            pointer-events: none;
+        }
+
+        .video-frame.is-playing::after {
+            display: none;
+        }
+
+        .video-play {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 88px;
+            height: 88px;
+            border: 0;
+            border-radius: 50%;
+            background: var(--gradient-orange);
+            color: #fff;
+            font-size: 1.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-left: 6px;
+            z-index: 2;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.45);
+            transition: transform 0.25s ease;
+            animation: playPulse 2.4s infinite;
+        }
+
+        .video-frame:hover .video-play {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        @keyframes playPulse {
+            0% {
+                box-shadow: 0 10px 35px rgba(0, 0, 0, 0.45), 0 0 0 0 rgba(255, 107, 53, 0.55);
+            }
+
+            70% {
+                box-shadow: 0 10px 35px rgba(0, 0, 0, 0.45), 0 0 0 22px rgba(255, 107, 53, 0);
+            }
+
+            100% {
+                box-shadow: 0 10px 35px rgba(0, 0, 0, 0.45), 0 0 0 0 rgba(255, 107, 53, 0);
+            }
+        }
+
+        .video-label {
+            position: absolute;
+            left: 18px;
+            bottom: 16px;
+            z-index: 2;
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .video-duration {
+            position: absolute;
+            right: 16px;
+            bottom: 16px;
+            z-index: 2;
+            background: rgba(0, 0, 0, 0.75);
+            color: #fff;
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 6px;
+        }
+
+        /* ====== EVENT HEADER ====== */
+        .event-topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .event-datetime {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .event-datetime-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            background: #fff;
+            border: 1px solid #bdd2fd;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 800;
+            color: var(--dark-gray, #1f2937);
+            white-space: nowrap;
+        }
+
+        .event-datetime-item i {
+            color: var(--accent-orange);
+        }
+
+        .event-title {
+            font-weight: 800;
+            font-size: 2rem;
+            line-height: 1.2;
+            color: var(--dark-gray, #1f2937);
+            margin: 1.25rem 0 0.75rem;
+        }
+
+        .event-lead {
+            color: #6b7280;
+            font-size: 1.02rem;
+            margin: 0 0 1rem;
+            line-height: 1.6;
+        }
+
+        .event-rating-line {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 0.5rem;
+            font-size: 0.92rem;
+            color: #6b7280;
+            font-weight: 600;
+        }
+
+        .event-rating-line strong {
+            color: var(--dark-gray, #1f2937);
+            font-size: 1.05rem;
+        }
+
+        .event-rating-line a {
+            color: var(--science-blue);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .event-rating-line a:hover {
+            color: var(--accent-orange);
+        }
+
+        .stars {
+            color: #f5a623;
+            letter-spacing: 2px;
+            white-space: nowrap;
+        }
+
+        .event-section-label {
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #6b7280;
+            margin: 1.75rem 0 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .event-section-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e5e7eb;
+        }
+
+        .mini-person {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            height: 100%;
+            padding: 14px 16px;
+            background: #f9fafc;
+            border: 1px solid #eef1f6;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .mini-person:hover {
+            background: #fff;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
+        }
+
+        .mini-person-photo {
+            width: 72px;
+            height: 72px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 0 0 3px #fff, 0 4px 14px rgba(0, 0, 0, 0.15);
+        }
+
+        .mini-person-photo img,
+        .mini-person-photo .initials {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            display: block;
+            font-size: 1.4rem;
+        }
+
+        .mini-person .person-role {
+            margin-bottom: 4px;
+        }
+
+        .mini-person-name {
+            font-weight: 800;
+            font-size: 1.02rem;
+            margin: 0;
+            line-height: 1.25;
+            color: var(--dark-gray, #1f2937);
+        }
+
+        .mini-person-title {
+            font-size: 0.8rem;
+            color: var(--science-blue);
+            font-weight: 600;
+            margin: 2px 0 0;
+            line-height: 1.3;
+        }
+
+        .event-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1.75rem;
+        }
+
+        .btn-event-primary {
+            background: var(--gradient-orange);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 15px;
+            padding: 12px 28px;
+            transition: all 0.3s;
+        }
+
+        .btn-event-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.35);
+            color: #fff;
+        }
+
+        .btn-event-secondary {
+            background: #fff;
+            color: var(--science-blue);
+            border: 2px solid var(--science-blue);
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 15px;
+            padding: 10px 26px;
+            transition: all 0.3s;
+        }
+
+        .btn-event-secondary:hover {
+            background: var(--science-blue);
+            color: #fff;
+        }
+
+        .initials {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 2.4rem;
+            color: var(--science-blue, #003B7A);
+            background: linear-gradient(145deg, #f0f4fa, #dfe8f5);
+        }
+
+        /* ====== PEOPLE (full bios) ====== */
+        .people-group-label {
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #6b7280;
+            margin: 0 0 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .people-group-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e5e7eb;
+        }
+
+        .people-group+.people-group {
+            margin-top: 1.75rem;
+        }
+
+        .person-card {
+            display: flex;
+            gap: 1.25rem;
+            align-items: flex-start;
+            height: 100%;
+            padding: 1.25rem;
+            border-radius: 16px;
+            background: #f9fafc;
+            border: 1px solid #eef1f6;
+            transition: all 0.3s ease;
+        }
+
+        .person-card:hover {
+            background: #fff;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
+        }
+
+        .person-photo {
+            width: 96px;
+            height: 96px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .person-photo img,
+        .person-photo .initials {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            display: block;
+            font-size: 1.8rem;
+        }
+
+        .person-role {
+            display: inline-block;
+            font-size: 0.68rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 3px 12px;
+            border-radius: 50px;
+            background: var(--accent-orange);
+            color: #fff;
+            margin-bottom: 6px;
+        }
+
+        .person-card.is-host .person-role,
+        .mini-person.is-host .person-role {
+            background: #3d8bff;
+        }
+
+        .person-info h5 {
+            font-weight: 800;
+            font-size: 1.15rem;
+            margin: 0 0 2px;
+            color: var(--dark-gray);
+        }
+
+        .person-info .person-title {
+            color: var(--science-blue);
+            font-weight: 700;
+            font-size: 0.88rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .person-info p {
+            font-size: 0.88rem;
+            color: var(--apple-gray);
+            margin: 0;
+            line-height: 1.55;
+        }
+
+        .person-info a.person-link {
+            display: inline-block;
+            margin-top: 0.6rem;
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--science-blue);
+        }
+
+        .person-info a.person-link:hover {
+            color: var(--accent-orange);
+        }
+
+        /* ====== CHAPTERS (clickable timeline) ====== */
+        .agenda-timeline {
+            position: relative;
+            padding-left: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .agenda-timeline::before {
+            content: '';
+            position: absolute;
+            left: 28px;
+            top: 12px;
+            bottom: 12px;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent-orange) 0%, #d6d6d6 100%);
+            border-radius: 2px;
+        }
+
+        .agenda-timeline-item {
+            display: flex;
+            gap: 1.5rem;
+            padding-bottom: 1.5rem;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .agenda-timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .agenda-timeline-marker {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid var(--accent-orange);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            z-index: 1;
+            box-shadow: 0 0 0 4px #fff, 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .agenda-timeline-item:hover .agenda-timeline-marker {
+            background: var(--accent-orange);
+            border-color: var(--accent-orange);
+            transform: scale(1.05);
+        }
+
+        .agenda-timeline-item:hover .agenda-timeline-marker i {
+            color: white;
+        }
+
+        .agenda-timeline-marker i {
+            font-size: 1.2rem;
+            color: var(--accent-orange);
+            transition: color 0.3s ease;
+        }
+
+        .agenda-timeline-content {
+            flex: 1;
+            background: #f9fafc;
+            border-radius: 14px;
+            padding: 1.1rem 1.4rem;
+            border: 1px solid #eef1f6;
+            transition: all 0.3s ease;
+        }
+
+        .agenda-timeline-item:hover .agenda-timeline-content {
+            background: #fff;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+            border-color: var(--accent-orange);
+        }
+
+        .agenda-timeline-time {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: white;
+            background: var(--science-blue);
+            padding: 3px 12px;
+            border-radius: 50px;
+            letter-spacing: 0.3px;
+            margin-bottom: 0.4rem;
+        }
+
+        .agenda-timeline-title {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--dark-gray);
+            margin: 0 0 0.25rem;
+        }
+
+        .agenda-timeline-desc {
+            font-size: 0.88rem;
+            color: var(--apple-gray);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .agenda-timeline-duration {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent-orange);
+            margin-top: 0.4rem;
+        }
+
+        /* ====== RATINGS & REVIEWS ====== */
+        .rating-summary {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 1.5rem;
+            background: #f9fafc;
+            border: 1px solid #eef1f6;
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+        }
+
+        .rating-big {
+            text-align: center;
+            min-width: 140px;
+        }
+
+        .rating-big .num {
+            font-size: 3.4rem;
+            font-weight: 800;
+            line-height: 1;
+            color: var(--science-blue, #003B7A);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .rating-big .stars {
+            display: block;
+            font-size: 1.1rem;
+            margin: 6px 0 4px;
+        }
+
+        .rating-big small {
+            color: #6b7280;
+            font-weight: 600;
+        }
+
+        .rating-bars {
+            flex: 1;
+            min-width: 220px;
+        }
+
+        .rating-bar-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #4b5563;
+            margin-bottom: 6px;
+        }
+
+        .rating-bar-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .rating-bar-row .lbl {
+            width: 34px;
+            white-space: nowrap;
+        }
+
+        .rating-bar-row .lbl i {
+            color: #f5a623;
+            font-size: 0.75rem;
+        }
+
+        .rating-bar-track {
+            flex: 1;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 50px;
+            overflow: hidden;
+        }
+
+        .rating-bar-fill {
+            height: 100%;
+            background: var(--gradient-orange, linear-gradient(90deg, #f4a631, #ff6b35));
+            border-radius: 50px;
+            width: 0;
+            transition: width 0.8s ease;
+        }
+
+        .rating-bar-row .cnt {
+            width: 24px;
+            text-align: right;
+            color: #6b7280;
+        }
+
+        .review-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 1.25rem;
+        }
+
+        .review-filter-btn {
+            background: white;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 50px;
+            padding: 6px 18px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #6b7280;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .review-filter-btn.active,
+        .review-filter-btn:hover {
+            background: var(--science-blue);
+            color: white;
+            border-color: var(--science-blue);
+        }
+
+        .review-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1.25rem 0;
+            border-bottom: 1px solid #eef1f6;
+        }
+
+        .review-item:last-child {
+            border-bottom: 0;
+        }
+
+        .review-avatar {
+            width: 48px;
+            height: 48px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            background: var(--gradient-blue, linear-gradient(135deg, #003B7A, #1a5bb0));
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.95rem;
+        }
+
+        .review-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 4px 12px;
+            margin-bottom: 2px;
+        }
+
+        .review-name {
+            font-weight: 800;
+            font-size: 0.98rem;
+            color: var(--dark-gray, #1f2937);
+        }
+
+        .review-date {
+            font-size: 0.78rem;
+            color: #9ca3af;
+            font-weight: 600;
+        }
+
+        .review-role {
+            font-size: 0.8rem;
+            color: var(--science-blue);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .review-item .stars {
+            font-size: 0.85rem;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .review-text {
+            font-size: 0.92rem;
+            color: #4b5563;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .reviews-empty {
+            text-align: center;
+            color: #9ca3af;
+            padding: 2rem 1rem;
+            display: none;
+        }
+
+        /* ====== FEEDBACK FORM ====== */
+        .feedback-form-wrap {
+            background: #f9fafc;
+            border: 1px solid #eef1f6;
+           /*  border-top: 5px solid var(--accent-orange); */
+            border-radius: 16px;
+            padding: 1.75rem;
+        }
+
+        .star-input {
+            display: inline-flex;
+            flex-direction: row-reverse;
+            gap: 4px;
+        }
+
+        .star-input input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .star-input label {
+            font-size: 2rem;
+            color: #d1d5db;
+            cursor: pointer;
+            transition: color 0.15s, transform 0.15s;
+            line-height: 1;
+        }
+
+        .star-input input:checked~label,
+        .star-input label:hover,
+        .star-input label:hover~label {
+            color: #f5a623;
+        }
+
+        .star-input label:hover {
+            transform: scale(1.15);
+        }
+
+        .star-input input:focus-visible+label {
+            outline: 2px solid var(--science-blue);
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+
+        .rating-error {
+            display: none;
+            color: #dc3545;
+            font-size: 0.875rem;
+            margin-top: 4px;
+        }
+
+        .rating-error.show {
+            display: block;
+        }
+
+        /* ====== SIDEBAR ====== */
+        .related-webinar-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            overflow: hidden;
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            align-items: center;
+        }
+
+        .related-webinar-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .related-webinar-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            background: linear-gradient(145deg, #f0f4fa, #e8edf5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--science-blue);
+            flex-shrink: 0;
+        }
+
+        .related-webinar-info h6 {
+            font-weight: 700;
+            margin: 0 0 2px;
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+        }
+
+        .related-webinar-info small {
+            color: var(--apple-gray);
+            font-size: 0.78rem;
+        }
+
+        /* Sticky right column that scrolls on its own when taller than the screen */
+        .sticky-sidebar {
+            position: sticky;
+            top: 100px;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 4px 8px 4px 4px;
+            margin-right: -8px;
+            overscroll-behavior: contain;
+            scrollbar-width: thin;
+             scrollbar-color: #d2d2d2 transparent;
+        }
+
+        .sticky-sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sticky-sidebar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .sticky-sidebar::-webkit-scrollbar-thumb {
+            background: var(--accent-orange);
+            border-radius: 3px;
+        }
+
+        @media (max-width: 991.98px) {
+            .sticky-sidebar {
+                position: static;
+                max-height: none;
+                overflow: visible;
+                padding: 0;
+                margin-right: 0;
+            }
+        }
+
+        .share-buttons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #f0f0f0;
+            color: var(--dark-gray);
+            margin-right: 8px;
+            transition: all 0.2s;
+        }
+
+        .share-buttons a:hover {
+            background: var(--accent-orange);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .section-title {
+            font-weight: 600;
+            font-size: 1rem;
+            text-transform: math-auto;
+            letter-spacing: 0.5px;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #E5E7EB;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        #video-player,
+        #chapters,
+        #people,
+        #reviews,
+        #feedback-form,
+        #get-resources {
+            scroll-margin-top: 100px;
+        }
+
+        /* reCAPTCHA v3 */
+        .grecaptcha-badge {
+            visibility: hidden;
+        }
+
+        .recaptcha-disclaimer {
+            font-size: 0.72rem;
+            color: #9ca3af;
+            margin-top: 0.75rem;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .recaptcha-disclaimer a {
+            color: var(--science-blue);
+            text-decoration: none;
+        }
+
+        .recaptcha-disclaimer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 767.98px) {
+            .detail-card {
+                padding: 1.5rem;
+            }
+
+            .video-frame {
+                margin: 0.5rem -1.5rem 1.25rem;
+            }
+
+            .video-play {
+                width: 68px;
+                height: 68px;
+                font-size: 1.5rem;
+            }
+
+            .video-label {
+                font-size: 0.82rem;
+                left: 12px;
+                bottom: 12px;
+            }
+
+            .event-title {
+                font-size: 1.6rem;
+            }
+
+            .person-card {
+                flex-direction: column;
+            }
+
+            .rating-summary {
+                gap: 1.25rem;
+            }
+
+            .feedback-form-wrap {
+                padding: 1.25rem;
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .event-topbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .agenda-timeline::before {
+                left: 23px;
+            }
+
+            .agenda-timeline-marker {
+                width: 48px;
+                height: 48px;
+            }
+
+            .agenda-timeline-marker i {
+                font-size: 1rem;
+            }
+
+            .agenda-timeline-item {
+                gap: 1rem;
+            }
+
+            .agenda-timeline-content {
+                padding: 0.9rem 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header Top Bar -->
+    <div class="header-top">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="top-contact">
+                <a href="tel:+1234567890"><i class="fas fa-phone"></i>+61 493 868 335</a>
+                <a href="mailto:info@sciencegears.com.au"><i class="fas fa-envelope"></i> info@sciencegears.com.au</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation (same as index) -->
+    <nav class="navbar navbar-expand-lg main-navbar sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="assets/logo/Logo-300x86.png" alt="ScienceGears Logo">
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+
+                    <!-- Products Mega Menu -->
+                    <li class="nav-item dropdown mega-menu">
+                        <a class="nav-link dropdown-toggle" href="#" id="megaproductsDropdown"
+                            data-bs-toggle="dropdown">Products</a>
+                        <div class="dropdown-menu mega-menu-content" aria-labelledby="megaproductsDropdown">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-3 mega-column">
+                                        <h5 class="section-title megamenu-left">Product Groups</h5>
+                                        <div class="megaproduct-category active"
+                                            onclick="window.location.href='electrochemistry.html'">
+                                            <i class="fas fa-bolt"></i> Electrochemistry
+                                        </div>
+                                        <div class="megaproduct-category"
+                                            onclick="window.location.href='spectroscopy.html'">
+                                            <i class="fas fa-solar-panel"></i> Spectroscopy
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 mega-column">
+                                        <div class="row">
+                                            <h5 class="section-title megamenu-left">Product Categories</h5>
+                                            <div class="megaproduct-category active"
+                                                onclick="window.location.href='electrochemistry.html'">
+                                                Potentiostats / Galvanostats
+                                            </div>
+                                            <div class="megaproduct-category"
+                                                onclick="window.location.href='electrochemistry.html'">
+                                                Photoelectrochemistry &amp; Photovoltaics
+                                            </div>
+                                            <div class="megaproduct-category"
+                                                onclick="window.location.href='electrochemistry.html'">
+                                                Electrochemistry Accessories
+                                            </div>
+                                            <div class="megaproduct-category"
+                                                onclick="window.location.href='electrochemistry.html'">
+                                                Battery Cycler
+                                            </div>
+                                            <div class="megaproduct-category"
+                                                onclick="window.location.href='electrochemistry.html'">
+                                                Battery Environmental Test Chambers
+                                            </div>
+                                            <div class="megaproduct-category"
+                                                onclick="window.location.href='electrochemistry.html'">
+                                                Battery Cycler Accessories
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 mega-column">
+                                        <div class="row">
+                                            <h5 class="section-title megamenu-left">Product Variants</h5>
+                                            <div class="megaproduct-category active"
+                                                onclick="window.location.href='electrochemistry.html'">Portable</div>
+                                            <div class="megaproduct-category"
+                                                onclick="window.location.href='electrochemistry.html'">Single Channel
+                                            </div>
+                                            <div class="megaproduct-category"
+                                                onclick="window.location.href='electrochemistry.html'">Bipotentiostat
+                                            </div>
+                                            <div class="megaproduct-category"
+                                                onclick="window.location.href='electrochemistry.html'">Modular</div>
+                                            <div class="megaproduct-category"
+                                                onclick="window.location.href='electrochemistry.html'">Multichannel
+                                            </div>
+                                            <div class="megaproduct-category"
+                                                onclick="window.location.href='electrochemistry.html'">Current Boosters
+                                            </div>
+                                            <div class="megaproduct-category"
+                                                onclick="window.location.href='electrochemistry.html'">Specialised
+                                                Devices &amp; Modules</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 mega-column">
+                                        <div class="row">
+                                            <h5 class="section-title megamenu-left">Products</h5>
+                                            <div class="megaproduct-category mb-4 active"
+                                                onclick="window.location.href='electrochemistry.html'">
+                                                <img src="assets/products/Potentiostats/Squidstat-Plus/SquidStat-Plus_1.png"
+                                                    alt="Squidstat" class="thumb-products"> Squidstat Plus
+                                            </div>
+                                            <div class="megaproduct-category mb-4"
+                                                onclick="window.location.href='electrochemistry.html'">
+                                                <img src="assets/products/Potentiostats/Squidstat-Plus/squidstat-prime/SquidStat-Prime_1.png"
+                                                    alt="Squidstat" class="thumb-products"> Squidstat Prime
+                                            </div>
+                                            <div class="megaproduct-category mb-4"
+                                                onclick="window.location.href='electrochemistry.html'">
+                                                <img src="assets/products/Potentiostats/Squidstat-Plus/squidstat-solo/SquidStat-Solo_1.png"
+                                                    alt="Squidstat" class="thumb-products"> Squidstat Solo
+                                            </div>
+                                            <div class="megaproduct-category mb-4"
+                                                onclick="window.location.href='electrochemistry.html'">
+                                                <img src="assets/products/Potentiostats/Squidstat-Plus/squidstat-penta/SquidStat-Penta_1.png"
+                                                    alt="Squidstat" class="thumb-products"> Squidstat Penta
+                                            </div>
+                                            <div class="megaproduct-category mb-4"
+                                                onclick="window.location.href='electrochemistry.html'">
+                                                <img src="assets/products/Potentiostats/Squidstat-Plus/squidstat-decka/SquidStat-Decka_1.png"
+                                                    alt="Squidstat" class="thumb-products"> Squidstat Decka
+                                            </div>
+                                            <div class="megaproduct-category mb-4"
+                                                onclick="window.location.href='electrochemistry.html'">
+                                                <img src="assets/products/Potentiostats/Squidstat-Plus/Squidstat-Venta/SquidStat-Venta_1.png"
+                                                    alt="Squidstat" class="thumb-products"> Squidstat Venta
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Resources Mega Menu -->
+                    <li class="nav-item dropdown mega-menu">
+                        <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown"
+                            data-bs-toggle="dropdown">Resources</a>
+                        <div class="dropdown-menu mega-menu-content" aria-labelledby="resourcesDropdown">
+                            <div class="container">
+                                <div class="row col-lg-12 nav-responsive">
+                                    <div class="row col-lg-9">
+                                        <div class="col-lg-3 mega-column">
+                                            <div class="card-images card-bg-1"><i class="fas fa-file-alt"></i></div>
+                                            <div class="megaproduct-promo">
+                                                <h6>Application Notes</h6>
+                                                <p>In-depth technical guides for researchers</p>
+                                                <a href="application-notes.html">
+                                                    <p class="mega-a">View all<i class="fas fa-arrow-right-long"></i>
+                                                    </p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 mega-column">
+                                            <div class="card-images card-bg-2"><i class="fas fa-book"></i></div>
+                                            <div class="megaproduct-promo">
+                                                <h6>Publications</h6>
+                                                <p>Peer-reviewed research and science articles.</p>
+                                                <a href="publications.html">
+                                                    <p class="mega-a">Read More<i class="fas fa-arrow-right-long"></i>
+                                                    </p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 mega-column">
+                                            <div class="card-images card-bg-3"><i class="fas fa-download"></i></div>
+                                            <div class="megaproduct-promo">
+                                                <h6>Software</h6>
+                                                <p>Software tutorials, troubleshooting.</p>
+                                                <a href="software.html">
+                                                    <p class="mega-a">Download Now<i
+                                                            class="fas fa-arrow-right-long"></i></p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 mega-column">
+                                            <div class="card-images card-bg-3"><i class="fas fa-video"></i></div>
+                                            <div class="megaproduct-promo">
+                                                <h6>Installation Videos</h6>
+                                                <p>Your Installation Journey Starts Here</p>
+                                                <a href="video.html">
+                                                    <p class="mega-a">Watch Now<i class="fas fa-arrow-right-long"></i>
+                                                    </p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 mega-column">
+                                        <h5 class="section-title megamenu-left">Support</h5>
+                                        <div class="subcategories-container">
+                                            <div class="megaproducts-categorys"
+                                                onclick="window.location.href='faq.html'"><i
+                                                    class="fas fa-question-circle"></i> FAQ</div>
+                                            <div class="megaproducts-categorys"
+                                                onclick="window.location.href='product-manual.html'"><i
+                                                    class="fas fa-book"></i> Product Manuals</div>
+                                            <div class="megaproducts-categorys"><i class="fas fa-shield-alt"></i>
+                                                Warranty &amp; Repairs</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="faq.html">FAQ</a></li>
+                    <li class="nav-item"><a class="nav-link nav-res" href="request-quote.html">Request Quote</a></li>
+                    <li class="nav-item"><a class="nav-link nav-res" href="contact.html">Contact Us</a></li>
+                </ul>
+
+                <div class="web-container-head align-items-center mobile-container-head">
+                    <div class="search-container">
+                        <button class="search-toggle" id="searchToggle"><i class="fas fa-search"></i></button>
+                        <div class="search-expandable" id="searchExpandable">
+                            <form class="search-form">
+                                <input class="form-control" type="search" placeholder="Search products..."
+                                    aria-label="Search">
+                                <button class="btn btn-search" type="submit"><i class="fas fa-search"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="nav-cta">
+                        <a href="request-quote.html" class="btn btn-request"><i class="fas fa-file-alt me-1"></i>
+                            Request Quote</a>
+                        <a href="contact.html" class="btn btn-contact"><i class="fas fa-headset me-1"></i> Contact
+                            Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile menu bar (same as index) -->
+    <div class="menu-bar">
+        <div class="menu-title">
+            <a class="navbar-brand" href="index.html">
+                <img src="assets/logo/Logo-300x86.png" alt="ScienceGears Logo">
+            </a>
+        </div>
+        <div class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></div>
+    </div>
+    <div class="menu-container" id="menuContainer">
+        <div class="modern-mega-menu">
+            <div class="menu-item"><a href="index.html">
+                    <div class="menu-header"><span>Home</span></div>
+                </a></div>
+            <div class="menu-item"><a href="about.html">
+                    <div class="menu-header"><span>About Us</span></div>
+                </a></div>
+            <div class="menu-item">
+                <div class="menu-header"><span>Products</span><i class="fas fa-chevron-down toggle-icon"></i></div>
+                <div class="submenu">
+                    <div class="submenu-item nested-toggle"><span>Electrochemistry</span><i
+                            class="fas fa-chevron-down toggle-icon ms-auto" style="font-size: 12px;"></i></div>
+                    <div class="nested-submenu">
+                        <div class="nested-item deep-nested-toggle"><span>Potentiostats / Galvanostats</span><i
+                                class="fas fa-chevron-down toggle-icon ms-auto" style="font-size: 10px;"></i></div>
+                        <div class="deep-nested-submenu">
+                            <a href="electrochemistry.html" class="deep-nested-item">Portable</a>
+                            <a href="electrochemistry.html" class="deep-nested-item">Single Channel</a>
+                            <a href="electrochemistry.html" class="deep-nested-item">Bipotentiostat</a>
+                            <a href="electrochemistry.html" class="deep-nested-item">Modular</a>
+                            <a href="electrochemistry.html" class="deep-nested-item">Multichannel / Galvanostats</a>
+                            <a href="electrochemistry.html" class="deep-nested-item">Current Boosters</a>
+                            <a href="electrochemistry.html" class="deep-nested-item">Specialised Devices &amp;
+                                Modules</a>
+                        </div>
+                        <div class="nested-item deep-nested-toggle"><span>Photoelectrochemistry and
+                                Photovoltaic</span><i class="fas fa-chevron-down toggle-icon ms-auto"
+                                style="font-size: 10px;"></i></div>
+                        <div class="nested-item deep-nested-toggle"><span>Electrochemistry Accessories</span><i
+                                class="fas fa-chevron-down toggle-icon ms-auto" style="font-size: 10px;"></i></div>
+                        <div class="nested-item deep-nested-toggle"><span>Battery Cycler</span><i
+                                class="fas fa-chevron-down toggle-icon ms-auto" style="font-size: 10px;"></i></div>
+                        <div class="nested-item deep-nested-toggle"><span>Battery Environmental Test Chambers</span><i
+                                class="fas fa-chevron-down toggle-icon ms-auto" style="font-size: 10px;"></i></div>
+                        <div class="nested-item deep-nested-toggle"><span>Battery Cycler Accessories</span><i
+                                class="fas fa-chevron-down toggle-icon ms-auto" style="font-size: 10px;"></i></div>
+                    </div>
+                    <div class="submenu-item nested-toggle"><span>Spectroscopy</span><i
+                            class="fas fa-chevron-down toggle-icon ms-auto" style="font-size: 12px;"></i></div>
+                    <div class="nested-submenu">
+                        <div class="nested-item deep-nested-toggle"><span>Handheld Raman</span><i
+                                class="fas fa-chevron-down toggle-icon ms-auto" style="font-size: 10px;"></i></div>
+                        <div class="nested-item deep-nested-toggle"><span>Laboratory Raman</span><i
+                                class="fas fa-chevron-down toggle-icon ms-auto" style="font-size: 10px;"></i></div>
+                        <div class="nested-item deep-nested-toggle"><span>FT-IR</span><i
+                                class="fas fa-chevron-down toggle-icon ms-auto" style="font-size: 10px;"></i></div>
+                        <div class="nested-item deep-nested-toggle"><span>LIBS</span><i
+                                class="fas fa-chevron-down toggle-icon ms-auto" style="font-size: 10px;"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-header"><span>Resources</span><i class="fas fa-chevron-down toggle-icon"></i></div>
+                <div class="submenu">
+                    <a href="application-notes.html" class="submenu-item">Application Notes</a>
+                    <a href="publications.html" class="submenu-item">Publications</a>
+                    <a href="software.html" class="submenu-item">Software</a>
+                    <a href="video.html" class="submenu-item">Installation Videos</a>
+                    <a href="product-manual.html" class="submenu-item">Product Manuals</a>
+                    <a href="warrenty-repairs.html" class="submenu-item">Warranty &amp; Repairs</a>
+                </div>
+            </div>
+            <div class="menu-item"><a href="blog.html">
+                    <div class="menu-header"><span>Blog</span></div>
+                </a></div>
+            <div class="menu-item"><a href="faq.html">
+                    <div class="menu-header"><span>FAQ</span></div>
+                </a></div>
+            <div class="menu-item"><a href="request-quote.html">
+                    <div class="menu-header"><span>Request Quote</span></div>
+                </a></div>
+            <div class="menu-item"><a href="contact.html">
+                    <div class="menu-header"><span>Contact Us</span></div>
+                </a></div>
+        </div>
+    </div>
+
+    <!-- ========== MAIN CONTENT ========== -->
+    <section class="section py-5">
+        <div class="container">
+            <div class="row g-4">
+                <!-- Left Column -->
+                <div class="col-lg-8">
+
+                    <!-- EVENT HEADER: video → badge/date → title → rating → speakers → actions -->
+                    <div class="detail-card mb-4" id="eventHeader">
+
+                        <!-- VIDEO FRAME (YouTube thumbnail; click to play, no heavy iframe until clicked) -->
+                        <div class="video-frame" id="video-player" role="button" tabindex="0"
+                            aria-label="Play webinar recording">
+                            <img class="video-thumb" id="videoThumb" alt="Webinar recording thumbnail">
+                            <button type="button" class="video-play" id="videoPlayBtn" aria-label="Play video"><i
+                                    class="fas fa-play"></i></button>
+                            <div class="video-label"><i class="fab fa-youtube"></i> Watch the full recording</div>
+                            <div class="video-duration">55:00</div>
+                        </div>
+
+                        <div class="event-topbar">
+                            <span class="webinar-badge badge-recorded">Recorded Webinar</span>
+                            <div class="event-datetime">
+                                <span class="event-datetime-item"><i class="fas fa-calendar-alt"></i> 15 Oct
+                                    2025</span>
+                                <span class="event-datetime-item"><i class="fas fa-video"></i> 55 min recording</span>
+                            </div>
+                        </div>
+
+                        <h1 class="event-title fw-bold">Corrosion Measurement: Best Practices &amp; Pitfalls</h1>
+                        <p class="event-lead">Learn how to get reliable corrosion data from polarisation and Tafel
+                            experiments, avoid the most common measurement errors, and interpret your results with
+                            confidence. Recorded live with Dr. Mark Stevenson.</p>
+
+                        <div class="event-rating-line" id="headerRating"></div>
+
+                        <!-- Speakers & Host (rendered from the list in the script) -->
+                        <div class="event-section-label" id="headerPeopleLabel">Speaker</div>
+                        <div class="row g-3" id="headerPeople"></div>
+
+                        <div class="event-actions" id="watchNowBtn">
+                        <!--     <a href="#video-player" class="btn btn-event-primary" ><i
+                                    class="fas fa-play me-2"></i>Watch Recording</a>
+                            <a href="#feedback-form" class="btn btn-event-secondary"><i
+                                    class="fas fa-pen-to-square me-2"></i>Leave Feedback</a> -->
+                        </div>
+                    </div>
+
+                    <!-- About -->
+                    <div class="detail-card mb-4">
+                        <h2 class="fw-bold mb-3" style="font-size: 1.6rem;">About This Webinar</h2>
+                        <p class="text-muted mb-3">Electrochemical corrosion measurements look simple, but small
+                            mistakes in cell setup, scan rate, or data fitting can change corrosion rates by an order
+                            of magnitude. In this session, Dr. Mark Stevenson walks through the techniques used to
+                            measure corrosion in the lab and shows where results most often go wrong.</p>
+                        <p class="text-muted mb-3">You'll see worked examples of potentiodynamic polarisation, Tafel
+                            analysis, and linear polarisation resistance, plus practical checks you can apply to your
+                            own data before you trust it.</p>
+                        <p class="text-muted mb-0">The recording includes the full live Q&amp;A, so you can hear the
+                            audience's questions and the speaker's answers.</p>
+
+                        <div class="row g-3 mt-4">
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-start gap-3 p-3 bg-light rounded-3 h-100">
+                                    <i class="fas fa-bullseye"
+                                        style="color: var(--accent-orange); font-size: 1.2rem; margin-top: 2px;"></i>
+                                    <div>
+                                        <h6 class="fw-bold mb-1">Key Takeaways</h6>
+                                        <ul class="list-unstyled small text-muted mb-0" style="line-height: 1.6;">
+                                            <li><i class="fas fa-check me-1"
+                                                    style="color: var(--accent-orange); font-size: 0.7rem;"></i>
+                                                Choosing between Tafel, LPR and EIS</li>
+                                            <li><i class="fas fa-check me-1"
+                                                    style="color: var(--accent-orange); font-size: 0.7rem;"></i> Cell
+                                                and reference electrode setup</li>
+                                            <li><i class="fas fa-check me-1"
+                                                    style="color: var(--accent-orange); font-size: 0.7rem;"></i> Scan
+                                                rate and stabilisation time</li>
+                                            <li><i class="fas fa-check me-1"
+                                                    style="color: var(--accent-orange); font-size: 0.7rem;"></i>
+                                                Spotting bad Tafel fits</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-start gap-3 p-3 bg-light rounded-3 h-100">
+                                    <i class="fas fa-users"
+                                        style="color: var(--accent-orange); font-size: 1.2rem; margin-top: 2px;"></i>
+                                    <div>
+                                        <h6 class="fw-bold mb-1">Best For</h6>
+                                        <ul class="list-unstyled small text-muted mb-0" style="line-height: 1.6;">
+                                            <li><i class="fas fa-check me-1"
+                                                    style="color: var(--accent-orange); font-size: 0.7rem;"></i>
+                                                Corrosion researchers</li>
+                                            <li><i class="fas fa-check me-1"
+                                                    style="color: var(--accent-orange); font-size: 0.7rem;"></i>
+                                                Materials engineers</li>
+                                            <li><i class="fas fa-check me-1"
+                                                    style="color: var(--accent-orange); font-size: 0.7rem;"></i> PhD
+                                                students &amp; postdocs</li>
+                                            <li><i class="fas fa-check me-1"
+                                                    style="color: var(--accent-orange); font-size: 0.7rem;"></i> QA
+                                                and testing labs</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chapters (click to jump in the video) -->
+                    <div class="detail-card mb-4" id="chapters">
+                        <h2 class="fw-bold mb-1" style="font-size: 1.6rem;">Video Chapters</h2>
+                        <p class="text-muted mb-4" style="font-size: 0.9rem;">Click a chapter to jump straight to that
+                            part of the recording.</p>
+                        <ul class="agenda-timeline" id="chapterList"></ul>
+                    </div>
+
+                    <!-- Full speaker / host bios -->
+                    <div class="detail-card mb-4" id="people">
+                        <h2 class="fw-bold mb-4" style="font-size: 1.6rem;" id="peopleHeading">Your Speaker</h2>
+                        <div id="peopleContainer"></div>
+                    </div>
+
+                    <!-- Ratings & Reviews -->
+                    <div class="detail-card mb-4" id="reviews">
+                        <h2 class="fw-bold mb-4" style="font-size: 1.6rem;">Attendee Feedback</h2>
+
+                        <div class="rating-summary">
+                            <div class="rating-big" id="ratingBig"></div>
+                            <div class="rating-bars" id="ratingBars"></div>
+                        </div>
+
+                        <div class="review-filters" id="reviewFilters">
+                            <button type="button" class="review-filter-btn active" data-filter="all">All</button>
+                            <button type="button" class="review-filter-btn" data-filter="5">5 stars</button>
+                            <button type="button" class="review-filter-btn" data-filter="4">4 stars</button>
+                            <button type="button" class="review-filter-btn" data-filter="3">3 stars &amp;
+                                below</button>
+                        </div>
+
+                        <div id="reviewList"></div>
+                        <div class="reviews-empty" id="reviewsEmpty"><i class="far fa-comment-dots fa-2x mb-2"></i>
+                            <p class="mb-0">No reviews match this filter yet.</p>
+                        </div>
+
+                        <div class="text-center mt-3">
+                            <button type="button" class="btn btn-event-secondary" id="loadMoreReviews">Show more
+                                reviews</button>
+                        </div>
+                    </div>
+
+                    <!-- Feedback form 
+                    <div class="detail-card mb-4" id="feedback-form">
+                        <h2 class="fw-bold mb-1" style="font-size: 1.6rem;">Share Your Feedback</h2>
+                        <p class="text-muted mb-4" style="font-size: 0.92rem;">Watched the recording? Tell us what you
+                            thought. Your feedback helps us plan future webinars.</p>
+
+                        <div class="feedback-form-wrap">
+                            <form id="feedbackForm" novalidate>
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <label class="form-label d-block">Your rating <span
+                                                class="text-danger">*</span></label>
+                                        <div class="star-input" id="starInput">
+                                            <input type="radio" name="rating" id="star5" value="5"><label for="star5"
+                                                title="5 stars"><i class="fas fa-star"></i></label>
+                                            <input type="radio" name="rating" id="star4" value="4"><label for="star4"
+                                                title="4 stars"><i class="fas fa-star"></i></label>
+                                            <input type="radio" name="rating" id="star3" value="3"><label for="star3"
+                                                title="3 stars"><i class="fas fa-star"></i></label>
+                                            <input type="radio" name="rating" id="star2" value="2"><label for="star2"
+                                                title="2 stars"><i class="fas fa-star"></i></label>
+                                            <input type="radio" name="rating" id="star1" value="1"><label for="star1"
+                                                title="1 star"><i class="fas fa-star"></i></label>
+                                        </div>
+                                        <div class="rating-error" id="ratingError">Please select a star rating.</div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="fbName" class="form-label">Name <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="fbName" placeholder="Jane Doe"
+                                            required>
+                                        <div class="invalid-feedback">Please enter your name.</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="fbEmail" class="form-label">Email <span
+                                                class="text-danger">*</span></label>
+                                        <input type="email" class="form-control" id="fbEmail"
+                                            placeholder="jane.doe@university.edu.au" required>
+                                        <div class="invalid-feedback">Please enter a valid email address.</div>
+                                        <div class="form-text" style="font-size: 0.75rem;">Never shown publicly.</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="fbInstitution" class="form-label">Institution / Company</label>
+                                        <input type="text" class="form-control" id="fbInstitution"
+                                            placeholder="University of Sydney">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="fbRole" class="form-label">Role</label>
+                                        <select class="form-select" id="fbRole">
+                                            <option value="" selected>Select your role</option>
+                                            <option>PhD Student</option>
+                                            <option>Postdoc / Researcher</option>
+                                            <option>Professor / Faculty</option>
+                                            <option>Industry Professional</option>
+                                            <option>Lab Manager</option>
+                                            <option>Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="fbComment" class="form-label">Your review <span
+                                                class="text-danger">*</span></label>
+                                        <textarea class="form-control" id="fbComment" rows="4" minlength="10"
+                                            placeholder="What did you find most useful? Anything we could improve?"
+                                            required></textarea>
+                                        <div class="invalid-feedback">Please write at least 10 characters.</div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="fbTopics" class="form-label">Topics you'd like in future webinars
+                                            (optional)</label>
+                                        <input type="text" class="form-control" id="fbTopics"
+                                            placeholder="e.g. Pitting corrosion, coatings, EIS for corrosion">
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="fbConsent" required>
+                                            <label class="form-check-label" for="fbConsent"
+                                                style="font-size: 0.85rem;">
+                                                I agree that ScienceGears may publish my name, role and review on this
+                                                page after moderation. <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="invalid-feedback">Please agree so we can publish your review.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mt-3">
+                                        <button type="submit" class="btn-join" id="fbSubmitBtn"><i
+                                                class="fas fa-paper-plane me-2"></i>Submit Feedback</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <div class="recaptcha-disclaimer mt-3">
+                                This site is protected by reCAPTCHA and the Google
+                                <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy
+                                    Policy</a> and
+                                <a href="https://policies.google.com/terms" target="_blank" rel="noopener">Terms of
+                                    Service</a> apply.
+                            </div>
+
+                            <div id="fbSuccess" class="alert alert-success mt-4 d-none" role="alert">
+                                <h5 class="alert-heading"><i class="fas fa-check-circle me-2"></i>Thank you!</h5>
+                                <p class="mb-0" style="font-size: 0.9rem;">Your feedback has been received. Approved
+                                    reviews appear on this page within a few days.</p>
+                            </div>
+                            <div id="fbError" class="alert alert-danger mt-4 d-none" role="alert">
+                                <i class="fas fa-exclamation-triangle me-2"></i><span id="fbErrorMsg">Something went
+                                    wrong. Please try again.</span>
+                            </div>
+                        </div>
+                    </div>-->
+
+                    <!-- Share -->
+                    <div class="detail-card">
+                        <h5 class="fw-bold mb-3">Share This Recording</h5>
+                        <div class="share-buttons">
+                            <a href="#" aria-label="Share on LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" aria-label="Share on Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" aria-label="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" aria-label="Copy link"><i class="fas fa-link"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: sticky + scrollable -->
+                <div class="col-lg-4">
+                    <div class="sticky-sidebar">
+
+                        <!-- Get slides & resources
+                        <div class="join-form-card mb-4" id="get-resources">
+                            <h3 class="fw-bold mb-2">Get the Slides &amp; Notes</h3>
+                            <p class="text-muted mb-4" style="font-size: 0.9rem;">Enter your details and we'll email
+                                you the slide deck and the related application note.</p>
+
+                            <form id="resourceForm" novalidate>
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <label for="rsName" class="form-label">Full Name <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="rsName" placeholder="Jane Doe"
+                                            required>
+                                        <div class="invalid-feedback">Please enter your name.</div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="rsEmail" class="form-label">Email Address <span
+                                                class="text-danger">*</span></label>
+                                        <input type="email" class="form-control" id="rsEmail"
+                                            placeholder="jane.doe@university.edu.au" required>
+                                        <div class="invalid-feedback">Please enter a valid email address.</div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="rsInstitution" class="form-label">Institution / Company</label>
+                                        <input type="text" class="form-control" id="rsInstitution"
+                                            placeholder="University of Sydney">
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="rsConsent" required>
+                                            <label class="form-check-label" for="rsConsent"
+                                                style="font-size: 0.85rem;">
+                                                I agree to receive these resources and occasional webinar updates from
+                                                ScienceGears. <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="invalid-feedback">Please agree to receive the resources.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mt-4">
+                                        <button type="submit" class="btn-join" id="rsSubmitBtn"><i
+                                                class="fas fa-download me-2"></i>Email Me the Resources</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <div class="recaptcha-disclaimer mt-3">
+                                Protected by reCAPTCHA. Google
+                                <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy</a>
+                                and
+                                <a href="https://policies.google.com/terms" target="_blank" rel="noopener">Terms</a>
+                                apply.
+                            </div>
+
+                            <div id="rsSuccess" class="alert alert-success mt-4 d-none" role="alert">
+                                <h5 class="alert-heading"><i class="fas fa-check-circle me-2"></i>On its way!</h5>
+                                <p class="mb-0" style="font-size: 0.9rem;">We've emailed the slides and notes to your
+                                    inbox.</p>
+                            </div>
+                            <div id="rsError" class="alert alert-danger mt-4 d-none" role="alert">
+                                <i class="fas fa-exclamation-triangle me-2"></i><span id="rsErrorMsg">Something went
+                                    wrong. Please try again.</span>
+                            </div>
+                        </div> -->
+
+                        <!-- More recorded webinars -->
+                        <div class="detail-card mb-4">
+                            <h5 class="fw-bold mb-3">More Recorded Webinars</h5>
+                            <div class="d-flex flex-column gap-3">
+                                <a href="past-webinar.html" class="related-webinar-card text-decoration-none">
+                                    <div class="related-webinar-icon"><i class="fas fa-microscope"></i></div>
+                                    <div class="related-webinar-info">
+                                        <h6>Raman Spectroscopy for Battery Materials</h6>
+                                        <small>28 Aug 2025 · Dr. Sophie Laurent</small>
+                                    </div>
+                                </a>
+                                <a href="past-webinar.html" class="related-webinar-card text-decoration-none">
+                                    <div class="related-webinar-icon"><i class="fas fa-chart-line"></i></div>
+                                    <div class="related-webinar-info">
+                                        <h6>Introduction to Potentiostats</h6>
+                                        <small>10 Jul 2025 · Dr. James Chen</small>
+                                    </div>
+                                </a>
+                                <a href="past-webinar.html" class="related-webinar-card text-decoration-none">
+                                    <div class="related-webinar-icon"><i class="fas fa-battery-full"></i></div>
+                                    <div class="related-webinar-info">
+                                        <h6>Battery Testing Fundamentals</h6>
+                                        <small>22 May 2025 · Dr. Elena Torres</small>
+                                    </div>
+                                </a>
+                            </div>
+                            <a href="webinar.html" class="btn btn-event-secondary w-100 mt-3">Browse all webinars</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (same as index) -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row text-start">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h3 class="footer-heading">Electrochemistry</h3>
+                    <a href="electrochemistry.html" class="footer-link">Potentiostats / Galvanostats</a>
+                    <a href="electrochemistry.html" class="footer-link">Photoelectrochemistry &amp; Photovoltaics</a>
+                    <a href="electrochemistry.html" class="footer-link">Electrochemistry Accessories</a>
+                    <a href="electrochemistry.html" class="footer-link">Battery Cycler</a>
+                    <a href="electrochemistry.html" class="footer-link">Battery Environmental Test Chambers</a>
+                    <a href="electrochemistry.html" class="footer-link">Battery Cycler Accessories</a>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h3 class="footer-heading">Spectroscopy</h3>
+                    <a href="spectroscopy.html" class="footer-link">Handheld Raman</a>
+                    <a href="spectroscopy.html" class="footer-link">Lab Raman</a>
+                    <a href="spectroscopy.html" class="footer-link">Online Raman</a>
+                    <a href="spectroscopy.html" class="footer-link">Lab FT-IR</a>
+                    <a href="spectroscopy.html" class="footer-link">Online FT-IR</a>
+                    <a href="spectroscopy.html" class="footer-link">LIBS</a>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h3 class="footer-heading">Learn</h3>
+                    <div class="mb-3">
+                        <a href="#" class="footer-link">How to Use</a>
+                        <a href="publications.html" class="footer-link">Educational Articles</a>
+                        <a href="video.html" class="footer-link">Video Tutorials</a>
+                        <a href="blog.html" class="footer-link">Science Blog</a>
+                        <a href="video.html" class="footer-link">Download Guides</a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <a href="index.html" class="footer-link">Home</a>
+                    <a href="about.html" class="footer-link">About Us</a>
+                    <a href="electrochemistry.html" class="footer-link">Products</a>
+                    <a href="faq.html" class="footer-link">FAQ</a>
+                    <a href="blog.html" class="footer-link">Blog</a>
+                    <a href="contact.html" class="footer-link">Contact Us</a>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h4 class="footer-heading">Legal</h4>
+                    <a href="terms-of-use.html" class="footer-link">Terms of Use</a>
+                    <a href="privacy-policy.html" class="footer-link">Privacy Policy</a>
+                    <a href="refund-policy.html" class="footer-link">Refund Policy</a>
+                    <div class="social-icons mt-4">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="text-center mb-2" style="font-size: 0.9rem; color: #9ca3af;">
+                Australia-based scientific technology company serving researchers worldwide.
+            </div>
+            <div class="footer-bottom">
+                <div class="col-lg-12 text-center mt-3">
+                    <div class="footer-text">
+                        &copy; 2025 ScienceGears Australia | Empowering Discovery Through Science | ABN: 23 456 789 012
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+
+    <!-- Google reCAPTCHA v3 -->
+    <script src="https://www.google.com/recaptcha/api.js?render=YOUR_RECAPTCHA_V3_SITE_KEY"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+    <script src="js/mobile-menu.js"></script>
+
+    <script>
+        /* =====================================================================
+           EDIT THESE THREE BLOCKS FOR EACH RECORDED WEBINAR
+           1) WEBINAR_VIDEO   – the YouTube video ID (the part after ?v=)
+           2) WEBINAR_PEOPLE  – speakers / hosts (remove the host to show speaker only)
+           3) CHAPTERS + REVIEWS – chapter timestamps (seconds) and attendee reviews
+           ===================================================================== */
+
+        // 1) YouTube video ID, e.g. for https://www.youtube.com/watch?v=dQw4w9WgXcQ use 'dQw4w9WgXcQ'
+        const WEBINAR_VIDEO = { id: 'YOUR_YOUTUBE_VIDEO_ID' };
+
+        // 2) People
+        const WEBINAR_PEOPLE = [
+            {
+                role: 'speaker',
+                name: 'Dr. Mark Stevenson',
+                title: 'Corrosion Scientist & Applications Specialist',
+                photo: 'assets/speakers/elena-torres.jpg',
+                bio: 'Dr. Mark Stevenson has spent more than 15 years developing electrochemical corrosion test methods for metals, coatings and energy materials. He works with research and industrial labs to help them get repeatable polarisation, Tafel and impedance data.',
+                linkedin: '#'
+            },
+            {
+                role: 'host',
+                name: 'Daniel Wright',
+                title: 'Technical Sales Manager, ScienceGears',
+                photo: 'assets/speakers/daniel-wright.jpg',
+                bio: 'Daniel hosted the session and moderated the live Q&A. He is your point of contact for instrument demos and follow-up enquiries after the webinar.',
+                linkedin: '#'
+            }
+        ];
+
+        // 3a) Chapters: start = seconds into the video
+        const CHAPTERS = [
+            { start: 0, time: '00:00', icon: 'fa-hand', title: 'Welcome & Introduction', desc: 'Why corrosion measurements go wrong and what this session covers.' },
+            { start: 210, time: '03:30', icon: 'fa-triangle-exclamation', title: 'Where Corrosion Data Goes Wrong', desc: 'The most common sources of error in lab corrosion tests.' },
+            { start: 720, time: '12:00', icon: 'fa-chart-line', title: 'Tafel, LPR or EIS: Choosing the Technique', desc: 'What each method tells you and when to use it.' },
+            { start: 1470, time: '24:30', icon: 'fa-flask', title: 'Cell & Reference Electrode Setup', desc: 'Getting a stable, repeatable measurement geometry.' },
+            { start: 2280, time: '38:00', icon: 'fa-magnifying-glass-chart', title: 'Checking Your Data & Fits', desc: 'How to tell a good Tafel fit from a bad one.' },
+            { start: 2760, time: '46:00', icon: 'fa-comments', title: 'Live Q&A', desc: 'Audience questions answered by the speaker.' }
+        ];
+
+        // 3b) Attendee reviews (placeholders – replace with real, approved reviews)
+        const REVIEWS = [
+            { name: 'Priya Nair', role: 'PhD Student', org: 'Monash University', rating: 5, date: '17 Oct 2025', text: 'The section on checking Tafel fits alone was worth the hour. I went back to my old data afterwards and found two experiments I should not have trusted.' },
+            { name: 'Tom Richards', role: 'Materials Engineer', org: 'Pacific Coatings', rating: 5, date: '16 Oct 2025', text: 'Clear, practical and honest about the pitfalls. The cell setup advice has already improved the repeatability of our coating tests.' },
+            { name: 'Dr. Li Wei', role: 'Postdoctoral Researcher', org: 'University of Melbourne', rating: 4, date: '16 Oct 2025', text: 'Very useful overview of when to use LPR versus full polarisation. I would have liked a little more on EIS for corrosion, but the Q&A covered some of it.' },
+            { name: 'Sarah Collins', role: 'Lab Manager', org: 'Southern Testing Labs', rating: 5, date: '20 Oct 2025', text: 'I shared the recording with my whole team. The chapters make it easy to jump to the bit you need.' },
+            { name: 'Arjun Mehta', role: 'Research Scientist', org: 'CSIRO', rating: 4, date: '22 Oct 2025', text: 'Good balance of theory and real examples. The advice on stabilisation time before a scan was something we had been getting wrong.' },
+            { name: 'Emma Hughes', role: 'Industry Professional', org: 'Hunter Engineering', rating: 3, date: '25 Oct 2025', text: 'Solid content, though some parts moved quickly if you are new to electrochemistry. A short primer at the start would help beginners.' }
+        ];
+
+        document.addEventListener('DOMContentLoaded', function () {
+
+            /* ---------- helpers ---------- */
+            const esc = s => String(s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+            const initialsOf = name => name.replace(/^(Dr\.|Prof\.|Mr\.|Ms\.|Mrs\.)\s*/i, '').split(/\s+/).map(w => w[0]).slice(0, 2).join('').toUpperCase();
+            const roleLabel = p => p.role === 'host' ? 'Host' : 'Speaker';
+
+            function starsHTML(value) {
+                let out = '';
+                for (let i = 1; i <= 5; i++) {
+                    if (value >= i) out += '<i class="fas fa-star"></i>';
+                    else if (value >= i - 0.5) out += '<i class="fas fa-star-half-alt"></i>';
+                    else out += '<i class="far fa-star"></i>';
+                }
+                return out;
+            }
+
+            function photoHTML(p) {
+                const ini = esc(initialsOf(p.name));
+                return `<img src="${esc(p.photo)}" alt="${esc(p.name)}" loading="lazy"
+                        onerror="this.outerHTML='<div class=&quot;initials&quot;>${ini}</div>'">`;
+            }
+
+            /* ---------- VIDEO (YouTube thumbnail → iframe on click) ---------- */
+            const frame = document.getElementById('video-player');
+            const thumb = document.getElementById('videoThumb');
+            const VID = WEBINAR_VIDEO.id;
+
+            // Try the high-res thumbnail, fall back to the standard one, then to the gradient
+            thumb.src = `assets/Corrosion Measurement Best Practices.png`;
+            let thumbTried = 0;
+            thumb.addEventListener('error', function () {
+                if (thumbTried === 0) { thumbTried = 1; thumb.src = `https://img.youtube.com/vi/${VID}/hqdefault.jpg`; }
+                else { thumb.style.display = 'none'; }
+            });
+            thumb.addEventListener('load', function () {
+                // YouTube returns a tiny placeholder when maxres doesn't exist
+                if (thumb.naturalWidth && thumb.naturalWidth < 300 && thumbTried === 0) {
+                    thumbTried = 1;
+                    thumb.src = `https://img.youtube.com/vi/${VID}/hqdefault.jpg`;
+                }
+            });
+
+            function loadVideo(startSeconds) {
+                const start = startSeconds ? `&start=${startSeconds}` : '';
+                frame.classList.add('is-playing');
+                frame.innerHTML = `<iframe
+                    src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(VID)}?autoplay=1&rel=0&modestbranding=1${start}"
+                    title="Webinar recording"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                    allowfullscreen></iframe>`;
+            }
+
+            frame.addEventListener('click', function () { if (!frame.classList.contains('is-playing')) loadVideo(0); });
+            frame.addEventListener('keydown', function (e) {
+                if ((e.key === 'Enter' || e.key === ' ') && !frame.classList.contains('is-playing')) { e.preventDefault(); loadVideo(0); }
+            });
+            document.getElementById('watchNowBtn').addEventListener('click', function (e) {
+                e.preventDefault();
+                frame.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                if (!frame.classList.contains('is-playing')) loadVideo(0);
+            });
+
+            /* ---------- CHAPTERS ---------- */
+            document.getElementById('chapterList').innerHTML = CHAPTERS.map((c, i) => {
+                const next = CHAPTERS[i + 1];
+                const mins = next ? Math.round((next.start - c.start) / 60) : null;
+                return `
+                <li class="agenda-timeline-item" data-start="${c.start}" tabindex="0" role="button" aria-label="Jump to ${esc(c.title)} at ${esc(c.time)}">
+                    <div class="agenda-timeline-marker"><i class="fas ${esc(c.icon)}"></i></div>
+                    <div class="agenda-timeline-content">
+                        <span class="agenda-timeline-time"><i class="fas fa-play" style="font-size:0.6rem;"></i> ${esc(c.time)}</span>
+                        <h6 class="agenda-timeline-title">${esc(c.title)}</h6>
+                        <p class="agenda-timeline-desc">${esc(c.desc)}</p>
+                        ${mins ? `<span class="agenda-timeline-duration"><i class="fas fa-clock"></i> ${mins} min</span>` : ''}
+                    </div>
+                </li>`;
+            }).join('');
+
+            function jumpTo(sec) {
+                frame.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                loadVideo(sec);
+            }
+            document.querySelectorAll('#chapterList .agenda-timeline-item').forEach(li => {
+                li.addEventListener('click', () => jumpTo(parseInt(li.dataset.start, 10)));
+                li.addEventListener('keydown', e => {
+                    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); jumpTo(parseInt(li.dataset.start, 10)); }
+                });
+            });
+
+            /* ---------- PEOPLE ---------- */
+            const speakers = WEBINAR_PEOPLE.filter(p => p.role === 'speaker');
+            const hosts = WEBINAR_PEOPLE.filter(p => p.role === 'host');
+            const ordered = [...speakers, ...hosts];
+
+            let label, heading;
+            if (speakers.length && hosts.length) {
+                label = (speakers.length > 1 ? 'Speakers' : 'Speaker') + ' & ' + (hosts.length > 1 ? 'Hosts' : 'Host');
+                heading = label;
+            } else if (hosts.length) {
+                label = hosts.length > 1 ? 'Hosts' : 'Host'; heading = hosts.length > 1 ? 'Your Hosts' : 'Your Host';
+            } else {
+                label = speakers.length > 1 ? 'Speakers' : 'Speaker'; heading = speakers.length > 1 ? 'Your Speakers' : 'Your Speaker';
+            }
+
+            document.getElementById('headerPeopleLabel').textContent = label;
+            const headerCol = ordered.length === 1 ? 'col-12' : 'col-md-6';
+            document.getElementById('headerPeople').innerHTML = ordered.map(p => `
+                <div class="${headerCol}">
+                    <div class="mini-person ${p.role === 'host' ? 'is-host' : ''}">
+                        <div class="mini-person-photo">${photoHTML(p)}</div>
+                        <div>
+                            <span class="person-role">${roleLabel(p)}</span>
+                            <p class="mini-person-name">${esc(p.name)}</p>
+                            <p class="mini-person-title">${esc(p.title)}</p>
+                        </div>
+                    </div>
+                </div>`).join('');
+
+            document.getElementById('peopleHeading').textContent = heading;
+
+            function cardHTML(p, wide) {
+                return `
+                <div class="${wide ? 'col-12' : 'col-md-6'}">
+                    <div class="person-card ${p.role === 'host' ? 'is-host' : ''}">
+                        <div class="person-photo">${photoHTML(p)}</div>
+                        <div class="person-info">
+                            <span class="person-role">${roleLabel(p)}</span>
+                            <h5 class="fw-bold">${esc(p.name)}</h5>
+                            <div class="person-title">${esc(p.title)}</div>
+                            <p>${esc(p.bio)}</p>
+                            ${p.linkedin ? `<a href="${esc(p.linkedin)}" class="person-link"><i class="fab fa-linkedin me-1"></i>LinkedIn Profile</a>` : ''}
+                        </div>
+                    </div>
+                </div>`;
+            }
+            function groupHTML(groupLabel, list) {
+                if (!list.length) return '';
+                const wide = list.length === 1;
+                return `<div class="people-group">
+                    ${(speakers.length && hosts.length) ? `<div class="people-group-label">${groupLabel}</div>` : ''}
+                    <div class="row g-3">${list.map(p => cardHTML(p, wide)).join('')}</div>
+                </div>`;
+            }
+            document.getElementById('peopleContainer').innerHTML =
+                groupHTML(speakers.length > 1 ? 'Speakers' : 'Speaker', speakers) +
+                groupHTML(hosts.length > 1 ? 'Hosts' : 'Host', hosts);
+
+            /* ---------- RATINGS SUMMARY (computed from REVIEWS) ---------- */
+            const total = REVIEWS.length;
+            const avg = total ? REVIEWS.reduce((s, r) => s + r.rating, 0) / total : 0;
+            const counts = [5, 4, 3, 2, 1].map(n => REVIEWS.filter(r => r.rating === n).length);
+
+            document.getElementById('headerRating').innerHTML = total
+                ? `<span class="stars">${starsHTML(avg)}</span><strong>${avg.toFixed(1)}</strong><span>(${total} review${total > 1 ? 's' : ''})</span><a href="#reviews">Read feedback</a>`
+                : `<a href="#feedback-form">Be the first to leave feedback</a>`;
+
+            document.getElementById('ratingBig').innerHTML = `
+                <div class="num">${total ? avg.toFixed(1) : '–'}</div>
+                <span class="stars">${starsHTML(avg)}</span>
+                <small>${total} review${total === 1 ? '' : 's'}</small>`;
+
+            document.getElementById('ratingBars').innerHTML = [5, 4, 3, 2, 1].map((n, i) => {
+                const pct = total ? Math.round(counts[i] / total * 100) : 0;
+                return `<div class="rating-bar-row">
+                    <span class="lbl">${n} <i class="fas fa-star"></i></span>
+                    <div class="rating-bar-track"><div class="rating-bar-fill" data-pct="${pct}"></div></div>
+                    <span class="cnt">${counts[i]}</span>
+                </div>`;
+            }).join('');
+            // animate bars
+            requestAnimationFrame(() => setTimeout(() => {
+                document.querySelectorAll('.rating-bar-fill').forEach(b => b.style.width = b.dataset.pct + '%');
+            }, 100));
+
+            /* ---------- REVIEW LIST (filter + show more) ---------- */
+            const PAGE = 4;
+            let activeFilter = 'all';
+            let shown = PAGE;
+            const listEl = document.getElementById('reviewList');
+            const emptyEl = document.getElementById('reviewsEmpty');
+            const moreBtn = document.getElementById('loadMoreReviews');
+
+            function reviewHTML(r) {
+                return `
+                <div class="review-item">
+                    <div class="review-avatar">${esc(initialsOf(r.name))}</div>
+                    <div class="flex-grow-1">
+                        <div class="review-head">
+                            <span class="review-name">${esc(r.name)}</span>
+                            <span class="review-date">${esc(r.date)}</span>
+                        </div>
+                        <div class="review-role">${esc(r.role)}${r.org ? ' · ' + esc(r.org) : ''}</div>
+                        <span class="stars" aria-label="${r.rating} out of 5 stars">${starsHTML(r.rating)}</span>
+                        <p class="review-text">${esc(r.text)}</p>
+                    </div>
+                </div>`;
+            }
+
+            function renderReviews() {
+                const filtered = REVIEWS.filter(r =>
+                    activeFilter === 'all' ? true :
+                        activeFilter === '3' ? r.rating <= 3 : r.rating === parseInt(activeFilter, 10));
+                listEl.innerHTML = filtered.slice(0, shown).map(reviewHTML).join('');
+                emptyEl.style.display = filtered.length ? 'none' : 'block';
+                moreBtn.style.display = filtered.length > shown ? 'inline-block' : 'none';
+            }
+
+            document.querySelectorAll('#reviewFilters .review-filter-btn').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    document.querySelectorAll('#reviewFilters .review-filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    activeFilter = this.dataset.filter;
+                    shown = PAGE;
+                    renderReviews();
+                });
+            });
+            moreBtn.addEventListener('click', function () { shown += PAGE; renderReviews(); });
+            renderReviews();
+
+            /* ---------- FORMS (shared reCAPTCHA v3 handler) ---------- */
+            // ⚠️ REPLACE with your actual reCAPTCHA v3 site key
+            const RECAPTCHA_SITE_KEY = 'YOUR_RECAPTCHA_V3_SITE_KEY';
+
+            function submitWithRecaptcha(action, payload, onSuccess, onError) {
+                if (typeof grecaptcha === 'undefined' || !grecaptcha.execute) {
+                    onError('reCAPTCHA could not be loaded. Please check your internet connection and try again.');
+                    return;
+                }
+                grecaptcha.ready(function () {
+                    grecaptcha.execute(RECAPTCHA_SITE_KEY, { action: action }).then(function (token) {
+                        // Send { ...payload, recaptchaToken: token } to your server here, e.g.
+                        // fetch('/api/' + action, { method: 'POST', headers: { 'Content-Type': 'application/json' },
+                        //     body: JSON.stringify({ ...payload, recaptchaToken: token }) })
+                        //   .then(r => r.json()).then(d => d.success ? onSuccess() : onError(d.message))
+                        //   .catch(() => onError('Network error. Please try again.'));
+                        console.log(action, payload, 'reCAPTCHA token:', token);
+
+                        // --- Simulated success (replace with the real server call above) ---
+                        setTimeout(onSuccess, 800);
+                    }).catch(function () {
+                        onError('reCAPTCHA verification failed. Please refresh the page and try again.');
+                    });
+                });
+            }
+
+            function setupForm(cfg) {
+                const form = document.getElementById(cfg.formId);
+                const btn = document.getElementById(cfg.btnId);
+                const ok = document.getElementById(cfg.successId);
+                const err = document.getElementById(cfg.errorId);
+                const errText = document.getElementById(cfg.errorTextId);
+                const idleHTML = btn.innerHTML;
+
+                function reset() { btn.disabled = false; btn.innerHTML = idleHTML; }
+                function fail(msg) {
+                    errText.textContent = msg || 'Something went wrong. Please try again.';
+                    err.classList.remove('d-none');
+                    reset();
+                }
+
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    ok.classList.add('d-none');
+                    err.classList.add('d-none');
+
+                    let valid = form.checkValidity();
+                    if (cfg.extraValidate && !cfg.extraValidate()) valid = false;
+                    if (!valid) { form.classList.add('was-validated'); return; }
+                    form.classList.remove('was-validated');
+
+                    btn.disabled = true;
+                    btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Verifying...';
+
+                    submitWithRecaptcha(cfg.action, cfg.getPayload(), function () {
+                        form.style.display = 'none';
+                        ok.classList.remove('d-none');
+                        reset();
+                    }, fail);
+                });
+            }
+
+            // Feedback form
+            const ratingError = document.getElementById('ratingError');
+            document.querySelectorAll('#starInput input').forEach(r =>
+                r.addEventListener('change', () => ratingError.classList.remove('show')));
+
+            setupForm({
+                formId: 'feedbackForm', btnId: 'fbSubmitBtn', successId: 'fbSuccess',
+                errorId: 'fbError', errorTextId: 'fbErrorMsg', action: 'webinar_feedback',
+                extraValidate: function () {
+                    const picked = document.querySelector('#starInput input:checked');
+                    ratingError.classList.toggle('show', !picked);
+                    return !!picked;
+                },
+                getPayload: () => ({
+                    rating: (document.querySelector('#starInput input:checked') || {}).value,
+                    name: document.getElementById('fbName').value,
+                    email: document.getElementById('fbEmail').value,
+                    institution: document.getElementById('fbInstitution').value,
+                    role: document.getElementById('fbRole').value,
+                    comment: document.getElementById('fbComment').value,
+                    topics: document.getElementById('fbTopics').value
+                })
+            });
+
+            // Resources form
+            setupForm({
+                formId: 'resourceForm', btnId: 'rsSubmitBtn', successId: 'rsSuccess',
+                errorId: 'rsError', errorTextId: 'rsErrorMsg', action: 'webinar_resources',
+                getPayload: () => ({
+                    name: document.getElementById('rsName').value,
+                    email: document.getElementById('rsEmail').value,
+                    institution: document.getElementById('rsInstitution').value
+                })
+            });
+        });
+    </script>
+</body>
+
+</html>

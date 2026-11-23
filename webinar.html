@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScienceGears - Webinars & Live Sessions</title>
+    <meta name="description"
+        content="Join ScienceGears webinars on electrochemistry, battery research, and materials science. Live sessions with experts, application notes, and Q&A.">
+    <meta name="keywords" content="electrochemistry webinars, battery research, potentiostat training, sciencegears events">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="ScienceGears - Webinars & Live Sessions">
+    <meta property="og:description" content="Expert-led webinars on electrochemistry instrumentation and research.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.sciencegears.com/webinars">
+    <meta property="og:image" content="https://www.sciencegears.com/assets/images/sciencegears-social.jpg">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://www.sciencegears.com/webinars">
+
+    <!-- Favicon -->
+    <link rel="icon" href="assets/logo/fav-icon.png" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/logo/fav-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/logo/fav-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/logo/fav-icon.png">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Swiper JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- Inline additions for webinar page -->
+    <style>
+        /* ====== WEBINAR CARD ====== */
+        .webinar-card {
+            background: var(--apple-card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--apple-card-shadow);
+            transition: all 0.3s ease;
+            height: 100%;
+            border: 1px solid rgba(0,0,0,0.04);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .webinar-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--apple-card-shadow-hover);
+        }
+
+        /* Thumbnail – fixed 16:9 frame, image always fills it perfectly */
+        .webinar-thumb {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            background: linear-gradient(145deg, #e8eef7, #f8fafd);
+        }
+        .webinar-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        .webinar-card:hover .webinar-thumb img {
+            transform: scale(1.05);
+        }
+
+        /* Date chip on the image */
+       .date-chip {
+    position: absolute;
+    top: 182px;
+    left: 382px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 6px 12px;
+    text-align: center;
+    line-height: 1;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+    min-width: 58px;
+}
+        .date-chip .d-day {
+            display: block;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--science-blue, #003B7A);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .date-chip .d-mon {
+            display: block;
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--accent-orange);
+            margin-top: 3px;
+        }
+        .date-chip .d-year {
+            display: block;
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: #6b7280;
+            margin-top: 2px;
+        }
+
+        .webinar-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+        .badge-live { background: #dc3545; color: white; }
+        .badge-upcoming { background: var(--accent-orange); color: rgb(16, 15, 15); }
+        .badge-recorded { background: var(--medium-gray, #6b7280); color: white; }
+
+        .webinar-body {
+            padding: 1.25rem 1.4rem 1.4rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .webinar-body h5 {
+            font-weight: 800;
+            font-size: 1.1rem;
+            line-height: 1.35;
+            margin-bottom: 1rem;
+            color: var(--dark-gray, #1f2937);
+        }
+
+        /* Prominent date / time row */
+        .webinar-when {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            background: #fff7ea;
+            border: 1px solid #fde4bd;
+            border-radius: 12px;
+            margin-bottom: 10px;
+        }
+        .webinar-when > i {
+            width: 38px;
+            height: 38px;
+            flex-shrink: 0;
+            border-radius: 10px;
+            background: var(--accent-orange);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+        .webinar-when strong {
+            display: block;
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--dark-gray, #1f2937);
+            line-height: 1.2;
+        }
+        .webinar-when span {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #6b7280;
+            margin-top: 2px;
+        }
+
+        /* Prominent speaker row */
+        .webinar-speaker {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            background: #eef3fb;
+            border: 1px solid #d9e4f5;
+            border-radius: 12px;
+            margin-bottom: 1.1rem;
+        }
+        .speaker-avatar {
+            width: 38px;
+            height: 38px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            background: var(--gradient-blue, linear-gradient(135deg,#003B7A,#1a5bb0));
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+        .webinar-speaker small {
+            display: block;
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #6b7280;
+            line-height: 1;
+            margin-bottom: 3px;
+        }
+        .webinar-speaker strong {
+            display: block;
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--science-blue, #003B7A);
+            line-height: 1.2;
+        }
+
+        .webinar-btn {
+            margin-top: auto;
+            border-radius: 50px;
+            font-weight: 700;
+            padding: 10px 16px;
+        }
+
+        /* Past filter buttons */
+        .past-filter-btn {
+            background: white;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 50px;
+            padding: 6px 18px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #6b7280;
+            transition: all 0.2s;
+            margin-right: 6px;
+            margin-bottom: 6px;
+            cursor: pointer;
+        }
+        .past-filter-btn.active,
+        .past-filter-btn:hover {
+            background: var(--science-blue);
+            color: white;
+            border-color: var(--science-blue);
+        }
+
+        /* ====== SECTION HEADERS ====== */
+        .webinar-group { margin-bottom: 4rem; }
+        .webinar-group:last-child { margin-bottom: 0; }
+        .webinar-group-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.75rem;
+            padding-bottom: 0.9rem;
+            border-bottom: 2px solid #E5E7EB;
+        }
+        .webinar-group-head h2 {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--dark-gray, #1f2937);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .group-count {
+            display: inline-block;
+            background: var(--secondary-blue);
+            color: #fff;
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 3px 12px;
+            border-radius: 50px;
+        }
+
+        /* Search bar */
+        .webinar-toolbar {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 2rem;
+        }
+        .webinar-search-wrap {
+            position: relative;
+            width: 100%;
+            max-width: 380px;
+        }
+        .webinar-search-wrap .form-control {
+            padding-left: 40px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            height: 44px;
+            border: 1.5px solid #e5e7eb;
+            background: #fff;
+            transition: all 0.2s;
+        }
+        .webinar-search-wrap .form-control:focus {
+            border-color: var(--accent-orange);
+            box-shadow: 0 0 0 3px rgba(244,166,49,0.12);
+        }
+        .webinar-search-wrap .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+            font-size: 0.9rem;
+            pointer-events: none;
+        }
+
+        .search-empty {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: #9ca3af;
+            display: none;
+        }
+        .search-empty i { font-size: 2.5rem; margin-bottom: 1rem; color: #d1d5db; }
+        .search-empty p { font-size: 1rem; margin: 0; }
+
+        /* ====== HOW TO JOIN ====== */
+        .join-steps {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        .join-step {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            padding: 1.5rem 1rem;
+            background: #f9fafc;
+            border: 1px solid #e3e3e3;
+            border-radius: 16px;
+            transition: all 0.3s;
+        }
+        .join-step:hover { background: #fff; box-shadow: 0 8px 20px rgba(0,0,0,0.06); }
+        .join-step .step-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--gradient-blue);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin: 0 auto 1rem;
+        }
+        .join-step h6 { font-weight: 700; }
+        .join-step p { font-size: 0.85rem; color: var(--apple-gray); margin: 0; }
+
+        .btn-outline-light:hover { background: white; color: #000; }
+
+        .section-title {
+            font-weight: 600;
+            font-size: 1rem;
+            text-transform: math-auto;
+            letter-spacing: 0.5px;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #E5E7EB;
+        }
+
+        @media (max-width: 767.98px) {
+            .webinar-toolbar { justify-content: stretch; }
+            .webinar-search-wrap { max-width: none; }
+            .webinar-group-head h2 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header Top Bar -->
+    <div class="header-top">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="top-contact">
+                <a href="tel:+1234567890"><i class="fas fa-phone"></i>+61 493 868 335</a>
+                <a href="mailto:info@sciencegears.com.au"><i class="fas fa-envelope"></i> info@sciencegears.com.au</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation -->
+    <nav class="navbar navbar-expand-lg main-navbar sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="assets/logo/Logo-300x86.png" alt="ScienceGears Logo">
+            </a>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>
+
+                    <!-- Products Mega Menu -->
+                    <li class="nav-item dropdown mega-menu">
+                        <a class="nav-link dropdown-toggle" href="#" id="megaproductsDropdown"
+                            data-bs-toggle="dropdown">
+                            Products
+                        </a>
+
+                        <div class="dropdown-menu mega-menu-content" aria-labelledby="megaproductsDropdown">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-2 mega-column">
+                                        <h5 class="section-title megamenu-left">Product Groups</h5>
+                                        <div class="megaproduct-category active"
+                                            onclick="window.location.href=' electrochemistry.html'">
+                                            <i class="fas fa-bolt"></i>
+                                            Electrochemistry
+                                        </div>
+                                        <div class="megaproduct-category"
+                                            onclick="window.location.href=' spectroscopy.html'">
+                                            <i class="fas fa-solar-panel"></i>
+                                            Spectroscopy
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-lg-3 mega-column">
+                                        <div class="row">
+                                            <h5 class="section-title megamenu-left">Product Categories</h5>
+
+                                            <div class="megaproduct-category active"
+                                                onclick="window.location.href=' electrochemistry.html'">
+                                                Potentiostats / Galvanostats
+                                            </div>
+
+                                            <div class="megaproduct-category"
+                                                onclick="window.location.href=' electrochemistry.html'">
+                                                Photoelectrochemistry &#038; Photovoltaics
+                                            </div>
+
+
+                                            <div class="megaproduct-category"
+                                                onclick="window.location.href=' electrochemistry.html'">
+                                                Electrochemistry Accessories
+                                            </div>
+                                            <div class="megaproduct-category"
+                                                onclick="window.location.href=' electrochemistry.html'">
+                                                Battery Cycler
+                                            </div>
+                                            <div class="megaproduct-category"
+                                                onclick="window.location.href=' electrochemistry.html'">
+                                                Battery Environmental Test Chambers
+                                            </div>
+
+                                            <div class="megaproduct-category"
+                                                onclick="window.location.href=' electrochemistry.html'">
+                                                Battery Cycler Accessories
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-3 mega-column">
+                                        <div class="row">
+                                            <h5 class="section-title megamenu-left">Product Variants</h5>
+
+                                            <div class="megaproduct-category active"
+                                                onclick="window.location.href=' electrochemistry.html'">
+                                                Portable
+                                            </div>
+
+                                            <div class="megaproduct-category"
+                                                onclick="window.location.href=' electrochemistry.html'">
+                                               Single Channel
+                                        </div>
+                                            <div class="megaproduct-category"
+                                                onclick="window.location.href=' electrochemistry.html'">
+                                                Bipotentiostat
+                                            </div>
+                                            <div class="megaproduct-category"
+                                                onclick="window.location.href=' electrochemistry.html'">
+                                                Modular
+                                            </div>
+                                            <div class="megaproduct-category"
+                                                onclick="window.location.href=' electrochemistry.html'">
+                                               Multichannel
+                                            </div>
+
+                                            <div class="megaproduct-category"
+                                                onclick="window.location.href=' electrochemistry.html'">
+                                                Current Boosters
+                                            </div>
+
+                                            <div class="megaproduct-category"
+                                                onclick="window.location.href=' electrochemistry.html'">
+                                               Specialised Devices & Modules
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                     <div class="col-lg-4 mega-column">
+                                        <div class="row">
+                                            <h5 class="section-title megamenu-left">Products</h5>
+
+                                            <div class="megaproduct-category mb-4 active"
+                                                onclick="window.location.href=' electrochemistry.html'">
+                                                <img src="assets/products/Potentiostats/Squidstat-Plus/SquidStat-Plus_1.png" alt="Squidstat" class="thumb-products">
+                                                Squidstat Plus
+                                            </div>
+
+                                            <div class="megaproduct-category mb-4"
+                                                onclick="window.location.href=' electrochemistry.html'">
+                                                 <img src="assets/products/Potentiostats/Squidstat-Plus/squidstat-prime/SquidStat-Prime_1.png" alt="Squidstat" class="thumb-products">
+                                               Squidstat Prime
+                                            </div>
+
+
+                                            <div class="megaproduct-category mb-4"
+                                                onclick="window.location.href=' electrochemistry.html'">
+                                                 <img src="assets/products/Potentiostats/Squidstat-Plus/squidstat-solo/SquidStat-Solo_1.png" alt="Squidstat" class="thumb-products">
+                                                Squidstat Solo
+                                            </div>
+                                            <div class="megaproduct-category mb-4"
+                                                onclick="window.location.href=' electrochemistry.html'">
+                                                 <img src="assets/products/Potentiostats/Squidstat-Plus/squidstat-penta/SquidStat-Penta_1.png" alt="Squidstat" class="thumb-products">
+                                               Squidstat Penta
+                                            </div>
+                                            <div class="megaproduct-category mb-4"
+                                                onclick="window.location.href=' electrochemistry.html'">
+                                                 <img src="assets/products/Potentiostats/Squidstat-Plus/squidstat-decka/SquidStat-Decka_1.png" alt="Squidstat" class="thumb-products">
+                                                Squidstat Decka
+                                            </div>
+
+                                            <div class="megaproduct-category mb-4"
+                                                onclick="window.location.href=' electrochemistry.html'">
+                                                 <img src="assets/products/Potentiostats/Squidstat-Plus/Squidstat-Venta/SquidStat-Venta_1.png" alt="Squidstat" class="thumb-products">
+                                               Squidstat Venta
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+
+                    <!-- Resources Mega Menu -->
+                    <li class="nav-item dropdown mega-menu">
+                        <a class="nav-link dropdown-toggle" href="#" id="megaproductsDropdown"
+                            data-bs-toggle="dropdown">
+                            Resources
+                        </a>
+                        <div class="dropdown-menu mega-menu-content" aria-labelledby="megaproductsDropdown">
+                            <div class="container">
+                                <div class="row col-lg-12 nav-responsive">
+                                    <div class="row col-lg-9">
+                                        <div class="col-lg-3 mega-column">
+                                            <div class="card-images card-bg-1">
+                                                <i class="fas fa-file-alt"></i>
+                                            </div>
+                                            <div class="megaproduct-promo">
+                                                <h6>Application Notes</h6>
+                                                <p>In-depth technical guides for researchers</p>
+                                                <a href="application-notes.html">
+                                                    <p class="mega-a">View all<i class="fas fa-arrow-right-long"></i>
+                                                    </p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 mega-column">
+                                            <div class="card-images card-bg-2">
+                                                <i class="fas fa-book"></i>
+                                            </div>
+                                            <div class="megaproduct-promo">
+                                                <h6>Publications</h6>
+                                                <p>Peer-reviewed research and science articles.</p>
+                                                <a href="publications.html">
+                                                    <p class="mega-a">Read More<i class="fas fa-arrow-right-long"></i>
+                                                    </p>
+                                                </a>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-lg-3 mega-column">
+                                            <div class="card-images card-bg-3">
+                                                <i class="fas fa-download"></i>
+                                            </div>
+                                            <div class="megaproduct-promo">
+                                                <h6>Software</h6>
+                                                <p>Software tutorials, troubleshooting.</p>
+                                                <a href="software.html">
+                                                    <p class="mega-a">Download Now<i
+                                                            class="fas fa-arrow-right-long"></i></p>
+                                                </a>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-lg-3 mega-column">
+                                            <div class="card-images card-bg-3">
+                                                <i class="fas fa-video"></i>
+                                            </div>
+                                            <div class="megaproduct-promo">
+                                                <h6>Installation Videos</h6>
+                                                <p>Your Installation Journey Starts Here</p>
+                                                <a href="video.html">
+                                                    <p class="mega-a">Watch Now<i class="fas fa-arrow-right-long"></i>
+                                                    </p>
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-lg-3 mega-column">
+                                        <h5 class="section-title megamenu-left">Support</h5>
+                                        <div class="subcategories-container">
+                                            <div class="megaproducts-categorys"
+                                                onclick="window.location.href='faq.html'"><i
+                                                    class="fas fa-question-circle"></i>
+                                                FAQ</div>
+                                            <div class="megaproducts-categorys"
+                                                onclick="window.location.href='product-manual.html'"><i
+                                                    class="fas fa-book"></i> Product
+                                                Manuals</div>
+
+                                            <div class="megaproducts-categorys"><i class="fas fa-shield-alt"></i>
+                                                Warranty & Repairs</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html">Blog</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="faq.html">FAQ</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link nav-res" href="request-quote.html">Request Quote</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link nav-res" href="contact.html">Contact Us</a>
+                    </li>
+
+                </ul>
+
+                <div class="web-container-head align-items-center mobile-container-head">
+                    <div class="search-container">
+                        <button class="search-toggle" id="searchToggle">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        <div class="search-expandable" id="searchExpandable">
+                            <form class="search-form">
+                                <input class="form-control" type="search" placeholder="Search products..."
+                                    aria-label="Search">
+                                <button class="btn btn-search" type="submit"><i class="fas fa-search"></i></button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="nav-cta">
+                        <a href="request-quote.html" class="btn btn-request">
+                            <i class="fas fa-file-alt me-1"></i> Request Quote
+                        </a>
+                        <a href="contact.html" class="btn btn-contact">
+                            <i class="fas fa-headset me-1"></i> Contact Us
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+       </nav>
+
+ <!-- Top Menu Bar -->
+    <div class="menu-bar">
+        <div class="menu-title"> <a class="navbar-brand" href="index.html">
+                <img src="assets/logo/Logo-300x86.png" alt="ScienceGears Logo">
+            </a></div>
+        <div class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </div>
+
+   <!-- Menu Container -->
+    <div class="menu-container" id="menuContainer">
+        <div class="modern-mega-menu">
+            <div class="menu-item">
+                <a href="index.html"><div class="menu-header">
+                    <span>Home</span>
+                </div></a>
+            </div>
+
+            <div class="menu-item">
+                <a href="about.html"><div class="menu-header">
+                    <span>About Us</span>
+                </div></a>
+            </div>
+
+            <!-- Products -->
+            <div class="menu-item">
+                <div class="menu-header">
+                    <span>Products</span>
+                    <i class="fas fa-chevron-down toggle-icon"></i>
+                </div>
+                <div class="submenu">
+                    <div class="submenu-item nested-toggle">
+                        <span>Electrochemistry</span>
+                        <i class="fas fa-chevron-down toggle-icon ms-auto" style="font-size: 12px;"></i>
+                    </div>
+                    <div class="nested-submenu">
+                        <div class="nested-item deep-nested-toggle">
+                            <span>Potentiostats / Galvanostats</span>
+                            <i class="fas fa-chevron-down toggle-icon ms-auto" style="font-size: 10px;"></i>
+                        </div>
+                        <div class="deep-nested-submenu">
+                            <a href="electrochemistry.html" class="deep-nested-item">Portable</a>
+                            <a href="electrochemistry.html" class="deep-nested-item">Single Channel</a>
+                            <a href="electrochemistry.html" class="deep-nested-item">Bipotentiostat</a>
+                            <a href="electrochemistry.html" class="deep-nested-item"> Modular</a>
+                            <a href="electrochemistry.html" class="deep-nested-item">Multichannel / Galvanostats</a>
+                            <a href="electrochemistry.html" class="deep-nested-item"> Current Boosters</a>
+                            <a href="electrochemistry.html" class="deep-nested-item">Specialised Devices & Modules</a>
+
+
+
+                        </div>
+                        <div class="nested-item deep-nested-toggle">
+                            <span>Photoelectrochemistry and Photovoltaic</span>
+                            <i class="fas fa-chevron-down toggle-icon ms-auto" style="font-size: 10px;"></i>
+                        </div>
+
+                        <div class="nested-item deep-nested-toggle">
+                            <span>Electrochemistry Accessories</span>
+                            <i class="fas fa-chevron-down toggle-icon ms-auto" style="font-size: 10px;"></i>
+                        </div>
+
+                        <div class="nested-item deep-nested-toggle">
+                            <span>Battery Cycler</span>
+                            <i class="fas fa-chevron-down toggle-icon ms-auto" style="font-size: 10px;"></i>
+                        </div>
+
+                        <div class="nested-item deep-nested-toggle">
+                            <span>Battery Environmental Test Chambers</span>
+                            <i class="fas fa-chevron-down toggle-icon ms-auto" style="font-size: 10px;"></i>
+                        </div>
+
+                        <div class="nested-item deep-nested-toggle">
+                            <span>Battery Cycler Accessories</span>
+                            <i class="fas fa-chevron-down toggle-icon ms-auto" style="font-size: 10px;"></i>
+                        </div>
+
+
+
+                    </div>
+
+
+                    <div class="submenu-item nested-toggle">
+                        <span>Spectroscopy</span>
+                        <i class="fas fa-chevron-down toggle-icon ms-auto" style="font-size: 12px;"></i>
+                    </div>
+                    <div class="nested-submenu">
+                        <div class="nested-item deep-nested-toggle">
+                            <span>Handheld Raman</span>
+                            <i class="fas fa-chevron-down toggle-icon ms-auto" style="font-size: 10px;"></i>
+                        </div>
+                        <div class="nested-item deep-nested-toggle">
+                            <span>Laboratory Raman</span>
+                            <i class="fas fa-chevron-down toggle-icon ms-auto" style="font-size: 10px;"></i>
+                        </div>
+                        <div class="nested-item deep-nested-toggle">
+                            <span>FT-IR</span>
+                            <i class="fas fa-chevron-down toggle-icon ms-auto" style="font-size: 10px;"></i>
+                        </div>
+                        <div class="nested-item deep-nested-toggle">
+                            <span>LIBS</span>
+                            <i class="fas fa-chevron-down toggle-icon ms-auto" style="font-size: 10px;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="menu-item">
+                <div class="menu-header">
+                    <span>
+                        Resources
+                    </span>
+                    <i class="fas fa-chevron-down toggle-icon"></i>
+                </div>
+                <div class="submenu">
+                    <a href="application-notes.html" class="submenu-item">Application Notes</a>
+                    <a href="publications.html" class="submenu-item">Publications</a>
+                    <a href="software.html" class="submenu-item">Software</a>
+                     <a href="video.html" class="submenu-item">Installation Videos</a>
+                    <a href="product-manual.html" class="submenu-item">Product Manuals</a>
+                    <a href="warrenty-repairs.html" class="submenu-item">Warranty & Repairs</a>
+                </div>
+            </div>
+
+
+            <div class="menu-item">
+               <a href="blog.html"><div class="menu-header">
+                    <span>Blog</span>
+                </div></a> 
+            </div>
+
+
+            <div class="menu-item">
+               <a href="faq.html"> <div class="menu-header">
+                    <span>FAQ</span>
+                </div></a> 
+            </div>
+
+            <div class="menu-item">
+               <a href="request-quote.html"> <div class="menu-header">
+                    <span>Request Quote</span>
+                </div></a>
+            </div>
+
+
+            <div class="menu-item">
+                <a href="contact.html"><div class="menu-header">
+                    <span>Contact Us</span></div></a>
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12">
+                    <h1 class="hero-title text-center">ScienceGears Webinars</h1>
+                    <p class="hero-subtitle text-center">Expert-led sessions on electrochemistry, battery testing, and materials characterisation. Learn best practices and get your questions answered.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========== WEBINARS (Upcoming on top, Past below) ========== -->
+    <section class="section py-5" id="webinars">
+        <div class="container">
+            <!-- ====== UPCOMING ====== -->
+            <div class="webinar-group" id="upcoming">
+                <div class="webinar-group-head">
+                    <h2 class="fw-bold">Upcoming Webinars <span class="group-count" id="upcomingCount">6</span></h2>
+                     <div class="webinar-search-wrap">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="form-control" id="webinarSearchInput" placeholder="Search all webinars..." aria-label="Search webinars">
+                </div>
+                </div>
+
+                <div class="row g-4" id="upcomingList">
+
+                    <!-- Upcoming 1 -->
+                    <div class="col-lg-4 col-md-6 upcoming-item" data-search="potentiostat selection guide choosing instrument james chen electrochemistry battery">
+                        <div class="webinar-card">
+                            <div class="webinar-thumb">
+                                <img src="assets/Potentiostat Selection Guide Webinar.png" alt="Potentiostat Selection Guide webinar" loading="lazy">
+                                <div class="date-chip"><span class="d-day">12</span><span class="d-mon">Dec</span><span class="d-year">2025</span></div>
+                                <span class="webinar-badge badge-upcoming">Upcoming</span>
+                            </div>
+                            <div class="webinar-body">
+                                <h5 class="fw-bold">Potentiostat Selection Guide: Choosing the Right Instrument</h5>
+                                <div class="webinar-when">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <div><strong>12 Dec 2025, 2:00 PM AEDT</strong><span><i class="far fa-clock"></i> 60 min session</span></div>
+                                </div>
+                                <div class="webinar-speaker">
+                                    <div class="speaker-avatar">JC</div>
+                                    <div><small>Speaker</small><strong>Dr. James Chen</strong></div>
+                                </div>
+                                <a href="webinar-detail.html" class="btn btn-outline-primary webinar-btn w-100" style="border: 2px solid var(--secondary-blue);" target="_blank">Register <i class="fas fa-arrow-right ms-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Upcoming 2 -->
+                    <div class="col-lg-4 col-md-6 upcoming-item" data-search="photoelectrochemistry fundamentals applications aisha rahman solar fuel photoelectrode">
+                        <div class="webinar-card">
+                            <div class="webinar-thumb">
+                                <img src="assets/Photoelectrochemistry Webinar Banner.png" alt="Photoelectrochemistry webinar" loading="lazy">
+                                <div class="date-chip"><span class="d-day">18</span><span class="d-mon">Dec</span><span class="d-year">2025</span></div>
+                                <span class="webinar-badge badge-upcoming">Upcoming</span>
+                            </div>
+                            <div class="webinar-body">
+                                <h5 class="fw-bold">Photoelectrochemistry: From Fundamentals to Applications</h5>
+                                <div class="webinar-when">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <div><strong>18 Dec 2025, 11:00 AM AEDT</strong><span><i class="far fa-clock"></i> 50 min session</span></div>
+                                </div>
+                                <div class="webinar-speaker">
+                                    <div class="speaker-avatar">AR</div>
+                                    <div><small>Speaker</small><strong>Prof. Aisha Rahman</strong></div>
+                                </div>
+                                <a href="webinar-detail.html" class="btn btn-outline-primary webinar-btn w-100" style="border: 2px solid var(--secondary-blue);" target="_blank">Register <i class="fas fa-arrow-right ms-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Upcoming 6 -->
+                    <div class="col-lg-4 col-md-6 upcoming-item" data-search="spectroscopy materials characterisation raman ftir sophie laurent">
+                        <div class="webinar-card">
+                            <div class="webinar-thumb">
+                                <img src="assets/Spectroscopy for Materials Characterisation.png" alt="Spectroscopy Raman and FT-IR webinar" loading="lazy">
+                                <div class="date-chip"><span class="d-day">19</span><span class="d-mon">Feb</span><span class="d-year">2026</span></div>
+                                <span class="webinar-badge badge-upcoming">Upcoming</span>
+                            </div>
+                            <div class="webinar-body">
+                                <h5 class="fw-bold">Spectroscopy for Materials Characterisation: Raman &amp; FT-IR</h5>
+                                <div class="webinar-when">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <div><strong>19 Feb 2026, 10:00 AM AEDT</strong><span><i class="far fa-clock"></i> 55 min session</span></div>
+                                </div>
+                                <div class="webinar-speaker">
+                                    <div class="speaker-avatar">SL</div>
+                                    <div><small>Speaker</small><strong>Dr. Sophie Laurent</strong></div>
+                                </div>
+                                <a href="webinar-detail.html" class="btn btn-outline-primary webinar-btn w-100" style="border: 2px solid var(--secondary-blue);" target="_blank">Register <i class="fas fa-arrow-right ms-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="search-empty" id="upcomingSearchEmpty">
+                    <i class="fas fa-search"></i>
+                    <p>No upcoming webinars match your search.</p>
+                </div>
+            </div>
+
+            <!-- ====== PAST ====== -->
+            <div class="webinar-group" id="past">
+                <div class="webinar-group-head">
+                    <h2 class="fw-bold">Past Webinars <span class="group-count" id="pastCount">6</span></h2>
+                    <div class="d-flex flex-wrap align-items-center gap-1" id="pastFilters">
+                        <span class="fw-semibold me-2" style="font-size: 0.9rem; color: #4b5563;">Filter by topic:</span>
+                        <button class="past-filter-btn active" data-past-filter="all">All</button>
+                        <button class="past-filter-btn" data-past-filter="battery">Battery</button>
+                        <button class="past-filter-btn" data-past-filter="corrosion">Corrosion</button>
+                        <button class="past-filter-btn" data-past-filter="spectroscopy">Spectroscopy</button>
+                        <button class="past-filter-btn" data-past-filter="potentiostat">Potentiostat</button>
+                    </div>
+                </div>
+
+                <div class="row g-4" id="pastList">
+
+                    <!-- Past 1 -->
+                    <div class="col-lg-4 col-md-6 past-item" data-past-topic="corrosion" data-search="corrosion measurement best practices pitfalls mark stevenson polarisation tafel">
+                        <div class="webinar-card">
+                            <div class="webinar-thumb">
+                                <img src="assets/Corrosion Measurement Best Practices.png" alt="Corrosion Measurement webinar" loading="lazy">
+                                <div class="date-chip"><span class="d-day">15</span><span class="d-mon">Oct</span><span class="d-year">2025</span></div>
+                                <span class="webinar-badge badge-recorded">Recorded</span>
+                            </div>
+                            <div class="webinar-body">
+                                <h5 class="fw-bold">Corrosion Measurement: Best Practices &amp; Pitfalls</h5>
+                                <div class="webinar-when">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <div><strong>15 Oct 2025</strong><span><i class="far fa-clock"></i> 55 min recording</span></div>
+                                </div>
+                                <div class="webinar-speaker">
+                                    <div class="speaker-avatar">MS</div>
+                                    <div><small>Speaker</small><strong>Dr. Mark Stevenson</strong></div>
+                                </div>
+                                <a href="past-webinar.html" class="btn btn-outline-secondary webinar-btn w-100">Watch Recording <i class="fas fa-play ms-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Past 2 -->
+                    <div class="col-lg-4 col-md-6 past-item" data-past-topic="spectroscopy" data-search="raman spectroscopy battery materials sophie laurent in-situ degradation">
+                        <div class="webinar-card">
+                            <div class="webinar-thumb">
+                                <img src="assets/Raman Spectroscopy for Battery Materials.png" alt="Raman Spectroscopy for Battery Materials webinar" loading="lazy">
+                                <div class="date-chip"><span class="d-day">28</span><span class="d-mon">Aug</span><span class="d-year">2025</span></div>
+                                <span class="webinar-badge badge-recorded">Recorded</span>
+                            </div>
+                            <div class="webinar-body">
+                                <h5 class="fw-bold">Raman Spectroscopy for Battery Materials</h5>
+                                <div class="webinar-when">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <div><strong>28 Aug 2025</strong><span><i class="far fa-clock"></i> 40 min recording</span></div>
+                                </div>
+                                <div class="webinar-speaker">
+                                    <div class="speaker-avatar">SL</div>
+                                    <div><small>Speaker</small><strong>Dr. Sophie Laurent</strong></div>
+                                </div>
+                                <a href="past-webinar.html" class="btn btn-outline-secondary webinar-btn w-100">Watch Recording <i class="fas fa-play ms-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Past 3 -->
+                    <div class="col-lg-4 col-md-6 past-item" data-past-topic="potentiostat" data-search="introduction potentiostats theory practice james chen instrumentation electrochemical control">
+                        <div class="webinar-card">
+                            <div class="webinar-thumb">
+                                <img src="assets/Potentiostats_ Theory & Practice Webinar.png" alt="Introduction to Potentiostats webinar" loading="lazy">
+                                <div class="date-chip"><span class="d-day">10</span><span class="d-mon">Jul</span><span class="d-year">2025</span></div>
+                                <span class="webinar-badge badge-recorded">Recorded</span>
+                            </div>
+                            <div class="webinar-body">
+                                <h5 class="fw-bold">Introduction to Potentiostats: Theory &amp; Practice</h5>
+                                <div class="webinar-when">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <div><strong>10 Jul 2025</strong><span><i class="far fa-clock"></i> 60 min recording</span></div>
+                                </div>
+                                <div class="webinar-speaker">
+                                    <div class="speaker-avatar">JC</div>
+                                    <div><small>Speaker</small><strong>Dr. James Chen</strong></div>
+                                </div>
+                                <a href="past-webinar.html" class="btn btn-outline-secondary webinar-btn w-100">Watch Recording <i class="fas fa-play ms-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Past 4 -->
+                    <div class="col-lg-4 col-md-6 past-item" data-past-topic="battery" data-search="battery testing fundamentals cyclers protocols elena torres current rates capacity efficiency">
+                        <div class="webinar-card">
+                            <div class="webinar-thumb">
+                                <img src="assets/Battery Testing Fundamentals_ Cyclers & Protocols.png" alt="Battery Testing Fundamentals webinar" loading="lazy">
+                                <div class="date-chip"><span class="d-day">22</span><span class="d-mon">May</span><span class="d-year">2025</span></div>
+                                <span class="webinar-badge badge-recorded">Recorded</span>
+                            </div>
+                            <div class="webinar-body">
+                                <h5 class="fw-bold">Battery Testing Fundamentals: Cyclers &amp; Protocols</h5>
+                                <div class="webinar-when">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <div><strong>22 May 2025</strong><span><i class="far fa-clock"></i> 50 min recording</span></div>
+                                </div>
+                                <div class="webinar-speaker">
+                                    <div class="speaker-avatar">ET</div>
+                                    <div><small>Speaker</small><strong>Dr. Elena Torres</strong></div>
+                                </div>
+                                <a href="past-webinar.html" class="btn btn-outline-secondary webinar-btn w-100">Watch Recording <i class="fas fa-play ms-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Past 5 -->
+                    <div class="col-lg-4 col-md-6 past-item" data-past-topic="battery" data-search="lithium-ion battery degradation analysis elena torres sei growth lithium plating active material">
+                        <div class="webinar-card">
+                            <div class="webinar-thumb">
+                                <img src="assets/Lithium-Ion Battery Degradation Analysis.png" alt="Lithium-Ion Battery Degradation Analysis webinar" loading="lazy">
+                                <div class="date-chip"><span class="d-day">14</span><span class="d-mon">Mar</span><span class="d-year">2025</span></div>
+                                <span class="webinar-badge badge-recorded">Recorded</span>
+                            </div>
+                            <div class="webinar-body">
+                                <h5 class="fw-bold">Lithium-Ion Battery Degradation Analysis</h5>
+                                <div class="webinar-when">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <div><strong>14 Mar 2025</strong><span><i class="far fa-clock"></i> 48 min recording</span></div>
+                                </div>
+                                <div class="webinar-speaker">
+                                    <div class="speaker-avatar">ET</div>
+                                    <div><small>Speaker</small><strong>Dr. Elena Torres</strong></div>
+                                </div>
+                                <a href="past-webinar.html" class="btn btn-outline-secondary webinar-btn w-100">Watch Recording <i class="fas fa-play ms-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Past 6 -->
+                    <div class="col-lg-4 col-md-6 past-item" data-past-topic="spectroscopy" data-search="ft-ir spectroscopy material characterisation sophie laurent sample preparation spectral interpretation">
+                        <div class="webinar-card">
+                            <div class="webinar-thumb">
+                                <img src="assets/FT-IR Spectroscopy Webinar Thumbnail.png" alt="FT-IR Spectroscopy webinar" loading="lazy">
+                                <div class="date-chip"><span class="d-day">9</span><span class="d-mon">Feb</span><span class="d-year">2025</span></div>
+                                <span class="webinar-badge badge-recorded">Recorded</span>
+                            </div>
+                            <div class="webinar-body">
+                                <h5 class="fw-bold">FT-IR Spectroscopy for Material Characterisation</h5>
+                                <div class="webinar-when">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <div><strong>9 Feb 2025</strong><span><i class="far fa-clock"></i> 42 min recording</span></div>
+                                </div>
+                                <div class="webinar-speaker">
+                                    <div class="speaker-avatar">SL</div>
+                                    <div><small>Speaker</small><strong>Dr. Sophie Laurent</strong></div>
+                                </div>
+                                <a href="past-webinar.html" class="btn btn-outline-secondary webinar-btn w-100">Watch Recording <i class="fas fa-play ms-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="search-empty" id="pastSearchEmpty">
+                    <i class="fas fa-search"></i>
+                    <p>No past webinars match your search or filter.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== HOW TO JOIN ========== -->
+    <section class="section bg-light" id="join-form">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-12">
+                    <h2 class="section-title text-start" style="font-size: 1.8rem;">How to Join</h2>
+                    <p class="text-muted mb-4">Getting started is simple. Follow these steps to secure your spot and receive access details.</p>
+
+                    <div class="join-steps">
+                        <div class="join-step">
+                            <div class="step-icon"><i class="fas fa-list-check"></i></div>
+                            <h6>1. Choose a Session</h6>
+                            <p>Browse our upcoming webinars and pick the topics relevant to your research.</p>
+                        </div>
+                        <div class="join-step">
+                            <div class="step-icon"><i class="fas fa-pen-to-square"></i></div>
+                            <h6>2. Register</h6>
+                            <p>Fill in the short form with your name and email. It takes less than a minute.</p>
+                        </div>
+                        <div class="join-step">
+                            <div class="step-icon"><i class="fas fa-envelope-open-text"></i></div>
+                            <h6>3. Receive Link</h6>
+                            <p>You'll get a confirmation email with your unique joining link and calendar invite.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+ 
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row text-start">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h3 class="footer-heading">Electrochemistry</h3>
+                    <a href="electrochemistry.html" class="footer-link">Potentiostats / Galvanostats</a>
+                    <a href="electrochemistry.html" class="footer-link">Photoelectrochemistry &amp; Photovoltaics</a>
+                    <a href="electrochemistry.html" class="footer-link">Electrochemistry Accessories</a>
+                    <a href="electrochemistry.html" class="footer-link">Battery Cycler</a>
+                    <a href="electrochemistry.html" class="footer-link">Battery Environmental Test Chambers</a>
+                    <a href="electrochemistry.html" class="footer-link">Battery Cycler Accessories</a>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h3 class="footer-heading">Spectroscopy</h3>
+                    <a href="spectroscopy.html" class="footer-link">Handheld Raman</a>
+                    <a href="spectroscopy.html" class="footer-link">Lab Raman</a>
+                    <a href="spectroscopy.html" class="footer-link">Online Raman</a>
+                    <a href="spectroscopy.html" class="footer-link">Lab FT-IR</a>
+                    <a href="spectroscopy.html" class="footer-link">Online FT-IR</a>
+                    <a href="spectroscopy.html" class="footer-link">LIBS</a>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h3 class="footer-heading">Learn</h3>
+                    <div class="mb-3">
+                        <a href="#" class="footer-link">How to Use</a>
+                        <a href="publications.html" class="footer-link">Educational Articles</a>
+                        <a href="video.html" class="footer-link">Video Tutorials</a>
+                        <a href="blog.html" class="footer-link">Science Blog</a>
+                        <a href="video.html" class="footer-link">Download Guides</a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <a href="index.html" class="footer-link">Home</a>
+                    <a href="about.html" class="footer-link">About Us</a>
+                    <a href="electrochemistry.html" class="footer-link">Products</a>
+                    <a href="faq.html" class="footer-link">FAQ</a>
+                    <a href="blog.html" class="footer-link">Blog</a>
+                    <a href="contact.html" class="footer-link">Contact Us</a>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h4 class="footer-heading">Legal</h4>
+                    <a href="terms-of-use.html" class="footer-link">Terms of Use</a>
+                    <a href="privacy-policy.html" class="footer-link">Privacy Policy</a>
+                    <a href="refund-policy.html" class="footer-link">Refund Policy</a>
+                    <div class="social-icons mt-4">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="text-center mb-2" style="font-size: 0.9rem; color: #9ca3af;">
+                Australia-based scientific technology company serving researchers worldwide.
+            </div>
+            <div class="footer-bottom">
+                <div class="col-lg-12 text-center mt-3">
+                    <div class="footer-text">
+                        &copy; 2025 ScienceGears Australia | Empowering Discovery Through Science | ABN: 23 456 789 012
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+    <script src="js/mobile-menu.js"></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        // ====== IMAGE FALLBACK (if a thumbnail file is missing, show a neutral placeholder) ======
+        document.querySelectorAll('.webinar-thumb img').forEach(img => {
+            img.addEventListener('error', function () {
+                this.style.display = 'none';
+            });
+        });
+
+        // ====== PAST WEBINAR FILTERS ======
+        const pastFilterBtns = document.querySelectorAll('#pastFilters .past-filter-btn');
+        let activePastFilter = 'all';
+
+        pastFilterBtns.forEach(btn => {
+            btn.addEventListener('click', function () {
+                pastFilterBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                activePastFilter = this.getAttribute('data-past-filter');
+                applySearchAndFilter();
+            });
+        });
+
+        // ====== SEARCH (applies to both sections) ======
+        const searchInput = document.getElementById('webinarSearchInput');
+        const upcomingEmpty = document.getElementById('upcomingSearchEmpty');
+        const pastEmpty = document.getElementById('pastSearchEmpty');
+
+        function applySearchAndFilter() {
+            const query = searchInput.value.toLowerCase().trim();
+
+            // Upcoming
+            let upVisible = 0;
+            document.querySelectorAll('#upcomingList .upcoming-item').forEach(item => {
+                const text = (item.getAttribute('data-search') || '') + ' ' + item.textContent.toLowerCase();
+                const show = !query || text.includes(query);
+                item.style.display = show ? '' : 'none';
+                if (show) upVisible++;
+            });
+            upcomingEmpty.style.display = upVisible === 0 ? 'block' : 'none';
+
+            // Past
+            let pastVisible = 0;
+            document.querySelectorAll('#pastList .past-item').forEach(item => {
+                const topic = item.getAttribute('data-past-topic');
+                const text = (item.getAttribute('data-search') || '') + ' ' + item.textContent.toLowerCase();
+                const show = (activePastFilter === 'all' || topic === activePastFilter) && (!query || text.includes(query));
+                item.style.display = show ? '' : 'none';
+                if (show) pastVisible++;
+            });
+            pastEmpty.style.display = pastVisible === 0 ? 'block' : 'none';
+        }
+
+        searchInput.addEventListener('input', applySearchAndFilter);
+
+        // Counts
+        document.getElementById('upcomingCount').textContent = document.querySelectorAll('#upcomingList .upcoming-item').length;
+        document.getElementById('pastCount').textContent = document.querySelectorAll('#pastList .past-item').length;
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScienceGears - Webinars & Live Sessions</title>
+    <meta name="description"
+        content="Join ScienceGears webinars on electrochemistry, battery research, and materials science. Live sessions with experts, application notes, and Q&A.">
+    <meta name="keywords" content="electrochemistry webinars, battery research, potentiostat training, sciencegears events">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="ScienceGears - Webinars & Live Sessions">
+    <meta property="og:description" content="Expert-led webinars on electrochemistry instrumentation and research.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.sciencegears.com/webinars">
+    <meta property="og:image" content="https://www.sciencegears.com/assets/images/sciencegears-social.jpg">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://www.sciencegears.com/webinars">
+
+    <!-- Favicon -->
+    <link rel="icon" href="assets/logo/fav-icon.png" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/logo/fav-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/logo/fav-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/logo/fav-icon.png">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Swiper JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- Inline additions for webinar page -->
+    <style>
+        /* Webinar specific styles – extend existing theme */
+        .webinar-hero {
+            background: var(--gradient-blue);
+            color: white;
+            padding: 80px 0 60px;
+            position: relative;
+            overflow: hidden;
+        }
+        .webinar-hero::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+        }
+        .webinar-hero h1 {
+            font-weight: 800;
+            font-size: 3rem;
+            color: #fff;
+        }
+        .webinar-hero .lead {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+        }
+        .webinar-card {
+            background: var(--apple-card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--apple-card-shadow);
+            transition: all 0.3s ease;
+            height: 100%;
+            border: 1px solid rgba(0,0,0,0.04);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .webinar-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--apple-card-shadow-hover);
+        }
+        .webinar-card .card-img-top {
+            height: 180px;
+            object-fit: cover;
+            background: #eef2f7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--science-blue);
+            background: linear-gradient(145deg, #f0f4fa, #ffffff);
+        }
+        .webinar-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .badge-live {
+            background: #dc3545;
+            color: white;
+        }
+        .badge-upcoming {
+            background: var(--accent-orange);
+            color: white;
+        }
+        .badge-recorded {
+            background: var(--medium-gray);
+            color: white;
+        }
+        .webinar-meta {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--apple-gray);
+            margin-bottom: 0.75rem;
+            flex-wrap: wrap;
+        }
+        .webinar-meta i {
+            color: var(--accent-orange);
+            width: 18px;
+            margin-right: 6px;
+        }
+        .filter-btn {
+            background: white;
+            border: 2px solid #eee;
+            border-radius: 50px;
+            padding: 8px 24px;
+            font-weight: 600;
+            color: #666;
+            transition: all 0.3s;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--secondary-blue);
+            color: white;
+            border-color: var(--secondary-blue);
+        }
+        .join-form-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 2rem;
+            border-top: 5px solid var(--accent-orange);
+        }
+        .form-label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+        }
+        .form-control, .form-select {
+            border-radius: 10px;
+            border: 1px solid var(--border-gray);
+            padding: 12px 18px;
+            font-size: 0.95rem;
+        }
+        .form-control:focus, .form-select:focus {
+            border-color: var(--accent-orange);
+            box-shadow: 0 0 0 0.2rem rgba(244, 166, 49, 0.15);
+        }
+        .btn-join {
+            background: var(--gradient-orange);
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: all 0.3s;
+            width: 100%;
+        }
+        .btn-join:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.35);
+            color: white;
+        }
+
+        /* ====== PROFESSIONAL "LATEST UPDATES" SIDE POPUP (STICKY BOTTOM-LEFT, AUTO VERTICAL SCROLL) ====== */
+        .updates-popup {
+            position: fixed;
+            left: 20px;
+            bottom: 20px;
+            width: 340px;
+            max-width: calc(100vw - 40px);
+            z-index: 1050;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            font-family: 'Roboto', sans-serif;
+        }
+        .updates-popup.minimized {
+            transform: translateY(calc(100% - 52px));
+            opacity: 0.95;
+        }
+        .updates-popup-header {
+            background: var(--science-blue);
+            color: white;
+            padding: 14px 18px;
+            border-radius: 12px 12px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+            transition: background 0.2s;
+        }
+        .updates-popup-header:hover {
+            background: #002a5c;
+        }
+        .updates-popup-header i {
+            margin-right: 8px;
+            color: var(--accent-orange);
+        }
+        .updates-popup-header .toggle-icon {
+            transition: transform 0.3s;
+            font-size: 0.9rem;
+            margin-left: 8px;
+        }
+        .updates-popup.minimized .updates-popup-header .toggle-icon {
+            transform: rotate(180deg);
+        }
+        .updates-popup-body {
+            background: white;
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            overflow: hidden;
+            max-height: 320px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-orange) #f0f0f0;
+            transition: max-height 0.3s ease;
+        }
+        .updates-popup.minimized .updates-popup-body {
+            max-height: 0;
+        }
+        .updates-popup-body::-webkit-scrollbar {
+            width: 6px;
+        }
+        .updates-popup-body::-webkit-scrollbar-thumb {
+            background: var(--accent-orange);
+            border-radius: 3px;
+        }
+        .update-entry {
+            padding: 14px 18px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.2s;
+        }
+        .update-entry:last-child {
+            border-bottom: none;
+        }
+        .update-entry:hover {
+            background: #fafafa;
+        }
+        .update-entry .update-date {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--accent-orange);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+        .update-entry h6 {
+            font-weight: 700;
+            font-size: 0.88rem;
+            margin: 0 0 4px;
+            color: var(--dark-gray);
+            line-height: 1.3;
+        }
+        .update-entry p {
+            font-size: 0.8rem;
+            color: var(--apple-gray);
+            margin: 0;
+            line-height: 1.4;
+        }
+        .updates-popup-footer {
+            padding: 10px 18px;
+            background: #f8f9fa;
+            border-radius: 0 0 12px 12px;
+            text-align: center;
+            border-top: 1px solid #eee;
+        }
+        .updates-popup-footer a {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--science-blue);
+            text-decoration: none;
+        }
+        .updates-popup-footer a:hover {
+            color: var(--accent-orange);
+        }
+        @media (max-width: 575.98px) {
+            .updates-popup {
+                width: 290px;
+                left: 12px;
+                bottom: 12px;
+            }
+        }
+
+        /* ====== REDESIGNED "PAST WEBINARS" – MODERN CARD GRID ====== */
+        .past-webinar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+        .past-webinar-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+            border: 1px solid rgba(0,0,0,0.04);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .past-webinar-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.12);
+            border-color: rgba(244,166,49,0.3);
+        }
+        .past-webinar-card .pw-thumbnail {
+            height: 140px;
+            background: linear-gradient(145deg, #f0f4fa, #e8edf5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.8rem;
+            color: var(--science-blue);
+            position: relative;
+            overflow: hidden;
+        }
+        .past-webinar-card .pw-thumbnail .play-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,36,100,0.55);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .past-webinar-card:hover .pw-thumbnail .play-overlay {
+            opacity: 1;
+        }
+        .past-webinar-card .pw-thumbnail .play-overlay i {
+            font-size: 2.4rem;
+            color: white;
+            opacity: 0.9;
+            transform: scale(0.9);
+            transition: transform 0.3s;
+        }
+        .past-webinar-card:hover .pw-thumbnail .play-overlay i {
+            transform: scale(1.1);
+        }
+        .past-webinar-card .pw-date-badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: var(--accent-orange);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            z-index: 1;
+            box-shadow: 0 3px 10px rgba(244,166,49,0.3);
+        }
+        .past-webinar-card .pw-body {
+            padding: 18px 20px 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .past-webinar-card .pw-body h5 {
+            font-weight: 700;
+            font-size: 1.05rem;
+            margin-bottom: 6px;
+            color: var(--dark-gray);
+            line-height: 1.3;
+        }
+        .past-webinar-card .pw-body .pw-speaker {
+            font-size: 0.82rem;
+            color: var(--apple-gray);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .past-webinar-card .pw-body .pw-speaker i {
+            color: var(--accent-orange);
+            width: 16px;
+        }
+        .past-webinar-card .pw-body .pw-footer {
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 12px;
+            border-top: 1px solid #f0f0f0;
+        }
+        .past-webinar-card .pw-body .pw-duration {
+            font-size: 0.78rem;
+            color: var(--apple-gray);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .past-webinar-card .pw-body .pw-duration i {
+            color: var(--accent-orange);
+        }
+        .past-webinar-card .pw-body .btn-watch {
+            background: transparent;
+            border: 2px solid var(--science-blue);
+            color: var(--science-blue);
+            border-radius: 50px;
+            padding: 6px 18px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            transition: all 0.25s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .past-webinar-card .pw-body .btn-watch:hover {
+            background: var(--science-blue);
+            color: white;
+            transform: translateX(3px);
+        }
+        .past-webinar-card .pw-body .btn-watch i {
+            font-size: 0.7rem;
+        }
+        /* Sticky "Register" scroll button inside card */
+        .webinar-card .btn-register-scroll {
+            cursor: pointer;
+        }
+
+        /* Smooth scroll offset for sticky nav */
+        html {
+            scroll-behavior: smooth;
+        }
+        #join-form {
+            scroll-margin-top: 100px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header Top Bar -->
+    <div class="header-top">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="top-contact">
+                <a href="tel:+1234567890"><i class="fas fa-phone"></i>+61 493 868 335</a>
+                <a href="mailto:info@sciencegears.com.au"><i class="fas fa-envelope"></i> info@sciencegears.com.au</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation -->
+    <nav class="navbar navbar-expand-lg main-navbar sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="assets/logo/Logo-300x86.png" alt="ScienceGears Logo">
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+
+                    <!-- Products Mega Menu -->
+                    <li class="nav-item dropdown mega-menu">
+                        <a class="nav-link dropdown-toggle" href="#" id="megaproductsDropdown"
+                            data-bs-toggle="dropdown">Products</a>
+                        <div class="dropdown-menu mega-menu-content" aria-labelledby="megaproductsDropdown">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-3 mega-column">
+                                        <h5 class="section-title megamenu-left">Product Groups</h5>
+                                        <div class="megaproduct-category active" onclick="window.location.href='electrochemistry.html'">
+                                            <i class="fas fa-bolt"></i> Electrochemistry
+                                        </div>
+                                        <div class="megaproduct-category" onclick="window.location.href='spectroscopy.html'">
+                                            <i class="fas fa-solar-panel"></i> Spectroscopy
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 mega-column">
+                                        <div class="row">
+                                            <h5 class="section-title megamenu-left">Product Categories</h5>
+                                            <div class="megaproduct-category active" onclick="window.location.href='electrochemistry.html'">
+                                                Potentiostats / Galvanostats
+                                            </div>
+                                            <div class="megaproduct-category" onclick="window.location.href='electrochemistry.html'">
+                                                Photoelectrochemistry &amp; Photovoltaics
+                                            </div>
+                                            <div class="megaproduct-category" onclick="window.location.href='electrochemistry.html'">
+                                                Electrochemistry Accessories
+                                            </div>
+                                            <div class="megaproduct-category" onclick="window.location.href='electrochemistry.html'">
+                                                Battery Cycler
+                                            </div>
+                                            <div class="megaproduct-category" onclick="window.location.href='electrochemistry.html'">
+                                                Battery Environmental Test Chambers
+                                            </div>
+                                            <div class="megaproduct-category" onclick="window.location.href='electrochemistry.html'">
+                                                Battery Cycler Accessories
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 mega-column">
+                                        <div class="row">
+                                            <h5 class="section-title megamenu-left">Product Variants</h5>
+                                            <div class="megaproduct-category active" onclick="window.location.href='electrochemistry.html'">Portable</div>
+                                            <div class="megaproduct-category" onclick="window.location.href='electrochemistry.html'">Single Channel</div>
+                                            <div class="megaproduct-category" onclick="window.location.href='electrochemistry.html'">Bipotentiostat</div>
+                                            <div class="megaproduct-category" onclick="window.location.href='electrochemistry.html'">Modular</div>
+                                            <div class="megaproduct-category" onclick="window.location.href='electrochemistry.html'">Multichannel</div>
+                                            <div class="megaproduct-category" onclick="window.location.href='electrochemistry.html'">Current Boosters</div>
+                                            <div class="megaproduct-category" onclick="window.location.href='electrochemistry.html'">Specialised Devices &amp; Modules</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 mega-column">
+                                        <div class="row">
+                                            <h5 class="section-title megamenu-left">Products</h5>
+                                            <div class="megaproduct-category mb-4 active" onclick="window.location.href='electrochemistry.html'">
+                                                <img src="assets/products/Potentiostats/Squidstat-Plus/SquidStat-Plus_1.png" alt="Squidstat" class="thumb-products"> Squidstat Plus
+                                            </div>
+                                            <div class="megaproduct-category mb-4" onclick="window.location.href='electrochemistry.html'">
+                                                <img src="assets/products/Potentiostats/Squidstat-Plus/squidstat-prime/SquidStat-Prime_1.png" alt="Squidstat" class="thumb-products"> Squidstat Prime
+                                            </div>
+                                            <div class="megaproduct-category mb-4" onclick="window.location.href='electrochemistry.html'">
+                                                <img src="assets/products/Potentiostats/Squidstat-Plus/squidstat-solo/SquidStat-Solo_1.png" alt="Squidstat" class="thumb-products"> Squidstat Solo
+                                            </div>
+                                            <div class="megaproduct-category mb-4" onclick="window.location.href='electrochemistry.html'">
+                                                <img src="assets/products/Potentiostats/Squidstat-Plus/squidstat-penta/SquidStat-Penta_1.png" alt="Squidstat" class="thumb-products"> Squidstat Penta
+                                            </div>
+                                            <div class="megaproduct-category mb-4" onclick="window.location.href='electrochemistry.html'">
+                                                <img src="assets/products/Potentiostats/Squidstat-Plus/squidstat-decka/SquidStat-Decka_1.png" alt="Squidstat" class="thumb-products"> Squidstat Decka
+                                            </div>
+                                            <div class="megaproduct-category mb-4" onclick="window.location.href='electrochemistry.html'">
+                                                <img src="assets/products/Potentiostats/Squidstat-Plus/Squidstat-Venta/SquidStat-Venta_1.png" alt="Squidstat" class="thumb-products"> Squidstat Venta
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Resources Mega Menu -->
+                    <li class="nav-item dropdown mega-menu">
+                        <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown"
+                            data-bs-toggle="dropdown">Resources</a>
+                        <div class="dropdown-menu mega-menu-content" aria-labelledby="resourcesDropdown">
+                            <div class="container">
+                                <div class="row col-lg-12 nav-responsive">
+                                    <div class="row col-lg-9">
+                                        <div class="col-lg-3 mega-column">
+                                            <div class="card-images card-bg-1"><i class="fas fa-file-alt"></i></div>
+                                            <div class="megaproduct-promo">
+                                                <h6>Application Notes</h6>
+                                                <p>In-depth technical guides for researchers</p>
+                                                <a href="application-notes.html"><p class="mega-a">View all<i class="fas fa-arrow-right-long"></i></p></a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 mega-column">
+                                            <div class="card-images card-bg-2"><i class="fas fa-book"></i></div>
+                                            <div class="megaproduct-promo">
+                                                <h6>Publications</h6>
+                                                <p>Peer-reviewed research and science articles.</p>
+                                                <a href="publications.html"><p class="mega-a">Read More<i class="fas fa-arrow-right-long"></i></p></a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 mega-column">
+                                            <div class="card-images card-bg-3"><i class="fas fa-download"></i></div>
+                                            <div class="megaproduct-promo">
+                                                <h6>Software</h6>
+                                                <p>Software tutorials, troubleshooting.</p>
+                                                <a href="software.html"><p class="mega-a">Download Now<i class="fas fa-arrow-right-long"></i></p></a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 mega-column">
+                                            <div class="card-images card-bg-3"><i class="fas fa-video"></i></div>
+                                            <div class="megaproduct-promo">
+                                                <h6>Installation Videos</h6>
+                                                <p>Your Installation Journey Starts Here</p>
+                                                <a href="video.html"><p class="mega-a">Watch Now<i class="fas fa-arrow-right-long"></i></p></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 mega-column">
+                                        <h5 class="section-title megamenu-left">Support</h5>
+                                        <div class="subcategories-container">
+                                            <div class="megaproducts-categorys" onclick="window.location.href='faq.html'"><i class="fas fa-question-circle"></i> FAQ</div>
+                                            <div class="megaproducts-categorys" onclick="window.location.href='product-manual.html'"><i class="fas fa-book"></i> Product Manuals</div>
+                                            <div class="megaproducts-categorys"><i class="fas fa-shield-alt"></i> Warranty &amp; Repairs</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="faq.html">FAQ</a></li>
+                    <li class="nav-item"><a class="nav-link nav-res" href="request-quote.html">Request Quote</a></li>
+                    <li class="nav-item"><a class="nav-link nav-res" href="contact.html">Contact Us</a></li>
+                </ul>
+
+                <div class="web-container-head align-items-center mobile-container-head">
+                    <div class="search-container">
+                        <button class="search-toggle" id="searchToggle"><i class="fas fa-search"></i></button>
+                        <div class="search-expandable" id="searchExpandable">
+                            <form class="search-form">
+                                <input class="form-control" type="search" placeholder="Search products..." aria-label="Search">
+                                <button class="btn btn-search" type="submit"><i class="fas fa-search"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="nav-cta">
+                        <a href="request-quote.html" class="btn btn-request"><i class="fas fa-file-alt me-1"></i> Request Quote</a>
+                        <a href="contact.html" class="btn btn-contact"><i class="fas fa-headset me-1"></i> Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile menu bar -->
+    <div class="menu-bar">
+        <div class="menu-title">
+            <a class="navbar-brand" href="index.html">
+                <img src="assets/logo/Logo-300x86.png" alt="ScienceGears Logo">
+            </a>
+        </div>
+        <div class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></div>
+    </div>
+    <div class="menu-container" id="menuContainer">
+        <div class="modern-mega-menu">
+            <div class="menu-item"><a href="index.html"><div class="menu-header"><span>Home</span></div></a></div>
+            <div class="menu-item"><a href="about.html"><div class="menu-header"><span>About Us</span></div></a></div>
+            <div class="menu-item">
+                <div class="menu-header"><span>Products</span><i class="fas fa-chevron-down toggle-icon"></i></div>
+                <div class="submenu">
+                    <div class="submenu-item nested-toggle"><span>Electrochemistry</span><i class="fas fa-chevron-down toggle-icon ms-auto" style="font-size: 12px;"></i></div>
+                    <div class="nested-submenu">
+                        <div class="nested-item deep-nested-toggle"><span>Potentiostats / Galvanostats</span><i class="fas fa-chevron-down toggle-icon ms-auto" style="font-size: 10px;"></i></div>
+                        <div class="deep-nested-submenu">
+                            <a href="electrochemistry.html" class="deep-nested-item">Portable</a>
+                            <a href="electrochemistry.html" class="deep-nested-item">Single Channel</a>
+                            <a href="electrochemistry.html" class="deep-nested-item">Bipotentiostat</a>
+                            <a href="electrochemistry.html" class="deep-nested-item">Modular</a>
+                            <a href="electrochemistry.html" class="deep-nested-item">Multichannel / Galvanostats</a>
+                            <a href="electrochemistry.html" class="deep-nested-item">Current Boosters</a>
+                            <a href="electrochemistry.html" class="deep-nested-item">Specialised Devices &amp; Modules</a>
+                        </div>
+                        <div class="nested-item deep-nested-toggle"><span>Photoelectrochemistry and Photovoltaic</span><i class="fas fa-chevron-down toggle-icon ms-auto" style="font-size: 10px;"></i></div>
+                        <div class="nested-item deep-nested-toggle"><span>Electrochemistry Accessories</span><i class="fas fa-chevron-down toggle-icon ms-auto" style="font-size: 10px;"></i></div>
+                        <div class="nested-item deep-nested-toggle"><span>Battery Cycler</span><i class="fas fa-chevron-down toggle-icon ms-auto" style="font-size: 10px;"></i></div>
+                        <div class="nested-item deep-nested-toggle"><span>Battery Environmental Test Chambers</span><i class="fas fa-chevron-down toggle-icon ms-auto" style="font-size: 10px;"></i></div>
+                        <div class="nested-item deep-nested-toggle"><span>Battery Cycler Accessories</span><i class="fas fa-chevron-down toggle-icon ms-auto" style="font-size: 10px;"></i></div>
+                    </div>
+                    <div class="submenu-item nested-toggle"><span>Spectroscopy</span><i class="fas fa-chevron-down toggle-icon ms-auto" style="font-size: 12px;"></i></div>
+                    <div class="nested-submenu">
+                        <div class="nested-item deep-nested-toggle"><span>Handheld Raman</span><i class="fas fa-chevron-down toggle-icon ms-auto" style="font-size: 10px;"></i></div>
+                        <div class="nested-item deep-nested-toggle"><span>Laboratory Raman</span><i class="fas fa-chevron-down toggle-icon ms-auto" style="font-size: 10px;"></i></div>
+                        <div class="nested-item deep-nested-toggle"><span>FT-IR</span><i class="fas fa-chevron-down toggle-icon ms-auto" style="font-size: 10px;"></i></div>
+                        <div class="nested-item deep-nested-toggle"><span>LIBS</span><i class="fas fa-chevron-down toggle-icon ms-auto" style="font-size: 10px;"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-header"><span>Resources</span><i class="fas fa-chevron-down toggle-icon"></i></div>
+                <div class="submenu">
+                    <a href="application-notes.html" class="submenu-item">Application Notes</a>
+                    <a href="publications.html" class="submenu-item">Publications</a>
+                    <a href="software.html" class="submenu-item">Software</a>
+                    <a href="video.html" class="submenu-item">Installation Videos</a>
+                    <a href="product-manual.html" class="submenu-item">Product Manuals</a>
+                    <a href="warrenty-repairs.html" class="submenu-item">Warranty &amp; Repairs</a>
+                </div>
+            </div>
+            <div class="menu-item"><a href="blog.html"><div class="menu-header"><span>Blog</span></div></a></div>
+            <div class="menu-item"><a href="faq.html"><div class="menu-header"><span>FAQ</span></div></a></div>
+            <div class="menu-item"><a href="request-quote.html"><div class="menu-header"><span>Request Quote</span></div></a></div>
+            <div class="menu-item"><a href="contact.html"><div class="menu-header"><span>Contact Us</span></div></a></div>
+        </div>
+    </div>
+
+    <!-- ========== WEBINAR HERO ========== -->
+    <section class="webinar-hero">
+        <div class="container position-relative" style="z-index: 2;">
+            <div class="row align-items-center">
+                <div class="col-lg-8">
+                    <span class="badge-live webinar-badge mb-3 d-inline-block"><i class="fas fa-circle me-1" style="font-size: 8px; vertical-align: middle;"></i> LIVE &amp; UPCOMING</span>
+                    <h1 class="mb-3">ScienceGears Webinars</h1>
+                    <p class="lead mb-4">Join our expert-led sessions on electrochemistry, battery testing, and materials characterisation. Learn best practices, see live demos, and get your questions answered.</p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#upcoming" class="btn btn-primary btn-lg px-4" style="background: var(--gradient-orange); border: none; border-radius: 50px; font-weight: 700;"><i class="fas fa-calendar-check me-2"></i>View Schedule</a>
+                        <a href="#join-form" class="btn btn-outline-light btn-lg px-4" style="border-radius: 50px; font-weight: 600; border: 2px solid rgba(255,255,255,0.7);"><i class="fas fa-user-plus me-2"></i>Register Now</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center d-none d-lg-block">
+                    <i class="fas fa-broadcast-tower" style="font-size: 10rem; opacity: 0.15; color: #fff;"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FILTERS + WEBINAR LIST ========== -->
+    <section class="section py-5" id="upcoming">
+        <div class="container">
+            <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+                <h2 class="section-title text-start mb-0" style="font-size: 2rem;">Upcoming &amp; Live Sessions</h2>
+                <div class="d-flex flex-wrap gap-2 mt-3 mt-md-0" id="webinarFilters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="live">Live</button>
+                    <button class="filter-btn" data-filter="upcoming">Upcoming</button>
+                    <button class="filter-btn" data-filter="recorded">Recorded</button>
+                </div>
+            </div>
+
+            <div class="row g-4" id="webinarList">
+                <!-- Webinar Card 1 - Live -->
+                <div class="col-lg-4 col-md-6 webinar-item" data-status="live">
+                    <div class="webinar-card">
+                        <div class="card-img-top">
+                            <i class="fas fa-flask"></i>
+                        </div>
+                        <div class="p-4 d-flex flex-column flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <span class="webinar-badge badge-live"><i class="fas fa-circle me-1" style="font-size: 8px;"></i> LIVE NOW</span>
+                                <span class="text-muted small">45 min</span>
+                            </div>
+                            <h5 class="fw-bold mb-2">Advanced EIS Techniques for Battery Research</h5>
+                            <p class="text-muted small mb-3 flex-grow-1">Master electrochemical impedance spectroscopy for Li-ion and next-gen battery characterisation. Live Q&amp;A with Dr. Elena Torres.</p>
+                            <div class="webinar-meta">
+                                <span><i class="fas fa-calendar-alt"></i> Today, 3:00 PM AEDT</span>
+                                <span><i class="fas fa-user-tie"></i> Dr. Elena Torres</span>
+                            </div>
+                            <button class="btn btn-primary w-100 mt-2 btn-register-scroll" style="border-radius: 50px; font-weight: 600;">Join Live Session <i class="fas fa-arrow-right ms-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Webinar Card 2 - Upcoming -->
+                <div class="col-lg-4 col-md-6 webinar-item" data-status="upcoming">
+                    <div class="webinar-card">
+                        <div class="card-img-top">
+                            <i class="fas fa-battery-full"></i>
+                        </div>
+                        <div class="p-4 d-flex flex-column flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <span class="webinar-badge badge-upcoming">UPCOMING</span>
+                                <span class="text-muted small">60 min</span>
+                            </div>
+                            <h5 class="fw-bold mb-2">Potentiostat Selection Guide: Choosing the Right Instrument</h5>
+                            <p class="text-muted small mb-3 flex-grow-1">From single-channel to multichannel systems — understand specifications that matter for your research and budget.</p>
+                            <div class="webinar-meta">
+                                <span><i class="fas fa-calendar-alt"></i> 12 Dec 2025, 2:00 PM AEDT</span>
+                                <span><i class="fas fa-user-tie"></i> Dr. James Chen</span>
+                            </div>
+                            <button class="btn btn-outline-primary w-100 mt-2 btn-register-scroll" style="border-radius: 50px; font-weight: 600; border: 2px solid var(--secondary-blue);">Register <i class="fas fa-arrow-right ms-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Webinar Card 3 - Upcoming -->
+                <div class="col-lg-4 col-md-6 webinar-item" data-status="upcoming">
+                    <div class="webinar-card">
+                        <div class="card-img-top">
+                            <i class="fas fa-solar-panel"></i>
+                        </div>
+                        <div class="p-4 d-flex flex-column flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <span class="webinar-badge badge-upcoming">UPCOMING</span>
+                                <span class="text-muted small">50 min</span>
+                            </div>
+                            <h5 class="fw-bold mb-2">Photoelectrochemistry: From Fundamentals to Applications</h5>
+                            <p class="text-muted small mb-3 flex-grow-1">Explore light-driven electrochemical processes, solar fuel research, and characterisation techniques for photoelectrodes.</p>
+                            <div class="webinar-meta">
+                                <span><i class="fas fa-calendar-alt"></i> 18 Dec 2025, 11:00 AM AEDT</span>
+                                <span><i class="fas fa-user-tie"></i> Prof. Aisha Rahman</span>
+                            </div>
+                            <button class="btn btn-outline-primary w-100 mt-2 btn-register-scroll" style="border-radius: 50px; font-weight: 600; border: 2px solid var(--secondary-blue);">Register <i class="fas fa-arrow-right ms-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Webinar Card 4 - Recorded -->
+                <div class="col-lg-4 col-md-6 webinar-item" data-status="recorded">
+                    <div class="webinar-card">
+                        <div class="card-img-top">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="p-4 d-flex flex-column flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <span class="webinar-badge badge-recorded">RECORDED</span>
+                                <span class="text-muted small">55 min</span>
+                            </div>
+                            <h5 class="fw-bold mb-2">Corrosion Measurement: Best Practices &amp; Pitfalls</h5>
+                            <p class="text-muted small mb-3 flex-grow-1">Learn reliable corrosion testing methods, data interpretation, and how to avoid common errors in polarisation experiments.</p>
+                            <div class="webinar-meta">
+                                <span><i class="fas fa-calendar-alt"></i> 15 Oct 2025</span>
+                                <span><i class="fas fa-user-tie"></i> Dr. Mark Stevenson</span>
+                            </div>
+                            <button class="btn btn-outline-secondary w-100 mt-2 btn-register-scroll" style="border-radius: 50px; font-weight: 600;">Watch Recording <i class="fas fa-play ms-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Webinar Card 5 - Recorded -->
+                <div class="col-lg-4 col-md-6 webinar-item" data-status="recorded">
+                    <div class="webinar-card">
+                        <div class="card-img-top">
+                            <i class="fas fa-microscope"></i>
+                        </div>
+                        <div class="p-4 d-flex flex-column flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <span class="webinar-badge badge-recorded">RECORDED</span>
+                                <span class="text-muted small">40 min</span>
+                            </div>
+                            <h5 class="fw-bold mb-2">Raman Spectroscopy for Battery Materials</h5>
+                            <p class="text-muted small mb-3 flex-grow-1">Non-destructive analysis of electrode materials, degradation mechanisms, and in-situ Raman techniques.</p>
+                            <div class="webinar-meta">
+                                <span><i class="fas fa-calendar-alt"></i> 28 Aug 2025</span>
+                                <span><i class="fas fa-user-tie"></i> Dr. Sophie Laurent</span>
+                            </div>
+                            <button class="btn btn-outline-secondary w-100 mt-2 btn-register-scroll" style="border-radius: 50px; font-weight: 600;">Watch Recording <i class="fas fa-play ms-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Webinar Card 6 - Upcoming -->
+                <div class="col-lg-4 col-md-6 webinar-item" data-status="upcoming">
+                    <div class="webinar-card">
+                        <div class="card-img-top">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <div class="p-4 d-flex flex-column flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <span class="webinar-badge badge-upcoming">UPCOMING</span>
+                                <span class="text-muted small">45 min</span>
+                            </div>
+                            <h5 class="fw-bold mb-2">Battery Cycler Data Analysis: From Raw Data to Insights</h5>
+                            <p class="text-muted small mb-3 flex-grow-1">Practical session on extracting capacity, efficiency, and degradation metrics from cycling data using modern software tools.</p>
+                            <div class="webinar-meta">
+                                <span><i class="fas fa-calendar-alt"></i> 8 Jan 2026, 4:00 PM AEDT</span>
+                                <span><i class="fas fa-user-tie"></i> Dr. Elena Torres</span>
+                            </div>
+                            <button class="btn btn-outline-primary w-100 mt-2 btn-register-scroll" style="border-radius: 50px; font-weight: 600; border: 2px solid var(--secondary-blue);">Register <i class="fas fa-arrow-right ms-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== HOW TO JOIN + REGISTRATION FORM ========== -->
+    <section class="section bg-light" id="join-form">
+        <div class="container">
+            <div class="row g-5">
+                <!-- Left: How to Join -->
+                <div class="col-lg-5">
+                    <h2 class="section-title text-start" style="font-size: 1.8rem;">How to Join</h2>
+                    <p class="text-muted mb-4">Getting started is simple. Follow these steps to secure your spot and receive access details.</p>
+
+                    <div class="join-steps">
+                        <div class="join-step">
+                            <div class="step-icon"><i class="fas fa-list-check"></i></div>
+                            <h6>1. Choose a Session</h6>
+                            <p>Browse our upcoming webinars and pick the topics relevant to your research.</p>
+                        </div>
+                        <div class="join-step">
+                            <div class="step-icon"><i class="fas fa-pen-to-square"></i></div>
+                            <h6>2. Register</h6>
+                            <p>Fill in the short form with your name and email. It takes less than a minute.</p>
+                        </div>
+                        <div class="join-step">
+                            <div class="step-icon"><i class="fas fa-envelope-open-text"></i></div>
+                            <h6>3. Receive Link</h6>
+                            <p>You'll get a confirmation email with your unique joining link and calendar invite.</p>
+                        </div>
+                    </div>
+
+                    <hr class="my-5">
+
+                    <!-- Quick updates teaser inside join section (non-popup) – optional -->
+                    <div class="alert alert-light border-0 shadow-sm p-4" style="border-left: 4px solid var(--accent-orange) !important; border-radius: 12px;">
+                        <h6 class="fw-bold mb-2"><i class="fas fa-bullhorn me-2" style="color: var(--accent-orange);"></i>Stay in the loop</h6>
+                        <p class="text-muted small mb-0">Check the sticky <strong>Latest Updates</strong> panel on the bottom-left for the newest webinar announcements and features. You can minimize it anytime.</p>
+                    </div>
+                </div>
+
+                <!-- Right: Registration Form -->
+                <div class="col-lg-7">
+                    <div class="join-form-card">
+                        <h3 class="fw-bold mb-2">Reserve Your Spot</h3>
+                        <p class="text-muted mb-4">Fill in your details and select the session you'd like to attend. We'll send you the joining instructions.</p>
+
+                        <form id="webinarRegistrationForm" novalidate>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="firstName" class="form-label">First Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="firstName" placeholder="Jane" required>
+                                    <div class="invalid-feedback">Please enter your first name.</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="lastName" class="form-label">Last Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="lastName" placeholder="Doe" required>
+                                    <div class="invalid-feedback">Please enter your last name.</div>
+                                </div>
+                                <div class="col-12">
+                                    <label for="email" class="form-label">Email Address <span class="text-danger">*</span></label>
+                                    <input type="email" class="form-control" id="email" placeholder="jane.doe@university.edu.au" required>
+                                    <div class="invalid-feedback">Please enter a valid email address.</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="institution" class="form-label">Institution / Company</label>
+                                    <input type="text" class="form-control" id="institution" placeholder="University of Sydney">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="role" class="form-label">Role</label>
+                                    <select class="form-select" id="role">
+                                        <option selected disabled>Select your role</option>
+                                        <option>PhD Student</option>
+                                        <option>Postdoc / Researcher</option>
+                                        <option>Professor / Faculty</option>
+                                        <option>Industry Professional</option>
+                                        <option>Lab Manager</option>
+                                        <option>Other</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <label for="sessionSelect" class="form-label">Select Session <span class="text-danger">*</span></label>
+                                    <select class="form-select" id="sessionSelect" required>
+                                        <option selected disabled value="">Choose a webinar...</option>
+                                        <option value="eis-battery">Advanced EIS Techniques for Battery Research (Live Now)</option>
+                                        <option value="potentiostat-guide">Potentiostat Selection Guide (12 Dec 2025)</option>
+                                        <option value="photoelectrochemistry">Photoelectrochemistry: From Fundamentals (18 Dec 2025)</option>
+                                        <option value="battery-cycler-data">Battery Cycler Data Analysis (8 Jan 2026)</option>
+                                    </select>
+                                    <div class="invalid-feedback">Please select a session.</div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="consentCheck" required>
+                                        <label class="form-check-label" for="consentCheck">
+                                            I agree to receive webinar updates and related communications from ScienceGears. <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="invalid-feedback">You must agree to receive communications to register.</div>
+                                    </div>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <button type="submit" class="btn-join"><i class="fas fa-paper-plane me-2"></i>Register for Webinar</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!-- Success message (hidden initially) -->
+                        <div id="registrationSuccess" class="alert alert-success mt-4 d-none" role="alert">
+                            <h5 class="alert-heading"><i class="fas fa-check-circle me-2"></i>Registration Confirmed!</h5>
+                            <p class="mb-0">Thank you for registering. A confirmation email with joining instructions has been sent to your inbox.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== REDESIGNED PAST WEBINARS (MODERN CARD GRID) ========== -->
+    <section class="section py-5" id="past-webinars">
+        <div class="container">
+            <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+                <h2 class="section-title text-start mb-0" style="font-size: 1.8rem;">Past Webinars</h2>
+                <a href="#join-form" class="btn btn-sm btn-outline-primary btn-register-scroll" style="border-radius: 50px; font-weight: 600; border: 2px solid var(--science-blue);">Request a topic <i class="fas fa-arrow-right ms-1"></i></a>
+            </div>
+            <p class="text-muted mb-4" style="max-width: 650px;">Missed a live session? Browse our archive of recorded webinars and watch anytime. New recordings are added regularly.</p>
+
+            <div class="past-webinar-grid">
+                <!-- Past Webinar Card 1 -->
+                <div class="past-webinar-card">
+                    <div class="pw-thumbnail">
+                        <div class="pw-date-badge">15 Oct 2025</div>
+                        <i class="fas fa-chart-line"></i>
+                        <div class="play-overlay"><i class="fas fa-play-circle"></i></div>
+                    </div>
+                    <div class="pw-body">
+                        <h5>Corrosion Measurement: Best Practices &amp; Pitfalls</h5>
+                        <div class="pw-speaker"><i class="fas fa-user-tie"></i> Dr. Mark Stevenson</div>
+                        <div class="pw-footer">
+                            <span class="pw-duration"><i class="fas fa-clock"></i> 55 min</span>
+                            <a href="webinar-detail.html" class="btn-watch">Watch <i class="fas fa-play"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Past Webinar Card 2 -->
+                <div class="past-webinar-card">
+                    <div class="pw-thumbnail">
+                        <div class="pw-date-badge">28 Aug 2025</div>
+                        <i class="fas fa-microscope"></i>
+                        <div class="play-overlay"><i class="fas fa-play-circle"></i></div>
+                    </div>
+                    <div class="pw-body">
+                        <h5>Raman Spectroscopy for Battery Materials</h5>
+                        <div class="pw-speaker"><i class="fas fa-user-tie"></i> Dr. Sophie Laurent</div>
+                        <div class="pw-footer">
+                            <span class="pw-duration"><i class="fas fa-clock"></i> 40 min</span>
+                            <a href="webinar-detail.html" class="btn-watch">Watch <i class="fas fa-play"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Past Webinar Card 3 -->
+                <div class="past-webinar-card">
+                    <div class="pw-thumbnail">
+                        <div class="pw-date-badge">10 Jul 2025</div>
+                        <i class="fas fa-cogs"></i>
+                        <div class="play-overlay"><i class="fas fa-play-circle"></i></div>
+                    </div>
+                    <div class="pw-body">
+                        <h5>Introduction to Potentiostats: Theory &amp; Practice</h5>
+                        <div class="pw-speaker"><i class="fas fa-user-tie"></i> Dr. James Chen</div>
+                        <div class="pw-footer">
+                            <span class="pw-duration"><i class="fas fa-clock"></i> 60 min</span>
+                            <a href="webinar-detail.html" class="btn-watch">Watch <i class="fas fa-play"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Past Webinar Card 4 -->
+                <div class="past-webinar-card">
+                    <div class="pw-thumbnail">
+                        <div class="pw-date-badge">22 May 2025</div>
+                        <i class="fas fa-battery-full"></i>
+                        <div class="play-overlay"><i class="fas fa-play-circle"></i></div>
+                    </div>
+                    <div class="pw-body">
+                        <h5>Battery Testing Fundamentals: Cyclers &amp; Protocols</h5>
+                        <div class="pw-speaker"><i class="fas fa-user-tie"></i> Dr. Elena Torres</div>
+                        <div class="pw-footer">
+                            <span class="pw-duration"><i class="fas fa-clock"></i> 50 min</span>
+                            <a href="webinar-detail.html" class="btn-watch">Watch <i class="fas fa-play"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Past Webinar Card 5 -->
+                <div class="past-webinar-card">
+                    <div class="pw-thumbnail">
+                        <div class="pw-date-badge">03 Apr 2025</div>
+                        <i class="fas fa-flask"></i>
+                        <div class="play-overlay"><i class="fas fa-play-circle"></i></div>
+                    </div>
+                    <div class="pw-body">
+                        <h5>Advanced EIS: Data Fitting &amp; Interpretation</h5>
+                        <div class="pw-speaker"><i class="fas fa-user-tie"></i> Dr. Elena Torres</div>
+                        <div class="pw-footer">
+                            <span class="pw-duration"><i class="fas fa-clock"></i> 65 min</span>
+                            <a href="webinar-detail.html" class="btn-watch">Watch <i class="fas fa-play"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Past Webinar Card 6 -->
+                <div class="past-webinar-card">
+                    <div class="pw-thumbnail">
+                        <div class="pw-date-badge">12 Feb 2025</div>
+                        <i class="fas fa-solar-panel"></i>
+                        <div class="play-overlay"><i class="fas fa-play-circle"></i></div>
+                    </div>
+                    <div class="pw-body">
+                        <h5>Photovoltaics: IV Curve Tracing &amp; Efficiency</h5>
+                        <div class="pw-speaker"><i class="fas fa-user-tie"></i> Prof. Aisha Rahman</div>
+                        <div class="pw-footer">
+                            <span class="pw-duration"><i class="fas fa-clock"></i> 45 min</span>
+                            <a href="webinar-detail.html" class="btn-watch">Watch <i class="fas fa-play"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section section">
+        <div class="container">
+            <div class="newsletter-container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 text-center position-relative" style="z-index: 2;">
+                        <h2 class="newsletter-title">Stay Updated with Electrochemistry Innovations</h2>
+                        <p class="newsletter-text">Subscribe to our newsletter for the latest product updates, application notes, and research insights from the world of electrochemistry.</p>
+                        <form class="newsletter-form">
+                            <input type="email" class="newsletter-input" placeholder="Your email address" required>
+                            <button type="submit" class="newsletter-btn">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row text-start">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h3 class="footer-heading">Electrochemistry</h3>
+                    <a href="electrochemistry.html" class="footer-link">Potentiostats / Galvanostats</a>
+                    <a href="electrochemistry.html" class="footer-link">Photoelectrochemistry &amp; Photovoltaics</a>
+                    <a href="electrochemistry.html" class="footer-link">Electrochemistry Accessories</a>
+                    <a href="electrochemistry.html" class="footer-link">Battery Cycler</a>
+                    <a href="electrochemistry.html" class="footer-link">Battery Environmental Test Chambers</a>
+                    <a href="electrochemistry.html" class="footer-link">Battery Cycler Accessories</a>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h3 class="footer-heading">Spectroscopy</h3>
+                    <a href="spectroscopy.html" class="footer-link">Handheld Raman</a>
+                    <a href="spectroscopy.html" class="footer-link">Lab Raman</a>
+                    <a href="spectroscopy.html" class="footer-link">Online Raman</a>
+                    <a href="spectroscopy.html" class="footer-link">Lab FT-IR</a>
+                    <a href="spectroscopy.html" class="footer-link">Online FT-IR</a>
+                    <a href="spectroscopy.html" class="footer-link">LIBS</a>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h3 class="footer-heading">Learn</h3>
+                    <div class="mb-3">
+                        <a href="#" class="footer-link">How to Use</a>
+                        <a href="publications.html" class="footer-link">Educational Articles</a>
+                        <a href="video.html" class="footer-link">Video Tutorials</a>
+                        <a href="blog.html" class="footer-link">Science Blog</a>
+                        <a href="video.html" class="footer-link">Download Guides</a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <a href="index.html" class="footer-link">Home</a>
+                    <a href="about.html" class="footer-link">About Us</a>
+                    <a href="electrochemistry.html" class="footer-link">Products</a>
+                    <a href="faq.html" class="footer-link">FAQ</a>
+                    <a href="blog.html" class="footer-link">Blog</a>
+                    <a href="contact.html" class="footer-link">Contact Us</a>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h4 class="footer-heading">Legal</h4>
+                    <a href="terms-of-use.html" class="footer-link">Terms of Use</a>
+                    <a href="privacy-policy.html" class="footer-link">Privacy Policy</a>
+                    <a href="refund-policy.html" class="footer-link">Refund Policy</a>
+                    <div class="social-icons mt-4">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="footer-bottom">
+                <div class="col-lg-12 text-center mt-3">
+                    <div class="footer-text">
+                        &copy; 2025 ScienceGears Australia | Empowering Discovery Through Science | ABN: 23 456 789 012
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+
+    <!-- ====== STICKY "LATEST UPDATES" POPUP (BOTTOM-LEFT, AUTO VERTICAL SCROLL) ====== -->
+    <div class="updates-popup" id="updatesPopup">
+        <div class="updates-popup-header" id="updatesPopupToggle">
+            <span><i class="fas fa-bullhorn"></i>Latest Updates</span>
+            <span class="toggle-icon"><i class="fas fa-chevron-up"></i></span>
+        </div>
+        <div class="updates-popup-body" id="updatesPopupBody">
+            <div class="update-entry">
+                <div class="update-date">28 Nov 2025</div>
+                <h6>New Q&amp;A format for live sessions</h6>
+                <p>We've extended the Q&amp;A portion to 20 minutes based on your feedback. Submit questions during registration.</p>
+            </div>
+            <div class="update-entry">
+                <div class="update-date">15 Nov 2025</div>
+                <h6>On-demand library now available</h6>
+                <p>All past webinars are now available to watch anytime. Browse the "Recorded" filter to catch up.</p>
+            </div>
+            <div class="update-entry">
+                <div class="update-date">02 Nov 2025</div>
+                <h6>Certificate of attendance</h6>
+                <p>Attendees of live sessions can now request a certificate for professional development records.</p>
+            </div>
+            <div class="update-entry">
+                <div class="update-date">18 Oct 2025</div>
+                <h6>New speaker: Prof. Aisha Rahman</h6>
+                <p>We're excited to welcome Prof. Rahman for our December photoelectrochemistry session.</p>
+            </div>
+            <div class="update-entry">
+                <div class="update-date">05 Oct 2025</div>
+                <h6>Improved registration experience</h6>
+                <p>Our registration form now remembers your details for future sessions, saving you time.</p>
+            </div>
+            <div class="update-entry">
+                <div class="update-date">20 Sep 2025</div>
+                <h6>Download calendar invites</h6>
+                <p>All upcoming sessions now include a one-click "Add to Calendar" option in your confirmation email.</p>
+            </div>
+        </div>
+        <div class="updates-popup-footer">
+            <a href="#join-form" class="btn-register-scroll">Register for a webinar <i class="fas fa-arrow-right ms-1"></i></a>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+    <script src="js/mobile-menu.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // ====== FILTER BUTTONS ======
+            const filterBtns = document.querySelectorAll('#webinarFilters .filter-btn');
+            const webinarItems = document.querySelectorAll('.webinar-item');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    const filter = this.getAttribute('data-filter');
+
+                    webinarItems.forEach(item => {
+                        if (filter === 'all' || item.getAttribute('data-status') === filter) {
+                            item.style.display = '';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // ====== REGISTRATION FORM VALIDATION ======
+            const form = document.getElementById('webinarRegistrationForm');
+            const successMsg = document.getElementById('registrationSuccess');
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                if (!form.checkValidity()) {
+                    form.classList.add('was-validated');
+                    return;
+                }
+
+                form.classList.remove('was-validated');
+                form.style.display = 'none';
+                successMsg.classList.remove('d-none');
+            });
+
+            // ====== SMOOTH SCROLL FOR ALL REGISTER BUTTONS ======
+            const scrollTarget = document.getElementById('join-form');
+            document.querySelectorAll('.btn-register-scroll').forEach(btn => {
+                btn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    scrollTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            });
+
+            // ====== STICKY UPDATES POPUP: MINIMIZE / EXPAND ======
+            const popup = document.getElementById('updatesPopup');
+            const toggle = document.getElementById('updatesPopupToggle');
+
+            // Start expanded (not minimized)
+            // Optionally, minimize after a few seconds on small screens? No, keep expanded by default.
+
+            toggle.addEventListener('click', function () {
+                popup.classList.toggle('minimized');
+                // Update the chevron icon direction
+                const icon = this.querySelector('.toggle-icon i');
+                if (popup.classList.contains('minimized')) {
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                } else {
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                }
+            });
+
+            // ====== AUTO VERTICAL SCROLL FOR UPDATES POPUP BODY ======
+            const popupBody = document.getElementById('updatesPopupBody');
+            let scrollDirection = 1; // 1 = down, -1 = up
+            const scrollSpeed = 0.6; // pixels per frame (adjust for speed)
+            let scrollInterval;
+
+            function autoScrollUpdates() {
+                // Only auto-scroll if the popup is expanded (not minimized)
+                if (popup.classList.contains('minimized')) return;
+                // Also only if there is overflow
+                if (popupBody.scrollHeight <= popupBody.clientHeight) return;
+
+                popupBody.scrollTop += scrollDirection * scrollSpeed;
+
+                // Check boundaries
+                if (popupBody.scrollTop + popupBody.clientHeight >= popupBody.scrollHeight - 1) {
+                    // Reached bottom, change direction to up after a short pause
+                    scrollDirection = -1;
+                } else if (popupBody.scrollTop <= 0) {
+                    // Reached top, change direction to down after a short pause
+                    scrollDirection = 1;
+                }
+            }
+
+            // Start auto-scroll when popup is expanded
+            function startAutoScroll() {
+                if (scrollInterval) clearInterval(scrollInterval);
+                scrollInterval = setInterval(autoScrollUpdates, 30); // ~33 fps
+            }
+
+            // Stop auto-scroll
+            function stopAutoScroll() {
+                if (scrollInterval) {
+                    clearInterval(scrollInterval);
+                    scrollInterval = null;
+                }
+            }
+
+            // Observe popup minimization to start/stop auto-scroll
+            const observer = new MutationObserver(function (mutations) {
+                mutations.forEach(function (mutation) {
+                    if (mutation.attributeName === 'class') {
+                        if (popup.classList.contains('minimized')) {
+                            stopAutoScroll();
+                        } else {
+                            startAutoScroll();
+                        }
+                    }
+                });
+            });
+            observer.observe(popup, { attributes: true });
+
+            // Initial start (expanded by default)
+            startAutoScroll();
+
+            // Optional: Pause auto-scroll on hover to let user read
+            popupBody.addEventListener('mouseenter', stopAutoScroll);
+            popupBody.addEventListener('mouseleave', startAutoScroll);
+
+            // Ensure popup body scroll doesn't trigger the page scroll
+            popupBody.addEventListener('wheel', function (e) {
+                e.stopPropagation();
+            }, { passive: true });
+        });
+    </script>
+</body>
+</html>
+
+
+
+                <!-- Right: Registration Form -->
+                <div class="col-lg-7">
+                    <div class="join-form-card">
+                        <h3 class="fw-bold mb-2">Reserve Your Spot</h3>
+                        <p class="text-muted mb-4">Fill in your details and select the session you'd like to attend. We'll send you the joining instructions.</p>
+
+                        <form id="webinarRegistrationForm" novalidate>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="firstName" class="form-label">First Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="firstName" placeholder="Jane" required>
+                                    <div class="invalid-feedback">Please enter your first name.</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="lastName" class="form-label">Last Name <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="lastName" placeholder="Doe" required>
+                                    <div class="invalid-feedback">Please enter your last name.</div>
+                                </div>
+                                <div class="col-12">
+                                    <label for="email" class="form-label">Email Address <span class="text-danger">*</span></label>
+                                    <input type="email" class="form-control" id="email" placeholder="jane.doe@university.edu.au" required>
+                                    <div class="invalid-feedback">Please enter a valid email address.</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="institution" class="form-label">Institution / Company</label>
+                                    <input type="text" class="form-control" id="institution" placeholder="University of Sydney">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="role" class="form-label">Role</label>
+                                    <select class="form-select" id="role">
+                                        <option selected disabled>Select your role</option>
+                                        <option>PhD Student</option>
+                                        <option>Postdoc / Researcher</option>
+                                        <option>Professor / Faculty</option>
+                                        <option>Industry Professional</option>
+                                        <option>Lab Manager</option>
+                                        <option>Other</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <label for="sessionSelect" class="form-label">Select Session <span class="text-danger">*</span></label>
+                                    <select class="form-select" id="sessionSelect" required>
+                                        <option selected disabled value="">Choose a webinar...</option>
+                                        <option value="eis-battery">Advanced EIS Techniques for Battery Research (Live Now)</option>
+                                        <option value="potentiostat-guide">Potentiostat Selection Guide (12 Dec 2025)</option>
+                                        <option value="photoelectrochemistry">Photoelectrochemistry: From Fundamentals (18 Dec 2025)</option>
+                                        <option value="battery-cycler-data">Battery Cycler Data Analysis (8 Jan 2026)</option>
+                                    </select>
+                                    <div class="invalid-feedback">Please select a session.</div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="consentCheck" required>
+                                        <label class="form-check-label" for="consentCheck">
+                                            I agree to receive webinar updates and related communications from ScienceGears. <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="invalid-feedback">You must agree to receive communications to register.</div>
+                                    </div>
+                                </div>
+                                <div class="col-12 mt-4">
+                                    <button type="submit" class="btn-join" onclick="Location.href='#webinarRegistrationForm'"><i class="fas fa-paper-plane me-2"></i>Register for Webinar</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!-- Success message (hidden initially) -->
+                        <div id="registrationSuccess" class="alert alert-success mt-4 d-none" role="alert">
+                            <h5 class="alert-heading"><i class="fas fa-check-circle me-2"></i>Registration Confirmed!</h5>
+                            <p class="mb-0">Thank you for registering. A confirmation email with joining instructions has been sent to your inbox.</p>
+                        </div>
+                    </div>
+                </div>
