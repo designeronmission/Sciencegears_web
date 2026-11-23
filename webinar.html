@@ -40,345 +40,277 @@
 
     <!-- Inline additions for webinar page -->
     <style>
-        /* ====== WEBINAR CARD ====== */
-        .webinar-card {
-            background: var(--apple-card-bg);
-            border-radius: var(--border-radius);
-            box-shadow: var(--apple-card-shadow);
-            transition: all 0.3s ease;
-            height: 100%;
-            border: 1px solid rgba(0,0,0,0.04);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-        .webinar-card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--apple-card-shadow-hover);
-        }
+       /* ====== SHARED ====== */
+    .wb-thumb {
+        position: relative;
+        display: block;
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+        background: linear-gradient(145deg, #e8eef7, #f8fafd);
+    }
+    .wb-thumb img {
+        width: 100%; height: 100%;
+        object-fit: cover; object-position: center;
+        display: block;
+        transition: transform .5s ease;
+    }
+    .wb-thumb:hover img { transform: scale(1.04); }
 
-        /* Thumbnail – fixed 16:9 frame, image always fills it perfectly */
-        .webinar-thumb {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            overflow: hidden;
-            background: linear-gradient(145deg, #e8eef7, #f8fafd);
-        }
-        .webinar-thumb img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-        .webinar-card:hover .webinar-thumb img {
-            transform: scale(1.05);
-        }
+    .wb-status {
+        position: absolute; top: 12px; left: 12px;
+        padding: 5px 12px;
+        border-radius: 6px;
+        font-size: .7rem; font-weight: 700;
+        letter-spacing: .8px; text-transform: uppercase;
+        background: #fff; color: var(--science-blue, #003B7A);
+        box-shadow: 0 2px 8px rgba(0,0,0,.15);
+    }
+    .wb-status.upcoming::before,
+    .wb-status.recorded::before {
+        content: ""; display: inline-block;
+        width: 7px; height: 7px; border-radius: 50%;
+        margin-right: 7px; vertical-align: middle;
+    }
+    .wb-status.upcoming::before { background: var(--accent-orange, #F4A631); }
+    .wb-status.recorded::before { background: #9ca3af; }
 
-        /* Date chip on the image */
-       .date-chip {
-    position: absolute;
-    top: 182px;
-    left: 382px;
-    background: #fff;
-    border-radius: 12px;
-    padding: 6px 12px;
-    text-align: center;
-    line-height: 1;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
-    min-width: 58px;
-}
-        .date-chip .d-day {
-            display: block;
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: var(--science-blue, #003B7A);
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-        .date-chip .d-mon {
-            display: block;
-            font-size: 0.72rem;
-            font-weight: 800;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: var(--accent-orange);
-            margin-top: 3px;
-        }
-        .date-chip .d-year {
-            display: block;
-            font-size: 0.65rem;
-            font-weight: 700;
-            color: #6b7280;
-            margin-top: 2px;
-        }
+    .wb-title {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-weight: 800;
+        font-size: 1.3rem;
+        line-height: 1.3;
+        margin: 0 0 .6rem;
+    }
+    .wb-title a { color: var(--dark-gray, #1f2937); text-decoration: none; transition: color .2s; }
+    .wb-title a:hover { color: var(--secondary-blue, #1a5bb0); }
 
-        .webinar-badge {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            display: inline-block;
-            padding: 6px 14px;
-            border-radius: 50px;
-            font-size: 0.72rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-        }
-        .badge-live { background: #dc3545; color: white; }
-        .badge-upcoming { background: var(--accent-orange); color: rgb(16, 15, 15); }
-        .badge-recorded { background: var(--medium-gray, #6b7280); color: white; }
+    .wb-desc {
+        color: #6b7280;
+        font-size: .93rem;
+        line-height: 1.55;
+        margin: 0 0 1.1rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
 
-        .webinar-body {
-            padding: 1.25rem 1.4rem 1.4rem;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-        .webinar-body h5 {
-            font-weight: 800;
-            font-size: 1.1rem;
-            line-height: 1.35;
-            margin-bottom: 1rem;
-            color: var(--dark-gray, #1f2937);
-        }
+    /* Professional meta row */
+    .wb-meta {
+        display: flex; flex-wrap: wrap;
+        align-items: center;
+        gap: .5rem 1.25rem;
+        font-size: .85rem;
+        color: #4b5563;
+        margin-bottom: 1.1rem;
+    }
+    .wb-meta-item { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; }
+    .wb-meta-item i { color: var(--accent-orange, #F4A631); font-size: .9rem; }
 
-        /* Prominent date / time row */
-        .webinar-when {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 10px 14px;
-            background: #fff7ea;
-            border: 1px solid #fde4bd;
-            border-radius: 12px;
-            margin-bottom: 10px;
-        }
-        .webinar-when > i {
-            width: 38px;
-            height: 38px;
-            flex-shrink: 0;
-            border-radius: 10px;
-            background: var(--accent-orange);
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-        }
-        .webinar-when strong {
-            display: block;
-            font-size: 1rem;
-            font-weight: 800;
-            color: var(--dark-gray, #1f2937);
-            line-height: 1.2;
-        }
-        .webinar-when span {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #6b7280;
-            margin-top: 2px;
-        }
+    .wb-speaker { display: inline-flex; align-items: center; gap: 10px; }
+    .wb-avatar {
+        width: 34px; height: 34px; flex-shrink: 0;
+        border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        background: var(--science-blue, #003B7A); color: #fff;
+        font-size: .72rem; font-weight: 700; letter-spacing: .5px;
+    }
+    .wb-speaker small {
+        display: block; font-size: .65rem; font-weight: 600;
+        color: #9ca3af; line-height: 1.1;
+    }
+    .wb-speaker strong {
+        display: block; font-size: .88rem; font-weight: 700;
+        color: var(--dark-gray, #1f2937); line-height: 1.25;
+    }
 
-        /* Prominent speaker row */
-        .webinar-speaker {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 10px 14px;
-            background: #eef3fb;
-            border: 1px solid #d9e4f5;
-            border-radius: 12px;
-            margin-bottom: 1.1rem;
-        }
-        .speaker-avatar {
-            width: 38px;
-            height: 38px;
-            flex-shrink: 0;
-            border-radius: 50%;
-            background: var(--gradient-blue, linear-gradient(135deg,#003B7A,#1a5bb0));
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.85rem;
-            font-weight: 800;
-            letter-spacing: 0.5px;
-        }
-        .webinar-speaker small {
-            display: block;
-            font-size: 0.68rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            color: #6b7280;
-            line-height: 1;
-            margin-bottom: 3px;
-        }
-        .webinar-speaker strong {
-            display: block;
-            font-size: 1rem;
-            font-weight: 800;
-            color: var(--science-blue, #003B7A);
-            line-height: 1.2;
-        }
+    .wb-btn {
+        border-radius: 50px; font-weight: 700;
+        padding: 9px 22px; font-size: .9rem;
+        white-space: nowrap;
+    }
 
-        .webinar-btn {
-            margin-top: auto;
-            border-radius: 50px;
-            font-weight: 700;
-            padding: 10px 16px;
-        }
+    /* ====== UPCOMING: LIST ROWS ====== */
+    .wb-row {
+        display: flex;
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 16px;
+        overflow: hidden;
+        transition: box-shadow .3s, border-color .3s;
+    }
+    .wb-row:hover { box-shadow: 0 12px 30px rgba(0,0,0,.08); border-color: #d1d5db; }
+    .wb-row .wb-thumb { flex: 0 0 500px;
+    max-width: 500px;
+    align-self: stretch;
+    aspect-ratio: auto;
+    min-height: 210px; }
+    .wb-row .wb-body {
+        flex: 1; min-width: 0;
+        padding: 1.5rem 1.75rem;
+        display: flex; flex-direction: column; justify-content: center;
+    }
+    .wb-row .wb-title { font-size: 1.45rem; }
+    .wb-row .wb-foot {
+        display: flex; flex-wrap: wrap; align-items: center;
+        justify-content: space-between; gap: 1rem;
+        padding-top: 1rem; border-top: 1px solid #f0f1f3;
+    }
+    .wb-datebox {
+        flex: 0 0 92px;
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        background: #f8fafc; border-left: 1px solid #eef0f3;
+        text-align: center; padding: 1rem .5rem;
+    }
+    .wb-datebox .d-day { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2rem; font-weight: 800; line-height: 1; color: var(--science-blue, #003B7A); }
+    .wb-datebox .d-mon { font-size: .78rem; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: var(--accent-orange, #F4A631); margin-top: 6px; }
+    .wb-datebox .d-year { font-size: .72rem; font-weight: 600; color: #9ca3af; margin-top: 2px; }
 
-        /* Past filter buttons */
-        .past-filter-btn {
-            background: white;
-            border: 1.5px solid #e5e7eb;
-            border-radius: 50px;
-            padding: 6px 18px;
-            font-size: 0.82rem;
-            font-weight: 600;
-            color: #6b7280;
-            transition: all 0.2s;
-            margin-right: 6px;
-            margin-bottom: 6px;
-            cursor: pointer;
-        }
-        .past-filter-btn.active,
-        .past-filter-btn:hover {
-            background: var(--science-blue);
-            color: white;
-            border-color: var(--science-blue);
-        }
+    /* ====== PAST: CARDS ====== */
+    .wb-card {
+        height: 100%;
+        display: flex; flex-direction: column;
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 16px;
+        overflow: hidden;
+        transition: transform .3s, box-shadow .3s;
+    }
+    .wb-card:hover { transform: translateY(-5px); box-shadow: 0 14px 32px rgba(0,0,0,.09); }
+    .wb-card .wb-body { padding: 1.35rem 1.5rem 1.5rem; display: flex; flex-direction: column; flex-grow: 1; }
+    .wb-card .wb-meta { padding-bottom: 1rem; border-bottom: 1px solid #f0f1f3; margin-bottom: 1rem; }
+    .wb-card .wb-foot {
+        margin-top: auto;
+        display: flex; align-items: center; justify-content: space-between; gap: .75rem;
+    }
 
-        /* ====== SECTION HEADERS ====== */
-        .webinar-group { margin-bottom: 4rem; }
-        .webinar-group:last-child { margin-bottom: 0; }
-        .webinar-group-head {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-bottom: 1.75rem;
-            padding-bottom: 0.9rem;
-            border-bottom: 2px solid #E5E7EB;
-        }
-        .webinar-group-head h2 {
-            margin: 0;
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--dark-gray, #1f2937);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .group-count {
-            display: inline-block;
-            background: var(--secondary-blue);
-            color: #fff;
-            font-size: 0.8rem;
-            font-weight: 700;
-            padding: 3px 12px;
-            border-radius: 50px;
-        }
+    /* ====== GROUP HEADERS / SEARCH / FILTERS ====== */
+    .webinar-group { margin-bottom: 4rem; }
+    .webinar-group:last-child { margin-bottom: 0; }
+    .webinar-group-head {
+        display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;
+        gap: 1rem; margin-bottom: 1.75rem; padding-bottom: .9rem; border-bottom: 2px solid #E5E7EB;
+    }
+    .webinar-group-head h2 {
+        margin: 0; font-size: 2rem; font-weight: 800;
+        color: var(--dark-gray, #1f2937);
+        display: flex; align-items: center; gap: 12px;
+    }
+    .group-count {
+        display: inline-block; background: var(--secondary-blue);
+        color: #fff; font-size: .8rem; font-weight: 700;
+        padding: 3px 12px; border-radius: 50px;
+    }
+    .webinar-search-wrap { position: relative; width: 100%; max-width: 380px; }
+    .webinar-search-wrap .form-control {
+        padding-left: 40px; border-radius: 50px; font-size: .9rem; height: 44px;
+        border: 1.5px solid #e5e7eb; background: #fff; transition: all .2s;
+    }
+    .webinar-search-wrap .form-control:focus { border-color: var(--accent-orange); box-shadow: 0 0 0 3px rgba(244,166,49,.12); }
+    .webinar-search-wrap .search-icon {
+        position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
+        color: #9ca3af; font-size: .9rem; pointer-events: none;
+    }
+    .past-filter-btn {
+        background: #fff; border: 1.5px solid #e5e7eb; border-radius: 50px;
+        padding: 6px 18px; font-size: .82rem; font-weight: 600; color: #6b7280;
+        transition: all .2s; margin-right: 6px; margin-bottom: 6px; cursor: pointer;
+    }
+    .past-filter-btn.active, .past-filter-btn:hover {
+        background: var(--science-blue); color: #fff; border-color: var(--science-blue);
+    }
+    .search-empty { text-align: center; padding: 3rem 1rem; color: #9ca3af; display: none; }
+    .search-empty i { font-size: 2.5rem; margin-bottom: 1rem; color: #d1d5db; }
+    .search-empty p { font-size: 1rem; margin: 0; }
 
-        /* Search bar */
-        .webinar-toolbar {
-            display: flex;
-            justify-content: flex-end;
-            margin-bottom: 2rem;
-        }
-        .webinar-search-wrap {
-            position: relative;
-            width: 100%;
-            max-width: 380px;
-        }
-        .webinar-search-wrap .form-control {
-            padding-left: 40px;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            height: 44px;
-            border: 1.5px solid #e5e7eb;
-            background: #fff;
-            transition: all 0.2s;
-        }
-        .webinar-search-wrap .form-control:focus {
-            border-color: var(--accent-orange);
-            box-shadow: 0 0 0 3px rgba(244,166,49,0.12);
-        }
-        .webinar-search-wrap .search-icon {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #9ca3af;
-            font-size: 0.9rem;
-            pointer-events: none;
-        }
+    /* ====== HOW TO JOIN ====== */
+    .join-steps { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 2rem; }
+    .join-step {
+        flex: 1; min-width: 200px; text-align: center; padding: 1.5rem 1rem;
+        background: #f9fafc; border: 1px solid #e3e3e3; border-radius: 16px; transition: all .3s;
+    }
+    .join-step:hover { background: #fff; box-shadow: 0 8px 20px rgba(0,0,0,.06); }
+    .join-step .step-icon {
+        width: 60px; height: 60px; border-radius: 50%;
+        background: var(--gradient-blue); color: #fff;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 1.5rem; margin: 0 auto 1rem;
+    }
+    .join-step h6 { font-weight: 700; }
+    .join-step p { font-size: .85rem; color: var(--apple-gray); margin: 0; }
 
-        .search-empty {
-            text-align: center;
-            padding: 3rem 1rem;
-            color: #9ca3af;
-            display: none;
-        }
-        .search-empty i { font-size: 2.5rem; margin-bottom: 1rem; color: #d1d5db; }
-        .search-empty p { font-size: 1rem; margin: 0; }
+    .section-title {
+        font-weight: 600; font-size: 1rem; letter-spacing: .5px;
+        margin-bottom: 1.25rem; padding-bottom: .5rem; border-bottom: 2px solid #E5E7EB;
+    }
 
-        /* ====== HOW TO JOIN ====== */
-        .join-steps {
-            display: flex;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
-        .join-step {
-            flex: 1;
-            min-width: 200px;
-            text-align: center;
-            padding: 1.5rem 1rem;
-            background: #f9fafc;
-            border: 1px solid #e3e3e3;
-            border-radius: 16px;
-            transition: all 0.3s;
-        }
-        .join-step:hover { background: #fff; box-shadow: 0 8px 20px rgba(0,0,0,0.06); }
-        .join-step .step-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: var(--gradient-blue);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            margin: 0 auto 1rem;
-        }
-        .join-step h6 { font-weight: 700; }
-        .join-step p { font-size: 0.85rem; color: var(--apple-gray); margin: 0; }
+    /* ====== RESPONSIVE ====== */
+    @media (max-width: 991.98px) {
+        .wb-row .wb-thumb { flex-basis: 260px; max-width: 260px; }
+        .wb-datebox { display: none; }
+    }
+    @media (max-width: 767.98px) {
+        .wb-row { flex-direction: column; }
+        .wb-row .wb-thumb { flex: none; max-width: none; min-height: 0; aspect-ratio: 16 / 9; }
+        .wb-row .wb-body { padding: 1.25rem; }
+        .webinar-search-wrap { max-width: none; }
+        .webinar-group-head h2 { font-size: 1.6rem; }
+    }
 
-        .btn-outline-light:hover { background: white; color: #000; }
+     /* ====== UPCOMING: DATE + TIME LINE ====== */
+    .wb-when-bar {
+        display: flex; flex-wrap: wrap; align-items: center;
+        gap: .6rem 1rem;
+        margin-bottom: 1rem;
+    }
+    .wb-when-date {
+        display: inline-flex; align-items: center; gap: 10px;
+        padding: 8px 16px;
+        border-radius: 50px;
+        background: #eef3fb;
+        color: var(--science-blue, #003B7A);
+        font-size: .95rem; font-weight: 700;
+    }
+    .wb-when-date i { color: var(--accent-orange, #F4A631); }
+    .wb-dur {
+        display: inline-flex; align-items: center; gap: 6px;
+        font-size: .85rem; font-weight: 600; color: #6b7280;
+    }
 
-        .section-title {
-            font-weight: 600;
-            font-size: 1rem;
-            text-transform: math-auto;
-            letter-spacing: 0.5px;
-            margin-bottom: 1.25rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #E5E7EB;
-        }
-
-        @media (max-width: 767.98px) {
-            .webinar-toolbar { justify-content: stretch; }
-            .webinar-search-wrap { max-width: none; }
-            .webinar-group-head h2 { font-size: 1.6rem; }
-        }
+    /* ====== UPCOMING: PRESENTER WITH PHOTO ====== */
+    .wb-presenter { display: flex; align-items: center; gap: 14px; }
+    .wb-photo {
+        position: relative;
+        width: 58px; height: 58px; flex-shrink: 0;
+        border-radius: 50%;
+        overflow: hidden;
+        display: flex; align-items: center; justify-content: center;
+        background: var(--science-blue, #003B7A);
+        color: #fff; font-size: 1rem; font-weight: 700; letter-spacing: .5px;
+       /*  box-shadow: 0 0 0 3px #fff, 0 0 0 5px var(--accent-orange, #F4A631); */
+        margin: 0 4px;
+    }
+    .wb-photo img {
+        position: absolute; inset: 0;
+        width: 100%; height: 100%;
+        object-fit: cover; object-position: center top;
+    }
+    .wb-presenter-info small {
+        display: block;
+        font-size: 14px; font-weight: 500;
+        color:  #1f2937;
+        margin-bottom: 2px;
+    }
+    .wb-presenter-info strong {
+        display: block;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 1.05rem; font-weight: 800;
+        color: var(--dark-gray, #1f2937);
+        line-height: 1.2;
+    }
+    .wb-presenter-info span {
+        display: block; font-size: .8rem; color: #6b7280; margin-top: 2px;
+    }
     </style>
 </head>
 
@@ -866,259 +798,227 @@
 
 
     <!-- ========== WEBINARS (Upcoming on top, Past below) ========== -->
-    <section class="section py-5" id="webinars">
-        <div class="container">
-            <!-- ====== UPCOMING ====== -->
-            <div class="webinar-group" id="upcoming">
-                <div class="webinar-group-head">
-                    <h2 class="fw-bold">Upcoming Webinars <span class="group-count" id="upcomingCount">6</span></h2>
-                     <div class="webinar-search-wrap">
+<section class="section py-5" id="webinars">
+    <div class="container">
+
+        <!-- ====== UPCOMING (list design) ====== -->
+        <div class="webinar-group" id="upcoming">
+            <div class="webinar-group-head">
+                <h2 class="fw-bold">Upcoming Webinars <span class="group-count" id="upcomingCount">3</span></h2>
+                <div class="webinar-search-wrap">
                     <i class="fas fa-search search-icon"></i>
                     <input type="text" class="form-control" id="webinarSearchInput" placeholder="Search all webinars..." aria-label="Search webinars">
                 </div>
-                </div>
-
-                <div class="row g-4" id="upcomingList">
-
-                    <!-- Upcoming 1 -->
-                    <div class="col-lg-4 col-md-6 upcoming-item" data-search="potentiostat selection guide choosing instrument james chen electrochemistry battery">
-                        <div class="webinar-card">
-                            <div class="webinar-thumb">
-                                <img src="assets/Potentiostat Selection Guide Webinar.png" alt="Potentiostat Selection Guide webinar" loading="lazy">
-                                <div class="date-chip"><span class="d-day">12</span><span class="d-mon">Dec</span><span class="d-year">2025</span></div>
-                                <span class="webinar-badge badge-upcoming">Upcoming</span>
-                            </div>
-                            <div class="webinar-body">
-                                <h5 class="fw-bold">Potentiostat Selection Guide: Choosing the Right Instrument</h5>
-                                <div class="webinar-when">
-                                    <i class="fas fa-calendar-alt"></i>
-                                    <div><strong>12 Dec 2025, 2:00 PM AEDT</strong><span><i class="far fa-clock"></i> 60 min session</span></div>
-                                </div>
-                                <div class="webinar-speaker">
-                                    <div class="speaker-avatar">JC</div>
-                                    <div><small>Speaker</small><strong>Dr. James Chen</strong></div>
-                                </div>
-                                <a href="webinar-detail.html" class="btn btn-outline-primary webinar-btn w-100" style="border: 2px solid var(--secondary-blue);" target="_blank">Register <i class="fas fa-arrow-right ms-1"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Upcoming 2 -->
-                    <div class="col-lg-4 col-md-6 upcoming-item" data-search="photoelectrochemistry fundamentals applications aisha rahman solar fuel photoelectrode">
-                        <div class="webinar-card">
-                            <div class="webinar-thumb">
-                                <img src="assets/Photoelectrochemistry Webinar Banner.png" alt="Photoelectrochemistry webinar" loading="lazy">
-                                <div class="date-chip"><span class="d-day">18</span><span class="d-mon">Dec</span><span class="d-year">2025</span></div>
-                                <span class="webinar-badge badge-upcoming">Upcoming</span>
-                            </div>
-                            <div class="webinar-body">
-                                <h5 class="fw-bold">Photoelectrochemistry: From Fundamentals to Applications</h5>
-                                <div class="webinar-when">
-                                    <i class="fas fa-calendar-alt"></i>
-                                    <div><strong>18 Dec 2025, 11:00 AM AEDT</strong><span><i class="far fa-clock"></i> 50 min session</span></div>
-                                </div>
-                                <div class="webinar-speaker">
-                                    <div class="speaker-avatar">AR</div>
-                                    <div><small>Speaker</small><strong>Prof. Aisha Rahman</strong></div>
-                                </div>
-                                <a href="webinar-detail.html" class="btn btn-outline-primary webinar-btn w-100" style="border: 2px solid var(--secondary-blue);" target="_blank">Register <i class="fas fa-arrow-right ms-1"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <!-- Upcoming 6 -->
-                    <div class="col-lg-4 col-md-6 upcoming-item" data-search="spectroscopy materials characterisation raman ftir sophie laurent">
-                        <div class="webinar-card">
-                            <div class="webinar-thumb">
-                                <img src="assets/Spectroscopy for Materials Characterisation.png" alt="Spectroscopy Raman and FT-IR webinar" loading="lazy">
-                                <div class="date-chip"><span class="d-day">19</span><span class="d-mon">Feb</span><span class="d-year">2026</span></div>
-                                <span class="webinar-badge badge-upcoming">Upcoming</span>
-                            </div>
-                            <div class="webinar-body">
-                                <h5 class="fw-bold">Spectroscopy for Materials Characterisation: Raman &amp; FT-IR</h5>
-                                <div class="webinar-when">
-                                    <i class="fas fa-calendar-alt"></i>
-                                    <div><strong>19 Feb 2026, 10:00 AM AEDT</strong><span><i class="far fa-clock"></i> 55 min session</span></div>
-                                </div>
-                                <div class="webinar-speaker">
-                                    <div class="speaker-avatar">SL</div>
-                                    <div><small>Speaker</small><strong>Dr. Sophie Laurent</strong></div>
-                                </div>
-                                <a href="webinar-detail.html" class="btn btn-outline-primary webinar-btn w-100" style="border: 2px solid var(--secondary-blue);" target="_blank">Register <i class="fas fa-arrow-right ms-1"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="search-empty" id="upcomingSearchEmpty">
-                    <i class="fas fa-search"></i>
-                    <p>No upcoming webinars match your search.</p>
-                </div>
             </div>
 
-            <!-- ====== PAST ====== -->
-            <div class="webinar-group" id="past">
-                <div class="webinar-group-head">
-                    <h2 class="fw-bold">Past Webinars <span class="group-count" id="pastCount">6</span></h2>
-                    <div class="d-flex flex-wrap align-items-center gap-1" id="pastFilters">
-                        <span class="fw-semibold me-2" style="font-size: 0.9rem; color: #4b5563;">Filter by topic:</span>
-                        <button class="past-filter-btn active" data-past-filter="all">All</button>
-                        <button class="past-filter-btn" data-past-filter="battery">Battery</button>
-                        <button class="past-filter-btn" data-past-filter="corrosion">Corrosion</button>
-                        <button class="past-filter-btn" data-past-filter="spectroscopy">Spectroscopy</button>
-                        <button class="past-filter-btn" data-past-filter="potentiostat">Potentiostat</button>
-                    </div>
+            <div class="d-flex flex-column gap-4" id="upcomingList">
+
+             <!-- Upcoming 1 -->
+<div class="upcoming-item" data-search="potentiostat selection guide choosing instrument james chen electrochemistry battery">
+    <article class="wb-row">
+        <a href="webinar-detail.html" class="wb-thumb">
+            <img src="assets/Potentiostat Selection Guide Webinar.png" alt="Potentiostat Selection Guide webinar" loading="lazy">
+            <span class="wb-status upcoming">Upcoming</span>
+        </a>
+        <div class="wb-body">
+            <h3 class="wb-title"><a href="webinar-detail.html">Potentiostat Selection Guide: Choosing the Right Instrument</a></h3>
+            <p class="wb-desc">Learn how to match potentiostat specifications such as current range, bandwidth and channel count to your experiment, so you invest in the instrument your research actually needs.</p>
+            <div class="wb-when-bar">
+                <span class="wb-when-date"><i class="far fa-calendar-check"></i>17 Dec 2025, 2:00 PM AEDT</span>
+                <span class="wb-dur"><i class="far fa-clock"></i>60 min session</span>
+            </div>
+            <div class="wb-foot">
+                <div class="wb-presenter">
+                    <div class="wb-photo">JC<img src="assets/speakers/daniel-wright.jpg" alt="Dr. James Chen" onerror="this.remove()"></div>
+                    <div class="wb-presenter-info"><small>Speaker</small><strong>Dr. James Chen</strong></div>
                 </div>
-
-                <div class="row g-4" id="pastList">
-
-                    <!-- Past 1 -->
-                    <div class="col-lg-4 col-md-6 past-item" data-past-topic="corrosion" data-search="corrosion measurement best practices pitfalls mark stevenson polarisation tafel">
-                        <div class="webinar-card">
-                            <div class="webinar-thumb">
-                                <img src="assets/Corrosion Measurement Best Practices.png" alt="Corrosion Measurement webinar" loading="lazy">
-                                <div class="date-chip"><span class="d-day">15</span><span class="d-mon">Oct</span><span class="d-year">2025</span></div>
-                                <span class="webinar-badge badge-recorded">Recorded</span>
-                            </div>
-                            <div class="webinar-body">
-                                <h5 class="fw-bold">Corrosion Measurement: Best Practices &amp; Pitfalls</h5>
-                                <div class="webinar-when">
-                                    <i class="fas fa-calendar-alt"></i>
-                                    <div><strong>15 Oct 2025</strong><span><i class="far fa-clock"></i> 55 min recording</span></div>
-                                </div>
-                                <div class="webinar-speaker">
-                                    <div class="speaker-avatar">MS</div>
-                                    <div><small>Speaker</small><strong>Dr. Mark Stevenson</strong></div>
-                                </div>
-                                <a href="past-webinar.html" class="btn btn-outline-secondary webinar-btn w-100">Watch Recording <i class="fas fa-play ms-1"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Past 2 -->
-                    <div class="col-lg-4 col-md-6 past-item" data-past-topic="spectroscopy" data-search="raman spectroscopy battery materials sophie laurent in-situ degradation">
-                        <div class="webinar-card">
-                            <div class="webinar-thumb">
-                                <img src="assets/Raman Spectroscopy for Battery Materials.png" alt="Raman Spectroscopy for Battery Materials webinar" loading="lazy">
-                                <div class="date-chip"><span class="d-day">28</span><span class="d-mon">Aug</span><span class="d-year">2025</span></div>
-                                <span class="webinar-badge badge-recorded">Recorded</span>
-                            </div>
-                            <div class="webinar-body">
-                                <h5 class="fw-bold">Raman Spectroscopy for Battery Materials</h5>
-                                <div class="webinar-when">
-                                    <i class="fas fa-calendar-alt"></i>
-                                    <div><strong>28 Aug 2025</strong><span><i class="far fa-clock"></i> 40 min recording</span></div>
-                                </div>
-                                <div class="webinar-speaker">
-                                    <div class="speaker-avatar">SL</div>
-                                    <div><small>Speaker</small><strong>Dr. Sophie Laurent</strong></div>
-                                </div>
-                                <a href="past-webinar.html" class="btn btn-outline-secondary webinar-btn w-100">Watch Recording <i class="fas fa-play ms-1"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Past 3 -->
-                    <div class="col-lg-4 col-md-6 past-item" data-past-topic="potentiostat" data-search="introduction potentiostats theory practice james chen instrumentation electrochemical control">
-                        <div class="webinar-card">
-                            <div class="webinar-thumb">
-                                <img src="assets/Potentiostats_ Theory & Practice Webinar.png" alt="Introduction to Potentiostats webinar" loading="lazy">
-                                <div class="date-chip"><span class="d-day">10</span><span class="d-mon">Jul</span><span class="d-year">2025</span></div>
-                                <span class="webinar-badge badge-recorded">Recorded</span>
-                            </div>
-                            <div class="webinar-body">
-                                <h5 class="fw-bold">Introduction to Potentiostats: Theory &amp; Practice</h5>
-                                <div class="webinar-when">
-                                    <i class="fas fa-calendar-alt"></i>
-                                    <div><strong>10 Jul 2025</strong><span><i class="far fa-clock"></i> 60 min recording</span></div>
-                                </div>
-                                <div class="webinar-speaker">
-                                    <div class="speaker-avatar">JC</div>
-                                    <div><small>Speaker</small><strong>Dr. James Chen</strong></div>
-                                </div>
-                                <a href="past-webinar.html" class="btn btn-outline-secondary webinar-btn w-100">Watch Recording <i class="fas fa-play ms-1"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Past 4 -->
-                    <div class="col-lg-4 col-md-6 past-item" data-past-topic="battery" data-search="battery testing fundamentals cyclers protocols elena torres current rates capacity efficiency">
-                        <div class="webinar-card">
-                            <div class="webinar-thumb">
-                                <img src="assets/Battery Testing Fundamentals_ Cyclers & Protocols.png" alt="Battery Testing Fundamentals webinar" loading="lazy">
-                                <div class="date-chip"><span class="d-day">22</span><span class="d-mon">May</span><span class="d-year">2025</span></div>
-                                <span class="webinar-badge badge-recorded">Recorded</span>
-                            </div>
-                            <div class="webinar-body">
-                                <h5 class="fw-bold">Battery Testing Fundamentals: Cyclers &amp; Protocols</h5>
-                                <div class="webinar-when">
-                                    <i class="fas fa-calendar-alt"></i>
-                                    <div><strong>22 May 2025</strong><span><i class="far fa-clock"></i> 50 min recording</span></div>
-                                </div>
-                                <div class="webinar-speaker">
-                                    <div class="speaker-avatar">ET</div>
-                                    <div><small>Speaker</small><strong>Dr. Elena Torres</strong></div>
-                                </div>
-                                <a href="past-webinar.html" class="btn btn-outline-secondary webinar-btn w-100">Watch Recording <i class="fas fa-play ms-1"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Past 5 -->
-                    <div class="col-lg-4 col-md-6 past-item" data-past-topic="battery" data-search="lithium-ion battery degradation analysis elena torres sei growth lithium plating active material">
-                        <div class="webinar-card">
-                            <div class="webinar-thumb">
-                                <img src="assets/Lithium-Ion Battery Degradation Analysis.png" alt="Lithium-Ion Battery Degradation Analysis webinar" loading="lazy">
-                                <div class="date-chip"><span class="d-day">14</span><span class="d-mon">Mar</span><span class="d-year">2025</span></div>
-                                <span class="webinar-badge badge-recorded">Recorded</span>
-                            </div>
-                            <div class="webinar-body">
-                                <h5 class="fw-bold">Lithium-Ion Battery Degradation Analysis</h5>
-                                <div class="webinar-when">
-                                    <i class="fas fa-calendar-alt"></i>
-                                    <div><strong>14 Mar 2025</strong><span><i class="far fa-clock"></i> 48 min recording</span></div>
-                                </div>
-                                <div class="webinar-speaker">
-                                    <div class="speaker-avatar">ET</div>
-                                    <div><small>Speaker</small><strong>Dr. Elena Torres</strong></div>
-                                </div>
-                                <a href="past-webinar.html" class="btn btn-outline-secondary webinar-btn w-100">Watch Recording <i class="fas fa-play ms-1"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Past 6 -->
-                    <div class="col-lg-4 col-md-6 past-item" data-past-topic="spectroscopy" data-search="ft-ir spectroscopy material characterisation sophie laurent sample preparation spectral interpretation">
-                        <div class="webinar-card">
-                            <div class="webinar-thumb">
-                                <img src="assets/FT-IR Spectroscopy Webinar Thumbnail.png" alt="FT-IR Spectroscopy webinar" loading="lazy">
-                                <div class="date-chip"><span class="d-day">9</span><span class="d-mon">Feb</span><span class="d-year">2025</span></div>
-                                <span class="webinar-badge badge-recorded">Recorded</span>
-                            </div>
-                            <div class="webinar-body">
-                                <h5 class="fw-bold">FT-IR Spectroscopy for Material Characterisation</h5>
-                                <div class="webinar-when">
-                                    <i class="fas fa-calendar-alt"></i>
-                                    <div><strong>9 Feb 2025</strong><span><i class="far fa-clock"></i> 42 min recording</span></div>
-                                </div>
-                                <div class="webinar-speaker">
-                                    <div class="speaker-avatar">SL</div>
-                                    <div><small>Speaker</small><strong>Dr. Sophie Laurent</strong></div>
-                                </div>
-                                <a href="past-webinar.html" class="btn btn-outline-secondary webinar-btn w-100">Watch Recording <i class="fas fa-play ms-1"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="search-empty" id="pastSearchEmpty">
-                    <i class="fas fa-search"></i>
-                    <p>No past webinars match your search or filter.</p>
-                </div>
+                <a href="webinar-detail.html" class="btn btn-outline-primary wb-btn" style="border:2px solid var(--secondary-blue);">Register <i class="fas fa-arrow-right ms-1"></i></a>
             </div>
         </div>
-    </section>
+    </article>
+</div>
+            </div>
+
+            <div class="search-empty" id="upcomingSearchEmpty">
+                <i class="fas fa-search"></i>
+                <p>No upcoming webinars match your search.</p>
+            </div>
+        </div>
+
+        <!-- ====== PAST (card design) ====== -->
+        <div class="webinar-group" id="past">
+            <div class="webinar-group-head">
+                <h2 class="fw-bold">Past Webinars <span class="group-count" id="pastCount">6</span></h2>
+                <div class="d-flex flex-wrap align-items-center gap-1" id="pastFilters">
+                    <span class="fw-semibold me-2" style="font-size:.9rem;color:#4b5563;">Filter by topic:</span>
+                    <button class="past-filter-btn active" data-past-filter="all">All</button>
+                    <button class="past-filter-btn" data-past-filter="battery">Battery</button>
+                    <button class="past-filter-btn" data-past-filter="corrosion">Corrosion</button>
+                    <button class="past-filter-btn" data-past-filter="spectroscopy">Spectroscopy</button>
+                    <button class="past-filter-btn" data-past-filter="potentiostat">Potentiostat</button>
+                </div>
+            </div>
+
+            <div class="row g-4" id="pastList">
+
+                <!-- Past 1 -->
+                <div class="col-lg-4 col-md-6 past-item" data-past-topic="corrosion" data-search="corrosion measurement best practices pitfalls mark stevenson polarisation tafel">
+                    <article class="wb-card">
+                        <a href="past-webinar.html" class="wb-thumb">
+                            <img src="assets/Corrosion Measurement Best Practices.png" alt="Corrosion Measurement webinar" loading="lazy">
+                            <span class="wb-status recorded">Recorded</span>
+                        </a>
+                        <div class="wb-body">
+                            <h3 class="wb-title"><a href="past-webinar.html">Corrosion Measurement: Best Practices &amp; Pitfalls</a></h3>
+                            <p class="wb-desc">Avoid common errors in polarisation and Tafel measurements, and learn how to get reliable, repeatable corrosion data from your setup.</p>
+                                        <div class="wb-when-bar">
+                <span class="wb-when-date"><i class="far fa-calendar-check"></i>11 Dec 2025, 2:00 PM AEDT</span>
+                <span class="wb-dur"><i class="far fa-clock"></i>60 min session</span>
+            </div>
+                            <div class="wb-foot">
+                                <div class="wb-speaker">
+                                   <div class="wb-photo">JC<img src="assets/speakers/daniel-wright.jpg" alt="Dr. James Chen" onerror="this.remove()"></div>
+                                    <div class="wb-presenter-info"><small>Speaker</small><strong>Dr. Mark Stevenson</strong></div>
+                                </div>
+                                <a href="past-webinar.html" class="btn btn-outline-secondary wb-btn">Watch <i class="fas fa-play ms-1"></i></a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Past 2 -->
+                <div class="col-lg-4 col-md-6 past-item" data-past-topic="spectroscopy" data-search="raman spectroscopy battery materials sophie laurent in-situ degradation">
+                    <article class="wb-card">
+                        <a href="past-webinar.html" class="wb-thumb">
+                            <img src="assets/Raman Spectroscopy for Battery Materials.png" alt="Raman Spectroscopy for Battery Materials webinar" loading="lazy">
+                            <span class="wb-status recorded">Recorded</span>
+                        </a>
+                        <div class="wb-body">
+                            <h3 class="wb-title"><a href="past-webinar.html">Raman Spectroscopy for Battery Materials</a></h3>
+                            <p class="wb-desc">See how in-situ Raman reveals structural changes and degradation mechanisms in battery electrode materials during operation.</p>
+                                        <div class="wb-when-bar">
+                <span class="wb-when-date"><i class="far fa-calendar-check"></i>12 Dec 2025, 2:00 PM AEDT</span>
+                <span class="wb-dur"><i class="far fa-clock"></i>60 min session</span>
+            </div>
+                            <div class="wb-foot">
+                                <div class="wb-speaker">
+                                    <div class="wb-photo">JC<img src="assets/speakers/daniel-wright.jpg" alt="Dr. James Chen" onerror="this.remove()"></div>
+                                     <div class="wb-presenter-info"><small>Speaker</small><strong>Dr. Sophie Laurent</strong></div>
+                                </div>
+                                <a href="past-webinar.html" class="btn btn-outline-secondary wb-btn">Watch <i class="fas fa-play ms-1"></i></a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Past 3 -->
+                <div class="col-lg-4 col-md-6 past-item" data-past-topic="potentiostat" data-search="introduction potentiostats theory practice james chen instrumentation electrochemical control">
+                    <article class="wb-card">
+                        <a href="past-webinar.html" class="wb-thumb">
+                            <img src="assets/Potentiostats_ Theory & Practice Webinar.png" alt="Introduction to Potentiostats webinar" loading="lazy">
+                            <span class="wb-status recorded">Recorded</span>
+                        </a>
+                        <div class="wb-body">
+                            <h3 class="wb-title"><a href="past-webinar.html">Introduction to Potentiostats: Theory &amp; Practice</a></h3>
+                            <p class="wb-desc">A clear introduction to how potentiostats control and measure electrochemical cells, with hands-on guidance for first-time users.</p>
+                                        <div class="wb-when-bar">
+                <span class="wb-when-date"><i class="far fa-calendar-check"></i>13 Dec 2025, 12:00 PM AEDT</span>
+                <span class="wb-dur"><i class="far fa-clock"></i>60 min session</span>
+            </div>
+                            <div class="wb-foot">
+                                <div class="wb-speaker">
+                                   <div class="wb-photo">JC<img src="assets/speakers/daniel-wright.jpg" alt="Dr. James Chen" onerror="this.remove()"></div>
+                                   <div class="wb-presenter-info"><small>Speaker</small><strong>Dr. Sophie Laurent</strong></div>
+                                </div>
+                                <a href="past-webinar.html" class="btn btn-outline-secondary wb-btn">Watch <i class="fas fa-play ms-1"></i></a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Past 4 -->
+                <div class="col-lg-4 col-md-6 past-item" data-past-topic="battery" data-search="battery testing fundamentals cyclers protocols elena torres current rates capacity efficiency">
+                    <article class="wb-card">
+                        <a href="past-webinar.html" class="wb-thumb">
+                            <img src="assets/Battery Testing Fundamentals_ Cyclers & Protocols.png" alt="Battery Testing Fundamentals webinar" loading="lazy">
+                            <span class="wb-status recorded">Recorded</span>
+                        </a>
+                        <div class="wb-body">
+                            <h3 class="wb-title"><a href="past-webinar.html">Battery Testing Fundamentals: Cyclers &amp; Protocols</a></h3>
+                            <p class="wb-desc">Understand cycler setup, current rates and test protocols, and how to measure capacity and efficiency accurately.</p>
+                                       <div class="wb-when-bar">
+                <span class="wb-when-date"><i class="far fa-calendar-check"></i>14 Dec 2025, 5:00 PM AEDT</span>
+                <span class="wb-dur"><i class="far fa-clock"></i>60 min session</span>
+            </div>
+                            <div class="wb-foot">
+                                <div class="wb-speaker">
+                                    <div class="wb-photo">JC<img src="assets/speakers/daniel-wright.jpg" alt="Dr. James Chen" onerror="this.remove()"></div>
+                                    <div class="wb-presenter-info"><small>Speaker</small><strong>Dr. Sophie Laurent</strong></div>
+                                </div>
+                                <a href="past-webinar.html" class="btn btn-outline-secondary wb-btn">Watch <i class="fas fa-play ms-1"></i></a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Past 5 -->
+                <div class="col-lg-4 col-md-6 past-item" data-past-topic="battery" data-search="lithium-ion battery degradation analysis elena torres sei growth lithium plating active material">
+                    <article class="wb-card">
+                        <a href="past-webinar.html" class="wb-thumb">
+                            <img src="assets/Lithium-Ion Battery Degradation Analysis.png" alt="Lithium-Ion Battery Degradation Analysis webinar" loading="lazy">
+                            <span class="wb-status recorded">Recorded</span>
+                        </a>
+                        <div class="wb-body">
+                            <h3 class="wb-title"><a href="past-webinar.html">Lithium-Ion Battery Degradation Analysis</a></h3>
+                            <p class="wb-desc">Identify the key ageing mechanisms, including SEI growth, lithium plating and active material loss, and how to diagnose them.</p>
+                                       <div class="wb-when-bar">
+                <span class="wb-when-date"><i class="far fa-calendar-check"></i>15 Dec 2025, 2:00 PM AEDT</span>
+                <span class="wb-dur"><i class="far fa-clock"></i>60 min session</span>
+            </div>
+                            <div class="wb-foot">
+                                <div class="wb-speaker">
+                                    <div class="wb-photo">JC<img src="assets/speakers/daniel-wright.jpg" alt="Dr. James Chen" onerror="this.remove()"></div>
+                                    <div class="wb-presenter-info"><small>Speaker</small><strong>Dr. Sophie Laurent</strong></div>
+                                </div>
+                                <a href="past-webinar.html" class="btn btn-outline-secondary wb-btn">Watch <i class="fas fa-play ms-1"></i></a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Past 6 -->
+                <div class="col-lg-4 col-md-6 past-item" data-past-topic="spectroscopy" data-search="ft-ir spectroscopy material characterisation sophie laurent sample preparation spectral interpretation">
+                    <article class="wb-card">
+                        <a href="past-webinar.html" class="wb-thumb">
+                            <img src="assets/FT-IR Spectroscopy Webinar Thumbnail.png" alt="FT-IR Spectroscopy webinar" loading="lazy">
+                            <span class="wb-status recorded">Recorded</span>
+                        </a>
+                        <div class="wb-body">
+                            <h3 class="wb-title"><a href="past-webinar.html">FT-IR Spectroscopy for Material Characterisation</a></h3>
+                            <p class="wb-desc">Step-by-step guidance on sample preparation and interpreting FT-IR spectra to characterise a wide range of materials.</p>
+                                        <div class="wb-when-bar">
+                <span class="wb-when-date"><i class="far fa-calendar-check"></i>16 Dec 2025, 1:00 PM AEDT</span>
+                <span class="wb-dur"><i class="far fa-clock"></i>60 min session</span>
+            </div>
+                            <div class="wb-foot">
+                                <div class="wb-speaker">
+                                    <div class="wb-photo">JC<img src="assets/speakers/daniel-wright.jpg" alt="Dr. James Chen" onerror="this.remove()"></div>
+                                    <div class="wb-presenter-info"><small>Speaker</small><strong>Dr. Sophie Laurent</strong></div>
+                                </div>
+                                <a href="past-webinar.html" class="btn btn-outline-secondary wb-btn">Watch <i class="fas fa-play ms-1"></i></a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <div class="search-empty" id="pastSearchEmpty">
+                <i class="fas fa-search"></i>
+                <p>No past webinars match your search or filter.</p>
+            </div>
+        </div>
+    </div>
+</section>
 
     <!-- ========== HOW TO JOIN ========== -->
     <section class="section bg-light" id="join-form">

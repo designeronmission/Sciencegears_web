@@ -1477,8 +1477,6 @@
                         <div class="event-rating-line" id="headerRating"></div>
 
                         <!-- Speakers & Host (rendered from the list in the script) -->
-                        <div class="event-section-label" id="headerPeopleLabel">Speaker</div>
-                        <div class="row g-3" id="headerPeople"></div>
 
                         <div class="event-actions" id="watchNowBtn">
                         <!--     <a href="#video-player" class="btn btn-event-primary" ><i
@@ -1501,63 +1499,10 @@
                         <p class="text-muted mb-0">The recording includes the full live Q&amp;A, so you can hear the
                             audience's questions and the speaker's answers.</p>
 
-                        <div class="row g-3 mt-4">
-                            <div class="col-md-6">
-                                <div class="d-flex align-items-start gap-3 p-3 bg-light rounded-3 h-100">
-                                    <i class="fas fa-bullseye"
-                                        style="color: var(--accent-orange); font-size: 1.2rem; margin-top: 2px;"></i>
-                                    <div>
-                                        <h6 class="fw-bold mb-1">Key Takeaways</h6>
-                                        <ul class="list-unstyled small text-muted mb-0" style="line-height: 1.6;">
-                                            <li><i class="fas fa-check me-1"
-                                                    style="color: var(--accent-orange); font-size: 0.7rem;"></i>
-                                                Choosing between Tafel, LPR and EIS</li>
-                                            <li><i class="fas fa-check me-1"
-                                                    style="color: var(--accent-orange); font-size: 0.7rem;"></i> Cell
-                                                and reference electrode setup</li>
-                                            <li><i class="fas fa-check me-1"
-                                                    style="color: var(--accent-orange); font-size: 0.7rem;"></i> Scan
-                                                rate and stabilisation time</li>
-                                            <li><i class="fas fa-check me-1"
-                                                    style="color: var(--accent-orange); font-size: 0.7rem;"></i>
-                                                Spotting bad Tafel fits</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="d-flex align-items-start gap-3 p-3 bg-light rounded-3 h-100">
-                                    <i class="fas fa-users"
-                                        style="color: var(--accent-orange); font-size: 1.2rem; margin-top: 2px;"></i>
-                                    <div>
-                                        <h6 class="fw-bold mb-1">Best For</h6>
-                                        <ul class="list-unstyled small text-muted mb-0" style="line-height: 1.6;">
-                                            <li><i class="fas fa-check me-1"
-                                                    style="color: var(--accent-orange); font-size: 0.7rem;"></i>
-                                                Corrosion researchers</li>
-                                            <li><i class="fas fa-check me-1"
-                                                    style="color: var(--accent-orange); font-size: 0.7rem;"></i>
-                                                Materials engineers</li>
-                                            <li><i class="fas fa-check me-1"
-                                                    style="color: var(--accent-orange); font-size: 0.7rem;"></i> PhD
-                                                students &amp; postdocs</li>
-                                            <li><i class="fas fa-check me-1"
-                                                    style="color: var(--accent-orange); font-size: 0.7rem;"></i> QA
-                                                and testing labs</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
 
-                    <!-- Chapters (click to jump in the video) -->
-                    <div class="detail-card mb-4" id="chapters">
-                        <h2 class="fw-bold mb-1" style="font-size: 1.6rem;">Video Chapters</h2>
-                        <p class="text-muted mb-4" style="font-size: 0.9rem;">Click a chapter to jump straight to that
-                            part of the recording.</p>
-                        <ul class="agenda-timeline" id="chapterList"></ul>
-                    </div>
+                
 
                     <!-- Full speaker / host bios -->
                     <div class="detail-card mb-4" id="people">
@@ -1932,16 +1877,6 @@
             }
         ];
 
-        // 3a) Chapters: start = seconds into the video
-        const CHAPTERS = [
-            { start: 0, time: '00:00', icon: 'fa-hand', title: 'Welcome & Introduction', desc: 'Why corrosion measurements go wrong and what this session covers.' },
-            { start: 210, time: '03:30', icon: 'fa-triangle-exclamation', title: 'Where Corrosion Data Goes Wrong', desc: 'The most common sources of error in lab corrosion tests.' },
-            { start: 720, time: '12:00', icon: 'fa-chart-line', title: 'Tafel, LPR or EIS: Choosing the Technique', desc: 'What each method tells you and when to use it.' },
-            { start: 1470, time: '24:30', icon: 'fa-flask', title: 'Cell & Reference Electrode Setup', desc: 'Getting a stable, repeatable measurement geometry.' },
-            { start: 2280, time: '38:00', icon: 'fa-magnifying-glass-chart', title: 'Checking Your Data & Fits', desc: 'How to tell a good Tafel fit from a bad one.' },
-            { start: 2760, time: '46:00', icon: 'fa-comments', title: 'Live Q&A', desc: 'Audience questions answered by the speaker.' }
-        ];
-
         // 3b) Attendee reviews (placeholders – replace with real, approved reviews)
         const REVIEWS = [
             { name: 'Priya Nair', role: 'PhD Student', org: 'Monash University', rating: 5, date: '17 Oct 2025', text: 'The section on checking Tafel fits alone was worth the hour. I went back to my old data afterwards and found two experiments I should not have trusted.' },
@@ -2015,22 +1950,6 @@
                 if (!frame.classList.contains('is-playing')) loadVideo(0);
             });
 
-            /* ---------- CHAPTERS ---------- */
-            document.getElementById('chapterList').innerHTML = CHAPTERS.map((c, i) => {
-                const next = CHAPTERS[i + 1];
-                const mins = next ? Math.round((next.start - c.start) / 60) : null;
-                return `
-                <li class="agenda-timeline-item" data-start="${c.start}" tabindex="0" role="button" aria-label="Jump to ${esc(c.title)} at ${esc(c.time)}">
-                    <div class="agenda-timeline-marker"><i class="fas ${esc(c.icon)}"></i></div>
-                    <div class="agenda-timeline-content">
-                        <span class="agenda-timeline-time"><i class="fas fa-play" style="font-size:0.6rem;"></i> ${esc(c.time)}</span>
-                        <h6 class="agenda-timeline-title">${esc(c.title)}</h6>
-                        <p class="agenda-timeline-desc">${esc(c.desc)}</p>
-                        ${mins ? `<span class="agenda-timeline-duration"><i class="fas fa-clock"></i> ${mins} min</span>` : ''}
-                    </div>
-                </li>`;
-            }).join('');
-
             function jumpTo(sec) {
                 frame.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 loadVideo(sec);
@@ -2057,19 +1976,6 @@
                 label = speakers.length > 1 ? 'Speakers' : 'Speaker'; heading = speakers.length > 1 ? 'Your Speakers' : 'Your Speaker';
             }
 
-            document.getElementById('headerPeopleLabel').textContent = label;
-            const headerCol = ordered.length === 1 ? 'col-12' : 'col-md-6';
-            document.getElementById('headerPeople').innerHTML = ordered.map(p => `
-                <div class="${headerCol}">
-                    <div class="mini-person ${p.role === 'host' ? 'is-host' : ''}">
-                        <div class="mini-person-photo">${photoHTML(p)}</div>
-                        <div>
-                            <span class="person-role">${roleLabel(p)}</span>
-                            <p class="mini-person-name">${esc(p.name)}</p>
-                            <p class="mini-person-title">${esc(p.title)}</p>
-                        </div>
-                    </div>
-                </div>`).join('');
 
             document.getElementById('peopleHeading').textContent = heading;
 
